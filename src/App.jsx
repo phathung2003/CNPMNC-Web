@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route, Link } from "react-router-dom"
+import Contact from "./pages/contact"
+import Info from "./pages/info"
+import Main from "./pages/main";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function App() {
   return (
-    <>
+    <div className="App">
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <Link to="/Contact">Contact</Link>
+        <br></br>
+        <Link to="/Info">Info</Link>
+        <br></br>
+        <Link to="/Main">Main</Link>
+
+        <Routes>
+          <Route path="/" element={<p>Hello, World</p>} />
+          <Route path="/Contact" element={<Contact />} />
+          <Route path="/Info" element={<Info />} />
+          <Route path="/Main" element={<Main />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
-export default App
+//Link to thay thế cho href
+//Route dùng để render ra thực thể
