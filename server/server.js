@@ -19,6 +19,24 @@ app.post('/contact', (req,res) => {
     .catch(err => res.json(err))
 })
 
+app.post("/main", (req,res) => {
+    const {email, password} = req.body;
+    contactModel.findOne({email : email}).then(
+        user => {
+            if(user){
+                if(user.password === password){
+                    res.json("Ok")
+                }else{
+                    res.json("Sai mật khẩu")
+                }
+            }
+            else{
+                res.json("Không có tài khoản")
+            }
+        }
+    )
+})
+
 app.listen(port, () =>{
     console.log("Server khởi động tại port " + port)
 })
