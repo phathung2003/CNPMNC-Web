@@ -1,9 +1,10 @@
+//Khai báo để chạy biến môi trường
+require('dotenv').config()
+
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
 
-const uri = "mongodb+srv://phathung2003:27012003@thuexe.moxyghb.mongodb.net/Test"
-const port = 3001;
 const contactModel = require("./models/Contact")
 
 
@@ -11,7 +12,8 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect(uri)
+//               Biến môi trường
+mongoose.connect(process.env.DATABASE_TEST)
 
 app.post('/contact', (req,res) => {
     contactModel.create(req.body)
@@ -43,6 +45,6 @@ app.get("/info",(req,res) => {
     .catch(err => res.json(err))
 })
 
-app.listen(port, () =>{
-    console.log("Server khởi động tại port " + port)
+app.listen(process.env.PORT, () =>{
+    console.log("Server khởi động tại port " + process.env.PORT)
 })

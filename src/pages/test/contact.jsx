@@ -1,8 +1,8 @@
 import axois from 'axios'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-const api = "http://localhost:3001/contact"
+import "../../css/index.css"
+const api = import.meta.env.VITE_API_CONTACT;
 
 export default function Contact() {
     const [name, setName] = useState()
@@ -31,7 +31,7 @@ export default function Contact() {
                             <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Tạo tài khoản
                             </h1>
-                            <form class="space-y-4 md:space-y-6" onClick={handelSubmit}>
+                            <form class="space-y-4 md:space-y-6" onSubmit={handelSubmit}>
                                 <div>
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Họ tên</label>
                                     <input

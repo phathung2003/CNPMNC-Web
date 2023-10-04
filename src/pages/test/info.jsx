@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const api = "http://localhost:3001/info"
+const api = import.meta.env.VITE_API_INFO
 
 export default function Info() {
     const [userInfo, setInfo] = useState([])
