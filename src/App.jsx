@@ -10,7 +10,7 @@ import Register from './pages/Register'
 
 function App() {
   return (
-    <div style={{ "backgroundImage": "url('C:/Users/PC/OneDrive/Máy tính/CNPMNC-Web/src/assets/image.jpg'" }}>
+    <div>
 
       <Link to="/Contact">Contact</Link>
       <br></br>
