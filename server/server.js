@@ -37,6 +37,12 @@ app.post("/main", (req,res) => {
     )
 })
 
+app.get("/info",(req,res) => {
+    contactModel.find()
+    .then(info => res.json(info))
+    .catch(err => res.json(err))
+})
+
 app.listen(port, () =>{
     console.log("Server khởi động tại port " + port)
 })
