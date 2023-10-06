@@ -8,9 +8,9 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 
 
-function App() {
+export default function App() {
   return (
-    <div style={{ "backgroundImage": "url('C:/Users/PC/OneDrive/Máy tính/CNPMNC-Web/src/assets/image.jpg'" }}>
+    <div>
 
       <Link to="/Contact">Contact</Link>
       <br></br>
@@ -27,6 +27,7 @@ function App() {
       <Routes>
         @*Để test backend*@
         <Route path="/" element={<p className="text-3xl font-bold underline">Hello, World</p>} />
+        <Route path="/" element={<p className="text-3xl font-bold underline">Duplicate</p>} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/Info" element={<Info />} />
         <Route path="/Main" element={<Main />} />
@@ -38,8 +39,6 @@ function App() {
 
   )
 }
-
-export default App
 
 //Link to thay thế cho href
 //Route dùng để render ra thực thể

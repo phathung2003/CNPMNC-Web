@@ -1,0 +1,5 @@
+Cài extension trên Visual Code
+PostCSS Language Support: Tránh gạch chân vàng khi xài Tailwind
+
+Cài thư viện
+npm i dotenv: Thư viện bảo vệ biến môi trường (Ví dụ: API)
