@@ -6,11 +6,16 @@ const api = import.meta.env.VITE_API_INFO
 export default function Info() {
     const [userInfo, setInfo] = useState([])
 
-    useEffect(() => {
-        axios.get(api)
-            .then(info => setInfo(info.data))
-            .catch(err => console.log(err))
-    }, [])
+    if (api !== undefined) {
+        useEffect(() => {
+            axios.get(api)
+                .then(info => setInfo(info.data))
+                .catch(err => console.log(err))
+        }, [])
+    }
+    else {
+        console.log("Bạn thiếu file .env hoặc file .env không hợp lệ để truyền dữ liệu")
+    }
 
     return (
         <div>

@@ -11,14 +11,19 @@ export default function Main() {
 
     const handelSubmit = (input) => {
         input.preventDefault()
-        axois.post(api, { email, password }).then(
-            result => {
-                console.log(result.data)
-                if (result.data === "Ok") {
-                    navigate("/info")
+        if (api !== undefined) {
+            axois.post(api, { email, password }).then(
+                result => {
+                    console.log(result.data)
+                    if (result.data === "Ok") {
+                        navigate("/info")
+                    }
                 }
-            }
-        ).catch(err => console.log(err))
+            ).catch(err => console.log(err))
+        }
+        else {
+            console.log("Bạn thiếu file .env hoặc file .env không hợp lệ để truyền dữ liệu")
+        }
     }
 
     return (

@@ -2,6 +2,7 @@ import axois from 'axios'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "../../css/index.css"
+
 const api = import.meta.env.VITE_API_CONTACT;
 
 export default function Contact() {
@@ -12,13 +13,20 @@ export default function Contact() {
 
     const handelSubmit = (input) => {
         input.preventDefault()
-        axois.post(api, { name, email, password }).then(
-            result => {
-                console.log(result)
-                navigate("/main")
-            }
-        ).catch(err => console.log(err))
+        if (api !== undefined) {
+            axois.post(api, { name, email, password }).then(
+                result => {
+                    console.log(result)
+                    navigate("/main")
+                }
+            ).catch(err => console.log(err))
+        }
+        else {
+            console.log("Bạn thiếu file .env hoặc file .env không hợp lệ để truyền dữ liệu")
+        }
     }
+
+
 
     return (
         <div>
