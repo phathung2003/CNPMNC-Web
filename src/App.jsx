@@ -25,18 +25,6 @@ export default function App() {
       <Link to="/Register">Register</Link>
 
           <div className='flex justify-center items-center  ' >
-          
-            <p>Nội dung các trang sẽ ở đây</p>
-            <br></br>
-            <Routes>
-              @*Để test backend*@
-              <Route path="/" element={<p className="text-3xl font-bold underline">Hello, World</p>} />
-              <Route path="/Contact" element={<Contact />} />
-              <Route path="/Info" element={<Info />} />
-              <Route path="/Main" element={<Main />} />
-
-          <div className='flex justify-center items-center  ' >
-          
             <p>Nội dung các trang sẽ ở đây</p>
             <br></br>
             <Routes>
@@ -50,10 +38,6 @@ export default function App() {
               <Route path="/Register" element={<Register />} />
             </Routes>
           </div>
-    </div>
-              <Route path="/Login" element={<Login />} />
-              <Route path="/Register" element={<Register />} />
-      </Routes>
       </div>
     </div>
   )
