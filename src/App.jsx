@@ -12,6 +12,8 @@ export default function App() {
   return (
     <div>
         
+    <div>
+        
       <Link to="/Contact">Contact</Link>
       <br></br>
       <Link to="/Info">Info</Link>
@@ -33,6 +35,22 @@ export default function App() {
               <Route path="/Info" element={<Info />} />
               <Route path="/Main" element={<Main />} />
 
+          <div className='flex justify-center items-center  ' >
+          
+            <p>Nội dung các trang sẽ ở đây</p>
+            <br></br>
+            <Routes>
+              @*Để test backend*@
+              <Route path="/" element={<p className="text-3xl font-bold underline">Hello, World</p>} />
+              <Route path="/Contact" element={<Contact />} />
+              <Route path="/Info" element={<Info />} />
+              <Route path="/Main" element={<Main />} />
+
+              <Route path="/Login" element={<Login />} />
+              <Route path="/Register" element={<Register />} />
+            </Routes>
+          </div>
+    </div>
               <Route path="/Login" element={<Login />} />
               <Route path="/Register" element={<Register />} />
       </Routes>

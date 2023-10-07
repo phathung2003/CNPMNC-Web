@@ -52,5 +52,31 @@ export default function Info() {
             </table>
         </div>
 
+        <div>
+            <p>Info Pages</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Mật khẩu</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {
+                        userInfo.map(info => {
+                            return <tr>
+                                <td>{info.name}</td>
+                                <td>{info.email}</td>
+                                <td>{info.password}</td>
+                            </tr>
+                        })
+                    }
+                </tbody>
+            </table>
+        </div>
+
     );
 }
