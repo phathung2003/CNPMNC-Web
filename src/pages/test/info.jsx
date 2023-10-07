@@ -1,5 +1,43 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+const api = import.meta.env.VITE_API_INFO
+
 export default function Info() {
+    const [userInfo, setInfo] = useState([])
+
+    useEffect(() => {
+        axios.get(api)
+            .then(info => setInfo(info.data))
+            .catch(err => console.log(err))
+    }, [])
+
     return (
-        <p>Info Pages</p>
+        <div>
+            <p>Info Pages</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Mật khẩu</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {
+                        userInfo.map(info => {
+                            return <tr>
+                                <td>{info.name}</td>
+                                <td>{info.email}</td>
+                                <td>{info.password}</td>
+                            </tr>
+                        })
+                    }
+                </tbody>
+            </table>
+        </div>
+
     );
 }
