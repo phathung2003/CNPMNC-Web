@@ -75,5 +75,8 @@ export default function Main() {
             </section>
 
         </div>
+        
+        <p>Main Pages</p>
+        
     );
 }
