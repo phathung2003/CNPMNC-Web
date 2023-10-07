@@ -7,7 +7,7 @@ export default function Login() {
             <div>
                 <h1>Login</h1>
                 <div>
-                    <input type="email" />
+                    <input type="email"/>
                     <label htmlFor="">Your email</label>
                 </div>
                 <div>
