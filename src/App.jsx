@@ -7,8 +7,7 @@ import Register from './pages/Register';
 
 export default function App() {
   return (
-    <Router>
-      <div className="container mx-auto columns columns-3xs to-blue-600">
+      <div>
         <nav>
           <ul>
             <li>
@@ -28,27 +27,7 @@ export default function App() {
             </li>
           </ul>
         </nav>
-    <Router>
-      <div className="container mx-auto columns columns-3xs to-blue-600">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/Contact">Contact</Link>
-            </li>
-            <li>
-              <Link to="/Info">Info</Link>
-            </li>
-            <li>
-              <Link to="/Main">Main</Link>
-            </li>
-            <li>
-              <Link to="/Login">Login</Link>
-            </li>
-            <li>
-              <Link to="/Register">Register</Link>
-            </li>
-          </ul>
-        </nav>
+    
 
         <p>Nội dung các trang sẽ ở đây</p>
 
@@ -62,12 +41,9 @@ export default function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
         </Routes>
-      </div>
-    </Router>
+    </div>
   );
 }
-
-export default App
 
 //Link to thay thế cho href
 //Route dùng để render ra thực thể
