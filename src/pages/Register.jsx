@@ -35,7 +35,7 @@ export default function Register() {
                         }
                     }).catch(err => console.log(err))
             }
-            else{
+            else {
                 setError('F12 để biết thông tin')
             }
         }
