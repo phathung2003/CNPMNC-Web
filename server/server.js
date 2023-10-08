@@ -23,10 +23,27 @@ if(result.call()){
     mongoose.connect(database)
 
     app.post('/contact', (req,res) => {
-        contactModel.create(req.body)
-        .then(info => res.json(info))
-        .catch(err => res.json(err))
+        
+        const {name, email, password} = req.body;
+        contactModel.findOne({email : email}).then(
+            user => {
+                if(user){
+                    if(user.email === email){
+                        res.json("Đã tồn tại email")
+                        return
+                    }
+                    else{
+                        res.json("Ok")
+                        
+                    }
+                }
+                else{
+                    res.json("Lỗi")
+                }
+            }
+        )
     })
+    
     
     app.post("/main", (req,res) => {
         const {email, password} = req.body;
@@ -36,7 +53,7 @@ if(result.call()){
                     if(user.password === password){
                         res.json("Ok")
                     }else{
-                        res.json("Sai mật khẩu")
+                        res.json("Sai mật khẩu")                      
                     }
                 }
                 else{

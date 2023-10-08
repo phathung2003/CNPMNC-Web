@@ -24,8 +24,8 @@ export default function App() {
       <br></br>
       <Link to="/Register">Register</Link>
 
-          <div className='flex justify-center items-center  ' >
-            <p>Nội dung các trang sẽ ở đây</p>
+          <div  >
+            
             <br></br>
             <Routes>
               @*Để test backend*@
