@@ -2,7 +2,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const api = import.meta.env.VITE_API_MAIN;
+import checkUri from "../backend/checkUri"
+const [result, api] = checkUri("Main");
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -11,19 +12,17 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         // Basic validation
         if (!email || !password) {
-        setError('Hãy nhập thông tin đầy đủ.')
-        return;
-     }
-        
-        
-        if (api !== undefined) {
+            setError('Hãy nhập thông tin đầy đủ.')
+            return;
+        }
+        if (result) {
             axios
                 .post(api, { email, password })
                 .then((result) => {
@@ -38,8 +37,9 @@ export default function Login() {
                     console.log(err);
                     setError('An error occurred. Please try again later.');
                 });
-        } else {
-            setError('Missing or invalid .env file for API.');
+        }
+        else{
+            setError('F12 để biết thông tin')
         }
     };
 

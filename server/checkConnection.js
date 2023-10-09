@@ -1,24 +1,66 @@
 //Khai báo để chạy biến môi trường
 require('dotenv').config()
 
+const express = require("express")
+const mongoose = require("mongoose")
+const cors = require("cors")
+
 const HOSTS_REGEX = /^(?<protocol>[^/]+):\/\/(?:(?<username>[^:@]*)(?::(?<password>[^@]*))?@)?(?<hosts>(?!:)[^/?@]*)(?<rest>.*)/;
 
+//Lấy đường liên kết + Port
 const database = process.env.DATABASE_TEST;
 const port = process.env.PORT;
 
-
-const result = function(){
-    if(database === undefined || port === undefined){
+const result = () => {
+    if(database === undefined && !checkPort(port)){
         console.log("Bạn thiếu file .env hoặc file .env không hợp lệ để khởi động chương trình")
-        return false
+        return [false,null,null]
     }
-    if(!database.match(HOSTS_REGEX) || !(database.startsWith('mongodb://') || database.startsWith('mongodb+srv://'))){   
-    console.log("Không thể kết nối tới database !")
-        return false
+    
+    if(!checkConnectionString(database)){   
+        console.log("Không thể kết nối tới database !")
+        return [false,null,null]
     }
-    else{
-        return true
-    }
+    const app = connectDatabase(database);
+    return [true, port,app]
+}
+module.exports = result
+
+//-- Hàm check port --//
+function checkPort(port){
+    //Port chứa 16 bit => Từ 0 --> 65535
+    if(port < 0 )
+        return false;
+    if(port > 65535)
+        return false;
+    if(typeof port !== 'number') 
+        return false;
+    
+    return true;
 }
 
-module.exports = result
+//-- Check Link kết nối --//
+function checkConnectionString(uri){
+    
+    if(uri.startsWith('mongodb://') || uri.startsWith('mongodb+srv://')) {
+        return true;
+    }
+
+    if(uri.match(HOSTS_REGEX)) {
+        return true;
+    }
+    
+    return false;
+}
+
+//-- Hàm kết nối database --//
+function connectDatabase(uri){
+    const app = express()
+    app.use(express.json())
+    app.use(cors())
+
+    //Kết nối đến MongoDB
+    mongoose.connect(uri)
+    return app;
+}
+
