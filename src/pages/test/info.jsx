@@ -1,21 +1,9 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import value from "../../backend/infoProcess"
 
-const api = import.meta.env.VITE_API_INFO
 
 export default function Info() {
-    const [userInfo, setInfo] = useState([])
 
-    if (api !== undefined) {
-        useEffect(() => {
-            axios.get(api)
-                .then(info => setInfo(info.data))
-                .catch(err => console.log(err))
-        }, [])
-    }
-    else {
-        console.log("Bạn thiếu file .env hoặc file .env không hợp lệ để truyền dữ liệu")
-    }
+    const userInfo = value();
 
     return (
         <div>
@@ -33,7 +21,7 @@ export default function Info() {
                 <tbody>
                     {
                         userInfo.map(info => {
-                            return <tr>
+                            return <tr key={info._id} >
                                 <td>{info.name}</td>
                                 <td>{info.email}</td>
                                 <td>{info.password}</td>
