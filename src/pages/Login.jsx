@@ -20,6 +20,7 @@ export default function Login() {
         if (!email || !password) {
         setError('Hãy nhập thông tin đầy đủ.')
         return;
+
      }
         
         
@@ -32,6 +33,7 @@ export default function Login() {
                         navigate('/info');
                     } else {
                         setError('Mật khẩu hoặc tài khoản sai. Hãy nhập lại.');
+                        return;
                     }
                 })
                 .catch((err) => {

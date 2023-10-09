@@ -17,7 +17,7 @@ export default function Register() {
 
     const handelSubmit = (input) => {
         input.preventDefault()
-
+    
         if(!name || !email || !password || !confirm_password){
             setError('Hãy nhập đầy đủ thông tin')
             return;
@@ -27,17 +27,20 @@ export default function Register() {
         {
             if (api !== undefined) {
                 axois.post(api, { name, email, password }).
-                then((result) => {
-                        if(result.data === "Đã tồn tại email"){
+                then(result => {
+                        if(result.data === "No"){
                             setError('Email đã tồn tại')
-                            return
+                            
                         }
-                        else if (result.data === "Ok"){
+                        else {
                             console.log(result)
                             navigate("/login")
                         }
                     }
-                ).catch(err => console.log(err))
+                ).catch((err) => {
+                    console.log(err);
+                    setError('An error occurred. Please try again later.');
+                });
             }
             else {
                 console.log("Bạn thiếu file .env hoặc file .env không hợp lệ để truyền dữ liệu")
@@ -48,6 +51,7 @@ export default function Register() {
             return;
         }
     }
+    
 
 
 
