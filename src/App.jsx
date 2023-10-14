@@ -7,38 +7,23 @@ import Main from './pages/test/main'
 import Login from './pages/Login'
 import Register from './pages/Register'
 
+import Dashboard from "./pages/dashboard/dashboardMain"
 
+const testing = true;
 export default function App() {
+
+  if (testing) {
+    return (
+      <div>
+        <Routes>
+          <Route path="/Dashboard" element={<Dashboard />} />
+        </Routes>
+      </div>
+    )
+  }
   return (
     <div>
-        
-    <div>
-        
-      <Link to="/Contact">Contact</Link>
-      <br></br>
-      <Link to="/Info">Info</Link>
-      <br></br>
-      <Link to="/Main">Main</Link>
-      <br></br>
-      <Link to="/Login">Login</Link>
-      <br></br>
-      <Link to="/Register">Register</Link>
-
-          <div  >
-            
-            <br></br>
-            <Routes>
-              @*Để test backend*@
-              <Route path="/" element={<p className="text-3xl font-bold underline">Hello, World</p>} />
-              <Route path="/Contact" element={<Contact />} />
-              <Route path="/Info" element={<Info />} />
-              <Route path="/Main" element={<Main />} />
-
-              <Route path="/Login" element={<Login />} />
-              <Route path="/Register" element={<Register />} />
-            </Routes>
-          </div>
-      </div>
+      <Main />
     </div>
   )
 }
