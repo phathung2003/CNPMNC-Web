@@ -38,7 +38,7 @@ export default function Login() {
                     setError('An error occurred. Please try again later.');
                 });
         }
-        else{
+        else {
             setError('F12 để biết thông tin')
         }
     };

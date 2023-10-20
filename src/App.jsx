@@ -7,41 +7,41 @@ import Register from './pages/Register';
 
 export default function App() {
   return (
-    <Router>
-      <div className="container mx-auto columns columns-3xs to-blue-600">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/Contact">Contact</Link>
-            </li>
-            <li>
-              <Link to="/Info">Info</Link>
-            </li>
-            <li>
-              <Link to="/Main">Main</Link>
-            </li>
-            <li>
-              <Link to="/Login">Login</Link>
-            </li>
-            <li>
-              <Link to="/Register">Register</Link>
-            </li>
-          </ul>
-        </nav>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/Contact">Contact</Link>
+          </li>
+          <li>
+            <Link to="/Info">Info</Link>
+          </li>
+          <li>
+            <Link to="/Main">Main</Link>
+          </li>
+          <li>
+            <Link to="/Login">Login</Link>
+          </li>
+          <li>
+            <Link to="/Register">Register</Link>
+          </li>
+        </ul>
+      </nav>
 
-        <p>Nội dung các trang sẽ ở đây</p>
 
-        <Routes>
-          {/* Để test backend */}
-          <Route path="/" element={<p className="text-3xl font-bold underline">Hello, World</p>} />
-          <Route path="/Contact" element={<Contact />} />
-          <Route path="/Info" element={<Info />} />
-          <Route path="/Main" element={<Main />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
-        </Routes>
-      </div>
-    </Router>
+      <p>Nội dung các trang sẽ ở đây</p>
+
+      <Routes>
+        {/* Để test backend */}
+        <Route path="/" element={<p className="text-3xl font-bold underline">Hello, World</p>} />
+        <Route path="/" element={<p className="text-3xl font-bold underline">Duplicate</p>} />
+        <Route path="/Contact" element={<Contact />} />
+        <Route path="/Info" element={<Info />} />
+        <Route path="/Main" element={<Main />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
+      </Routes>
+    </div>
   );
 }
 
