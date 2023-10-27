@@ -19,20 +19,10 @@ export default function Login() {
 
         // Basic validation
         if (!email || !password) {
-<<<<<<< HEAD
-        setError('Hãy nhập thông tin đầy đủ.')
-        return;
-
-     }
-        
-        
-        if (api !== undefined) {
-=======
             setError('Hãy nhập thông tin đầy đủ.')
             return;
         }
         if (result) {
->>>>>>> 3c0504d0482b7d57d165999f4f02acd4d8f814f0
             axios
                 .post(api, { email, password })
                 .then((result) => {
