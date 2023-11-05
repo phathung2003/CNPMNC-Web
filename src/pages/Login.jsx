@@ -1,9 +1,6 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
-import checkUri from "../backend/checkUri"
-const [result, api] = checkUri("Main");
+import handleSubmit from '../backend/checkLogin'
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -11,37 +8,6 @@ export default function Login() {
     const [error, setError] = useState('');
 
     const navigate = useNavigate();
-
-
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        // Basic validation
-        if (!email || !password) {
-            setError('Hãy nhập thông tin đầy đủ.')
-            return;
-        }
-        if (result) {
-            axios
-                .post(api, { email, password })
-                .then((result) => {
-                    console.log(result.data);
-                    if (result.data === 'Ok') {
-                        navigate('/info');
-                    } else {
-                        setError('Mật khẩu hoặc tài khoản sai. Hãy nhập lại.');
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                    setError('An error occurred. Please try again later.');
-                });
-        }
-        else{
-            setError('F12 để biết thông tin')
-        }
-    };
 
     return (
         <div>
@@ -54,7 +20,7 @@ export default function Login() {
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Đăng nhập
                             </h1>
-                            <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+                            <form className="space-y-4 md:space-y-6" onSubmit={(e) => handleSubmit(e, email, password, setError, navigate)}>
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                         Email
