@@ -7,7 +7,7 @@ import Main from './pages/test/main'
 import Login from './pages/Login'
 import Register from './pages/Register'
 
-import Dashboard from "./pages/dashboard/dashboardMain"
+import Dashboard from "./pages/Dashboard"
 
 const testing = true;
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
     return (
       <div>
         <Routes>
-          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard />} />
         </Routes>
       </div>
     )

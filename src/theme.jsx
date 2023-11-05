@@ -92,7 +92,7 @@ const darkColor = {
         900: "#151632",
     },
 
-    text : "#ffffff",
+    text: "#ffffff",
 }
 
 const whiteColor = {
@@ -152,7 +152,7 @@ const whiteColor = {
         900: "#e1e2fe",
     },
 
-    text : "#000000",
+    text: "#000000",
 }
 
 const darkPalette = (colors) => ({
