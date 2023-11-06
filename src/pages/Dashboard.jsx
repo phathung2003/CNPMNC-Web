@@ -9,7 +9,7 @@ import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
 
-import CarManager from './CarManager/AddCar'
+import CarManager from './CarManager/MainCar'
 import { Link, Route, Routes } from "react-router-dom";
 
 

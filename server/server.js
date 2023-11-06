@@ -1,10 +1,8 @@
 const check = require("./checkConnection");
 const contactModel = require("./models/Contact");
-
 const [result, port, app] = check(true);
 
 const carModel = require("./models/Car");
-
 
 if(result){
     app.post('/contact', (req,res) => {``
@@ -49,12 +47,33 @@ if(result){
         .then(info => res.json(info))
         .catch(err => res.json(err))
     })
-
-    app.post('/car', async (req,res) => {
+/////////////////////////////////////////////////////////////////
+    app.post('/carAdd', async (req,res) => {
         carModel.create(req.body)
         .then(info => res.json(info))
         .catch(err => res.json(err))
     })
+
+
+    app.post('/carDelete', async (req, res) => {
+        try{
+            const {id} = req.body;
+            await carModel.deleteOne({ _id : `${id}`});
+            return res.json({ success: true, msg: 'Product Deleted' });
+        }
+        catch(err){
+            console.error(err);
+        }
+    });
+
+
+    app.get("/carMain",(req,res) => {
+        carModel.find()
+        .then(info => res.json(info))
+        .catch(err => res.json(err))
+    })
+
+
 
     try{app.listen(port, () =>{console.log("Server khởi động tại port " + port)})}
     catch{console.log("Server khởi động thất bại")}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import checkUri from "../checkUri"
-const [result, api] = checkUri("Car");
+const [result, api] = checkUri("CarAdd");
 
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
