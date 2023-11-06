@@ -1,6 +1,6 @@
 import "../css/Dashboard.css"
 import Logo from "../assets/images/Logo_DarkMode.png"
-import { Box, IconButton, useTheme } from "@mui/material";
+import { IconButton } from "@mui/material";
 
 import UserIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -8,6 +8,14 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
+
+import CarManager from './CarManager/AddCar'
+import { Link, Route, Routes } from "react-router-dom";
+
+
+
+
+
 
 export default function Drawer() {
     return (
@@ -34,20 +42,20 @@ export default function Drawer() {
                     <li>
                         <div className="iocn-link">
                             <div className="link">
-                                <a href="#">
+                                <Link to="/Car">
                                     <i><CarIcon /></i>
                                     <span className="link_name">Quản lý xe</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         <ul className="sub-menu">
-                            <li><a className="link_name" href="#">Quản lý xe</a></li>
+                            <li><a className="link_name" href="/Car">Quản lý xe</a></li>
                         </ul>
                     </li>
 
 
-                    < li >
+                    <li>
                         <div className="iocn-link">
                             <div className="link">
                                 <a href="#">
@@ -62,12 +70,10 @@ export default function Drawer() {
 
                         <ul className="sub-menu">
                             <li><a className="link_name" href="#">Sổ đặt xe</a></li>
-                            <li><a href="#">Chưa duyệt</a></li>
-                            <li><a href="#">Đã duyệt</a></li>
-                        </ul >
-                    </li >
+                        </ul>
+                    </li>
 
-                    < li >
+                    <li>
                         <div className="iocn-link">
                             <div className="link">
                                 <a href="#">
@@ -77,9 +83,9 @@ export default function Drawer() {
                             </div>
                         </div >
 
-                        <li ul className="sub-menu" >
+                        <ul className="sub-menu" >
                             <li><a className="link_name" href="#">Sổ xe</a></li >
-                        </li>
+                        </ul>
                     </li >
                 </ul >
 
@@ -113,8 +119,11 @@ export default function Drawer() {
 
             </div >
 
-            <div class="home-content">
-                <p>#Send Help</p>
+            <div className="home-content">
+                <Routes>
+                    <Route path="/" element={<p className="text-3xl font-bold underline">Trang Chủ</p>} />
+                    <Route path="/Car" element={<CarManager />} />
+                </Routes>
             </div>
         </>
 

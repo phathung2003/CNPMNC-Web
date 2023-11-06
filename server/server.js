@@ -1,7 +1,10 @@
-const check = require("./checkConnection")
-const contactModel = require("./models/Contact")
+const check = require("./checkConnection");
+const contactModel = require("./models/Contact");
 
-const [result, port, app] = check()
+const [result, port, app] = check(true);
+
+const carModel = require("./models/Car");
+
 
 if(result){
     app.post('/contact', (req,res) => {``
@@ -23,6 +26,7 @@ if(result){
     
 
     app.post("/main", (req,res) => {
+        console.log(req.body)
         const {email, password} = req.body;
         contactModel.findOne({email : email}).then(
             user => {
@@ -46,6 +50,11 @@ if(result){
         .catch(err => res.json(err))
     })
 
+    app.post('/car', async (req,res) => {
+        carModel.create(req.body)
+        .then(info => res.json(info))
+        .catch(err => res.json(err))
+    })
 
     try{app.listen(port, () =>{console.log("Server khởi động tại port " + port)})}
     catch{console.log("Server khởi động thất bại")}

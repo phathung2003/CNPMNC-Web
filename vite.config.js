@@ -10,6 +10,7 @@ export default defineConfig({
     //Env variable from .env file
     'process.env.VITE_API_MAIN': JSON.stringify(process.env.VITE_API_MAIN),
     'process.env.VITE_API_CONTACT': JSON.stringify(process.env.VITE_API_CONTACT),
-    'process.env.VITE_API_INFO': JSON.stringify(process.env.VITE_API_INFO)
+    'process.env.VITE_API_INFO': JSON.stringify(process.env.VITE_API_INFO),
+    'process.env.VITE_API_CAR': JSON.stringify(process.env.VITE_API_CAR)
   }
 })

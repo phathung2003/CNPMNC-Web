@@ -8,10 +8,21 @@ const cors = require("cors")
 const HOSTS_REGEX = /^(?<protocol>[^/]+):\/\/(?:(?<username>[^:@]*)(?::(?<password>[^@]*))?@)?(?<hosts>(?!:)[^/?@]*)(?<rest>.*)/;
 
 //Lấy đường liên kết + Port
-const database = process.env.DATABASE_TEST;
+const databaseTest = process.env.DATABASE_TEST;
+const databaseXe = process.env.DATABASE_CAR;
 const port = process.env.PORT;
 
-const result = () => {
+module.exports = function result(table){
+    let database;
+
+    switch(table){
+        case true:
+            database = databaseXe;
+            break;
+        default:
+            database = databaseTest
+            break;
+    }
     if(database === undefined && !checkPort(port)){
         console.log("Bạn thiếu file .env hoặc file .env không hợp lệ để khởi động chương trình")
         return [false,null,null]
@@ -24,7 +35,6 @@ const result = () => {
     const app = connectDatabase(database);
     return [true, port,app]
 }
-module.exports = result
 
 //-- Hàm check port --//
 function checkPort(port){

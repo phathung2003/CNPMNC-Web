@@ -9,15 +9,13 @@ import Register from './pages/Register'
 
 import Dashboard from "./pages/Dashboard"
 
-const testing = true;
+const testing = true
 export default function App() {
 
   if (testing) {
     return (
       <div>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-        </Routes>
+        <Dashboard />
       </div>
     )
   }
