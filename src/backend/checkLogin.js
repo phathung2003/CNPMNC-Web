@@ -10,8 +10,9 @@ export default function checkLogin(e, email, password, setError, navigate){
         setError('Hãy nhập thông tin đầy đủ.')
         return;
     }
+    
     if (result) {
-        axios
+        axios 
             .post(api, { email, password })
             .then((result) => {
                 console.log(result.data);

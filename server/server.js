@@ -1,7 +1,8 @@
-const check = require("./checkConnection")
-const contactModel = require("./models/Contact")
+const check = require("./checkConnection");
+const contactModel = require("./models/Contact");
+const [result, port, app] = check(true);
 
-const [result, port, app] = check()
+const carModel = require("./models/Car");
 
 if(result){
     app.post('/contact', (req,res) => {``
@@ -23,6 +24,7 @@ if(result){
     
 
     app.post("/main", (req,res) => {
+        console.log(req.body)
         const {email, password} = req.body;
         contactModel.findOne({email : email}).then(
             user => {
@@ -45,7 +47,53 @@ if(result){
         .then(info => res.json(info))
         .catch(err => res.json(err))
     })
+    
+    //--------- Xử lý quản lý xe ---------///
+    
+    app.post('/carAdd', async (req,res) => {
+        carModel.create(req.body)
+        .then(info => res.json(info))
+        .catch(err => res.json(err))
+    })
 
+
+    app.post('/carDelete', async (req, res) => {
+        try{
+            const {id} = req.body;
+            await carModel.deleteOne({ _id : `${id}`});
+            return res.json({ success: true, msg: 'Xoá xe thành công' });
+        }
+        catch(err){console.error(err);}
+    });
+
+    app.post('/carEdit', async (req, res) => {
+        try{
+            const {ID, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
+            await carModel.updateOne({ _id : `${ID}`},{
+                $set: {
+                    TenXe : TenXe,
+                    BienSo :  BienSo,
+                    SoCho : SoCho,
+                    TruyenDong : TruyenDong,
+                    NhienLieu : NhienLieu,
+                    MoTa : MoTa,
+                    SoTien : SoTien,
+                    HinhAnh : HinhAnh,
+                    TinhTrang : TinhTrang,
+                }
+            });
+            return res.json({ success: true, msg: 'Cập nhật thành công !' });
+        }
+        catch(err){
+            console.error(err);
+        }
+    });
+
+    app.get("/carMain",(req,res) => {
+        carModel.find()
+        .then(info => res.json(info))
+        .catch(err => res.json(err))
+    })
 
     try{app.listen(port, () =>{console.log("Server khởi động tại port " + port)})}
     catch{console.log("Server khởi động thất bại")}
