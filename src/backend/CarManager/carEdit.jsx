@@ -1,18 +1,21 @@
 import axios from 'axios';
 import checkUri from "../checkUri"
-const [result, api] = checkUri("CarAdd");
+const [result, api] = checkUri("CarEdit");
 
 import { storage } from "../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { v4 } from 'uuid'
+
+const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
 
 export default function handleSubmit(e, formData, image, setProgress) {
     e.preventDefault();
 
-    if (image != null && image != "" && image != "Default")
+    if (image != null && image != "" && formData.HinhAnh != image && image != "Default")
         uploadImage(formData, image, setProgress);
-    else
+    else {
         pushToDatabase(formData)
+    }
 }
 
 function uploadImage(formData, image, setProgress) {
@@ -23,7 +26,6 @@ function uploadImage(formData, image, setProgress) {
 
     //Xem tiến trình tải
     progress.on("state_changed", (snapshot) => {
-
         //Lấy tỷ lệ phần trăm
         const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
         console.log("Tiến trình tải: " + progress + "%")
@@ -33,8 +35,14 @@ function uploadImage(formData, image, setProgress) {
         //Sau khi tải xong (Lấy link)
         () => {
             getDownloadURL(progress.snapshot.ref).then(url => {
-                formData.HinhAnh = url;
-                pushToDatabase(formData);
+                console.log(formData.HinhAnh)
+                const DeleteResult = DeletePicture(formData.HinhAnh);
+                if (DeleteResult) {
+                    formData.HinhAnh = url;
+                    pushToDatabase(formData)
+                }
+                ;
+                // }
             })
         })
 }
@@ -42,9 +50,8 @@ function uploadImage(formData, image, setProgress) {
 
 function pushToDatabase(formData) {
     if (result) {
-        var currentdate = new Date();
-        var ID = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds()
 
+        var ID = formData._id;
         var TenXe = formData.TenXe;
         var BienSo = formData.BienSo;
         var SoCho = formData.SoCho;
@@ -60,7 +67,6 @@ function pushToDatabase(formData) {
             .then((result) => {
                 console.log(result.data);
                 alert("Lưu thành công !")
-                window.location.reload(false);
                 console.log('Lưu Thành Công !');
             })
             .catch((err) => {
@@ -70,4 +76,15 @@ function pushToDatabase(formData) {
     }
     else
         console.log("Link API bị lỗi")
+}
+
+async function DeletePicture(image) {
+    const desertRef = ref(storage, image);
+
+    if (image != defaultPicture) {
+        deleteObject(desertRef).then(() => {
+            console.log("Xoá thành công")
+            return true;
+        }).catch((error) => { console.log("Xoá thất bại"); return false; });
+    }
 }

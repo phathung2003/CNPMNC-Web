@@ -1,4 +1,5 @@
 import { Routes, Route, Link } from "react-router-dom"
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import Contact from './pages/test/contact'
 import Info from './pages/test/info'

@@ -1,4 +1,5 @@
 import "../css/Dashboard.css"
+
 import Logo from "../assets/images/Logo_DarkMode.png"
 import { IconButton } from "@mui/material";
 
@@ -9,7 +10,10 @@ import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
 
-import CarManager from './CarManager/MainCar'
+import CarMain from './CarManager/MainCar'
+import CarAdd from './CarManager/AddCar'
+import CarEdit from './CarManager/EditCar'
+
 import { Link, Route, Routes } from "react-router-dom";
 
 
@@ -19,7 +23,7 @@ import { Link, Route, Routes } from "react-router-dom";
 
 export default function Drawer() {
     return (
-        <>
+        <div>
             <div className="sidebar">
                 <div className="logo-content">
                     <div className="logo">
@@ -122,10 +126,12 @@ export default function Drawer() {
             <div className="home-content">
                 <Routes>
                     <Route path="/" element={<p className="text-3xl font-bold underline">Trang Chủ</p>} />
-                    <Route path="/Car" element={<CarManager />} />
+                    <Route path="/Car" element={<CarMain />} />
+                    <Route path="/CarAdd" element={<CarAdd />} />
+                    <Route path="/CarEdit" element={<CarEdit />} />
                 </Routes>
             </div>
-        </>
+        </div>
 
     );
 }

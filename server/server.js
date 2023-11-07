@@ -48,7 +48,9 @@ if(result){
         .catch(err => res.json(err))
     })
 /////////////////////////////////////////////////////////////////
-    app.post('/carAdd', async (req,res) => {
+    
+app.post('/carAdd', async (req,res) => {
+        console.log(req.body.id)
         carModel.create(req.body)
         .then(info => res.json(info))
         .catch(err => res.json(err))
@@ -59,21 +61,39 @@ if(result){
         try{
             const {id} = req.body;
             await carModel.deleteOne({ _id : `${id}`});
-            return res.json({ success: true, msg: 'Product Deleted' });
+            return res.json({ success: true, msg: 'Xoá xe thành công' });
+        }
+        catch(err){console.error(err);}
+    });
+
+    app.post('/carEdit', async (req, res) => {
+        try{
+            const {ID, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
+            await carModel.updateOne({ _id : `${ID}`},{
+                $set: {
+                    TenXe : TenXe,
+                    BienSo :  BienSo,
+                    SoCho : SoCho,
+                    TruyenDong : TruyenDong,
+                    NhienLieu : NhienLieu,
+                    MoTa : MoTa,
+                    SoTien : SoTien,
+                    HinhAnh : HinhAnh,
+                    TinhTrang : TinhTrang,
+                }
+            });
+            return res.json({ success: true, msg: 'Cập nhật thành công !' });
         }
         catch(err){
             console.error(err);
         }
     });
 
-
     app.get("/carMain",(req,res) => {
         carModel.find()
         .then(info => res.json(info))
         .catch(err => res.json(err))
     })
-
-
 
     try{app.listen(port, () =>{console.log("Server khởi động tại port " + port)})}
     catch{console.log("Server khởi động thất bại")}

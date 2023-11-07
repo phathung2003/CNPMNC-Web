@@ -2,11 +2,11 @@ const mongoose = require("mongoose")
 
 const carSchema = new mongoose.Schema({
     ID : String,
+    TenXe :  String,
     BienSo :  String,
     SoCho : String,
     TruyenDong : String,
     NhienLieu : String,
-    NhienLieuTieuHao : String,
     MoTa : String,
     SoTien : String,
     HinhAnh : String,

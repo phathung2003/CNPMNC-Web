@@ -1,30 +1,34 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Form from 'react-bootstrap/Form';
 
 import "../../css/Detail.css"
-//Xử lý backend
-import handleSubmit from "../../backend/CarManager/carAdd";
+import handleSubmit from "../../backend/CarManager/carEdit";
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
 
-export default function AddCar() {
+export default function EditCar() {
     const navigate = useNavigate();
-    const [image, setFile] = useState("Default");
-    const [temp, setTemp] = useState(defaultPicture);
+    const location = useLocation();
+
+    const [image, setFile] = useState(location.state.HinhAnh);
+    const [temp, setTemp] = useState(location.state.HinhAnh);
     const [Progress, setProgress] = useState();
 
     const [formData, setFormData] = useState({
-        TenXe: "",
-        BienSo: "",
-        SoCho: "4 chỗ",
-        TruyenDong: "",
-        NhienLieu: "",
-        MoTa: "",
-        SoTien: "",
-        HinhAnh: `${defaultPicture}`,
-        TinhTrang: "Còn trống",
+        _id: `${location.state._id}`,
+        ID: `${location.state.ID}`,
+        TenXe: `${location.state.TenXe}`,
+        BienSo: `${location.state.BienSo}`,
+        SoCho: `${location.state.SoCho}`,
+        TruyenDong: `${location.state.TruyenDong}`,
+        NhienLieu: `${location.state.NhienLieu}`,
+        MoTa: `${location.state.MoTa}`,
+        SoTien: `${location.state.SoTien}`,
+        HinhAnh: `${location.state.HinhAnh}`,
+        TinhTrang: `${location.state.TinhTrang}`,
     });
 
     const Input = (e) => {
@@ -48,6 +52,7 @@ export default function AddCar() {
             console.log("Error: ", error);
         };
     }
+
 
     return (
         <div>
@@ -81,11 +86,26 @@ export default function AddCar() {
 
                                     <form onSubmit={(e) => handleSubmit(e, formData, image, setProgress)}>
                                         < div className="card-body">
+                                            <div className="form-group row mt-1">
+                                                <div className="col">
+                                                    <label className="form-label">ID Xe</label>
+                                                    <input className="form-control" defaultValue={formData.ID} disabled />
+                                                </div>
+                                                <div className="col">
+                                                    <label className="form-label">Tình trạng</label>
+                                                    <Form.Select name="TinhTrang" defaultValue={formData.TinhTrang} onChange={Input}>
+                                                        <option value="Còn trống">Còn trống</option>
+                                                        <option value="Đặt trước">Đặt trước</option>
+                                                        <option value="Đang thuê">Đang thuê</option>
+                                                    </Form.Select>
+                                                </div>
+                                            </div>
+
                                             {/*Tên Xe*/}
                                             <div className="form-group">
                                                 <div className="col">
                                                     <label className="form-label">Tên xe</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="TenXe" onChange={Input} />
+                                                    <input className="form-control" type="text" autoComplete="off" name="TenXe" defaultValue={formData.TenXe} onChange={Input} />
                                                 </div>
                                             </div>
 
@@ -94,13 +114,13 @@ export default function AddCar() {
                                                 {/*Biển số xe*/}
                                                 <div className="col">
                                                     <label className="form-label">Biển số xe</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="BienSo" onChange={Input} />
+                                                    <input className="form-control" type="text" autoComplete="off" name="BienSo" defaultValue={formData.BienSo} onChange={Input} />
                                                 </div>
 
                                                 {/*Số chỗ ngồi*/}
                                                 <div className="col">
                                                     <label className="form-label">Số chỗ ngồi</label>
-                                                    <Form.Select name="SoCho" defaultValue={"4 chỗ"} onChange={Input}>
+                                                    <Form.Select name="SoCho" defaultValue={formData.SoCho} onChange={Input}>
                                                         <option value="4 chỗ">4 chỗ</option>
                                                         <option value="4 chỗ">8 chỗ</option>
                                                         <option value="16 chỗ">16 chỗ</option>
@@ -116,19 +136,19 @@ export default function AddCar() {
                                                 {/*Nhiên liệu*/}
                                                 <div className="col">
                                                     <label className="form-label">Nhiên liệu</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="NhienLieu" onChange={Input} />
+                                                    <input className="form-control" type="text" autoComplete="off" name="NhienLieu" defaultValue={formData.NhienLieu} onChange={Input} />
                                                 </div>
 
                                                 {/*Truyền động*/}
                                                 <div className="col">
                                                     <label className="form-label">Truyền động</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="TruyenDong" onChange={Input} />
+                                                    <input className="form-control" type="text" autoComplete="off" name="TruyenDong" defaultValue={formData.TruyenDong} onChange={Input} />
                                                 </div>
 
                                                 {/*Số tiền*/}
                                                 <div className="col">
                                                     <label className="form-label">Số tiền/1 ngày</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="SoTien" onChange={Input} />
+                                                    <input className="form-control" type="text" autoComplete="off" name="SoTien" defaultValue={formData.SoTien} onChange={Input} />
                                                 </div>
                                             </div>
 
@@ -143,7 +163,7 @@ export default function AddCar() {
                                                 <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
                                                     setFile("Default")
                                                     setTemp(defaultPicture)
-                                                }}>Reset</button>
+                                                }}>Mặc định</button>
                                                 <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG, GIF và PNG</label>
                                                 {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> : ""}
                                             </div>
@@ -151,12 +171,12 @@ export default function AddCar() {
                                             {/*Mô tả*/}
                                             <div className="form-group mt-1">
                                                 <label className="form-label">Mô tả</label>
-                                                <textarea className="form-control" type="text" name="MoTa" onChange={Input} />
+                                                <textarea className="form-control" type="text" name="MoTa" defaultValue={formData.MoTa} onChange={Input} />
                                             </div>
                                         </div>
 
                                         <div className="d-flex flex-row-reverse mb-1 mr-1   ">
-                                            <button type="submit" className="btn btn-success">Lưu</button>&nbsp;
+                                            <button type="submit" className="btn btn-success">Lưu chỉnh sửa</button>&nbsp;
                                         </div>
 
                                     </form>
@@ -170,36 +190,5 @@ export default function AddCar() {
             </div>
         </div>
     );
+
 }
-
-
-// //Imgur
-
-// const onFileUpload = async () => {
-//     // Client ID
-//     const clientId = "ed8804237167f35",
-//         auth = "Client-ID " + clientId;
-
-//     // Creating an object of formData
-//     const formData = new FormData();
-
-//     // Adding our image to formData
-//     formData.append("file", file);
-
-//     // Making the post request
-//     await fetch("https://api.imgur.com/3/upload", {
-//         // API Endpoint
-//         method: "POST", // HTTP Method
-//         body: formData, // Data to be sent
-//         headers: {
-//             // Setting header
-//             Authorization: auth,
-//             Accept: "application/json",
-//         },
-//     })
-//         // Handling success
-//         .then((res) => res.data.success == true ? alert("image uploaded") : alert("Failed") && console.log(res.data.link))
-//         .catch((err) => alert("Failed") && console.log(err));
-// };
-
-
