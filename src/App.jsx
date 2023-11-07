@@ -1,13 +1,7 @@
 import { Routes, Route, Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import Contact from './pages/test/contact'
-import Info from './pages/test/info'
 import Main from './pages/test/main'
-
-import Login from './pages/Login'
-import Register from './pages/Register'
-
 import Dashboard from "./pages/Dashboard"
 
 const testing = true

@@ -47,10 +47,10 @@ if(result){
         .then(info => res.json(info))
         .catch(err => res.json(err))
     })
-/////////////////////////////////////////////////////////////////
     
-app.post('/carAdd', async (req,res) => {
-        console.log(req.body.id)
+    //--------- Xử lý quản lý xe ---------///
+    
+    app.post('/carAdd', async (req,res) => {
         carModel.create(req.body)
         .then(info => res.json(info))
         .catch(err => res.json(err))

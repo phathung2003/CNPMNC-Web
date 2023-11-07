@@ -55,7 +55,7 @@ export default function AddCar() {
 
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-primary mb-0" onClick={(e) => navigate("/Car")}>Quay lại</button>
-                    <h4 className="font-weight-bold"> Thông tin xe </h4>
+                    <h4 className="font-weight-bold"> Thêm xe </h4>
                 </div>
 
                 {/*Thanh Sidebar*/}
@@ -171,35 +171,3 @@ export default function AddCar() {
         </div>
     );
 }
-
-
-// //Imgur
-
-// const onFileUpload = async () => {
-//     // Client ID
-//     const clientId = "ed8804237167f35",
-//         auth = "Client-ID " + clientId;
-
-//     // Creating an object of formData
-//     const formData = new FormData();
-
-//     // Adding our image to formData
-//     formData.append("file", file);
-
-//     // Making the post request
-//     await fetch("https://api.imgur.com/3/upload", {
-//         // API Endpoint
-//         method: "POST", // HTTP Method
-//         body: formData, // Data to be sent
-//         headers: {
-//             // Setting header
-//             Authorization: auth,
-//             Accept: "application/json",
-//         },
-//     })
-//         // Handling success
-//         .then((res) => res.data.success == true ? alert("image uploaded") : alert("Failed") && console.log(res.data.link))
-//         .catch((err) => alert("Failed") && console.log(err));
-// };
-
-
