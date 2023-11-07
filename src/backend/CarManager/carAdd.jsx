@@ -6,11 +6,11 @@ import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid'
 
-export default function handleSubmit(e, formData, image, setProgress) {
+export default async function handleSubmit(e, formData, image, setProgress) {
     e.preventDefault();
 
     if (image != null && image != "" && image != "Default")
-        uploadImage(formData, image, setProgress);
+        uploadImage(formData, image, setProgress)
     else
         pushToDatabase(formData)
 }

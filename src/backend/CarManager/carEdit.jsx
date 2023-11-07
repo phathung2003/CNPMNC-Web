@@ -3,10 +3,10 @@ import checkUri from "../checkUri"
 const [result, api] = checkUri("CarEdit");
 
 import { storage } from "../firebase";
-import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
+import { ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import { v4 } from 'uuid'
 
-const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
+import DeletePicture from '../Feature/deletePicture';
 
 export default function handleSubmit(e, formData, image, setProgress) {
     e.preventDefault();
@@ -35,14 +35,11 @@ function uploadImage(formData, image, setProgress) {
         //Sau khi tải xong (Lấy link)
         () => {
             getDownloadURL(progress.snapshot.ref).then(url => {
-                console.log(formData.HinhAnh)
                 const DeleteResult = DeletePicture(formData.HinhAnh);
                 if (DeleteResult) {
                     formData.HinhAnh = url;
                     pushToDatabase(formData)
-                }
-                ;
-                // }
+                };
             })
         })
 }
@@ -78,13 +75,3 @@ function pushToDatabase(formData) {
         console.log("Link API bị lỗi")
 }
 
-async function DeletePicture(image) {
-    const desertRef = ref(storage, image);
-
-    if (image != defaultPicture) {
-        deleteObject(desertRef).then(() => {
-            console.log("Xoá thành công")
-            return true;
-        }).catch((error) => { console.log("Xoá thất bại"); return false; });
-    }
-}

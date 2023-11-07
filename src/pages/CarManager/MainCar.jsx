@@ -4,9 +4,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import "../../css/table.css"
 import Value from "../../backend/CarManager/carMain"
 import Delete from "../../backend/CarManager/carDelete";
+import { useEffect, useState } from 'react';
 
 export default function Info() {
     const navigate = useNavigate();
+    const [search, setSearch] = useState("");
     const carInfo = Value();
 
     return (
@@ -15,14 +17,16 @@ export default function Info() {
             <div className="d-flex justify-content-between mb-3">
                 <div className="row">
                     <div className="input-group">
+
                         <div className="form-outline" style={{ marginRight: "5px" }}>
-                            <input type="text" className="form-control border border-secondary" placeholder="Tìm kiếm" name="NameSearch" />
+                            <input type="text" className="form-control border border-secondary" placeholder="Tìm kiếm" onChange={(e) => setSearch(e.target.value.toLowerCase())} />
                         </div>
                         <div>
                             <button className="btn btn-primary" type="submit">
                                 <i><SearchIcon /></i>
                             </button>
                         </div>
+
                     </div>
                 </div>
 
@@ -46,7 +50,17 @@ export default function Info() {
 
                     <tbody>
                         {
-                            carInfo.map(info => {
+                            carInfo.filter((item) => {
+                                if (search === "") return item;
+                                return item.ID.toLowerCase().includes(search) ||
+                                    item.TenXe.toLowerCase().includes(search) ||
+                                    item.BienSo.toLowerCase().includes(search) ||
+                                    item.SoCho.toLowerCase().includes(search) ||
+                                    item.NhienLieu.toLowerCase().includes(search) ||
+                                    item.TruyenDong.toLowerCase().includes(search) ||
+                                    item.SoTien.toLowerCase().includes(search) ||
+                                    item.TinhTrang.toLowerCase().includes(search)
+                            }).map(info => {
                                 return <tr key={info._id}>
                                     <td align="center" style={{ width: "5%" }}>{info.ID}</td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhAnh}`}></img></td>
