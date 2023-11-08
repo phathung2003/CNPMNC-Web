@@ -51,42 +51,36 @@ if(result){
     //--------- Xử lý quản lý xe ---------///
     
     app.post('/carAdd', async (req,res) => {
-        carModel.create(req.body)
-        .then(info => res.json(info))
-        .catch(err => res.json(err))
+        await carModel.create(req.body)
+        .then(() => res.json({success: true, msg: 'Thêm xe thành công'}))
+        .catch(() => res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' }))
     })
 
 
     app.post('/carDelete', async (req, res) => {
-        try{
-            const {id} = req.body;
-            await carModel.deleteOne({ _id : `${id}`});
-            return res.json({ success: true, msg: 'Xoá xe thành công' });
-        }
-        catch(err){console.error(err);}
+        const {id} = req.body;
+        await carModel.deleteOne({ _id : `${id}`})
+        .then(() => res.json({ success: true, msg: 'Xoá xe thành công' }))
+        .catch(() => res.json({ success: false, msg: 'Xoá xe thất bại. Vui lòng thử lại sau !' }))
     });
 
     app.post('/carEdit', async (req, res) => {
-        try{
-            const {ID, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
-            await carModel.updateOne({ _id : `${ID}`},{
-                $set: {
-                    TenXe : TenXe,
-                    BienSo :  BienSo,
-                    SoCho : SoCho,
-                    TruyenDong : TruyenDong,
-                    NhienLieu : NhienLieu,
-                    MoTa : MoTa,
-                    SoTien : SoTien,
-                    HinhAnh : HinhAnh,
-                    TinhTrang : TinhTrang,
-                }
-            });
-            return res.json({ success: true, msg: 'Cập nhật thành công !' });
-        }
-        catch(err){
-            console.error(err);
-        }
+        const {ID, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
+        await carModel.updateOne({ _id : `${ID}`},{
+            $set: {
+                TenXe : TenXe,
+                BienSo :  BienSo,
+                SoCho : SoCho,
+                TruyenDong : TruyenDong,
+                NhienLieu : NhienLieu,
+                MoTa : MoTa,
+                SoTien : SoTien,
+                HinhAnh : HinhAnh,
+                TinhTrang : TinhTrang,
+            }
+        })
+        .then(() => res.json({ success: true, msg: 'Cập nhật thành công !' }))
+        .catch(() => res.json({ success: false, msg: 'Cập nhật thất bại. Vui lòng thử lại sau !' }))
     });
 
     app.get("/carMain", async (req,res) => {

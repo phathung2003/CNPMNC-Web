@@ -7,19 +7,41 @@ import DeletePicture from '../Feature/deletePicture';
 export default async function onDelete(id, HinhAnh) {
     try {
         if (window.confirm("Bạn có muốn xoá xe này ?")) {
-            if (result) {
-                const res = await axios.post(api, { id });
-                if (res.data.success) {
-                    // Xoá file hình trong Firebase
-                    DeletePicture(HinhAnh)
-                    alert(res.data.msg);
-                    window.location.reload(false);
-                }
+            if (await deleteCar(id)) {
+
+                // Xoá file hình trong Firebase
+                await DeletePicture(HinhAnh)
+                window.location.reload(false);
             }
-            else
-                console.log("Link API bị lỗi")
         }
     }
-    catch (err) { console.error(err); }
+    catch (err) {
+        alert("Xoá xe thất bại. Vui lòng thử lại sau !")
+        console.error(err);
+    }
 }
 
+async function deleteCar(id) {
+    const myPromise = new Promise(
+        function (resolve) {
+            if (result) {
+                axios.post(api, { id }).then((result) => {
+                    alert(result.data.msg)
+                    console.log(result.data.msg);
+                    resolve(result.data.success);
+                })
+                    .catch((err) => {
+                        alert("Kết nối đến máy chủ thất bại. Vui lòng thử lại sau !")
+                        console.log(err);
+                        console.log("Kết nối đến máy chủ thất bại. Vui lòng thử lại sau !");
+                        resolve(false);
+                    });
+            }
+            else {
+                alert("Đường dẫn kết nối bị lỗi!")
+                console.log("Đường dẫn API bị lỗi")
+                resolve(false);
+            }
+        });
+    return myPromise;
+}

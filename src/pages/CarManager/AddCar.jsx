@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import "../../css/Detail.css"
 //Xử lý backend
 import handleSubmit from "../../backend/CarManager/carAdd";
+import convertToBase64 from "../../backend/Feature/convertToBase64"
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
 
@@ -14,7 +15,7 @@ export default function AddCar() {
     const [image, setFile] = useState("Default");
     const [temp, setTemp] = useState(defaultPicture);
     const [Progress, setProgress] = useState();
-
+    const [inUploadProgress, setInUploadProgress] = useState(false);
     const [formData, setFormData] = useState({
         TenXe: "",
         BienSo: "",
@@ -27,27 +28,13 @@ export default function AddCar() {
         TinhTrang: "Còn trống",
     });
 
-    const Input = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const Input = (e) => { setFormData({ ...formData, [e.target.name]: e.target.value }); };
 
     const onFileChange = (event) => {
         // Updating the state 
         setFile(event.target.files[0]);
-        convertToBase64(event)
+        convertToBase64(event, setTemp)
     };
-
-    function convertToBase64(e) {
-        console.log(e);
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload = () => {
-            setTemp(reader.result);
-        };
-        reader.onerror = error => {
-            console.log("Error: ", error);
-        };
-    }
 
     return (
         <div>
@@ -79,7 +66,7 @@ export default function AddCar() {
                                 {/*Thông tin xe*/}
                                 <div className="tab-pane fade active show">
 
-                                    <form onSubmit={(e) => handleSubmit(e, formData, image, setProgress)}>
+                                    <form onSubmit={(e) => handleSubmit(e, formData, image, setProgress, inUploadProgress, setInUploadProgress)}>
                                         < div className="card-body">
                                             {/*Tên Xe*/}
                                             <div className="form-group">
@@ -143,11 +130,11 @@ export default function AddCar() {
                                                 <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
                                                     setFile("Default")
                                                     setTemp(defaultPicture)
-                                                }}>Reset</button>
-                                                <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG, GIF và PNG</label>
-                                                {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> : ""}
-                                            </div>
+                                                }}>Mặc định</button>
+                                                <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG và PNG</label>
 
+                                            </div>
+                                            {Progress >= 0 || Progress != undefined ? <ProgressBar now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> : ""}
                                             {/*Mô tả*/}
                                             <div className="form-group mt-1">
                                                 <label className="form-label">Mô tả</label>
@@ -156,17 +143,17 @@ export default function AddCar() {
                                         </div>
 
                                         <div className="d-flex flex-row-reverse mb-1 mr-1   ">
-                                            <button type="submit" className="btn btn-success">Lưu</button>&nbsp;
+                                            {!inUploadProgress ?
+                                                <button type="submit" className="btn btn-success">Lưu</button> :
+                                                <button className="btn btn-secondary">Đang lưu dữ liệu</button>
+                                            }
                                         </div>
-
                                     </form>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );

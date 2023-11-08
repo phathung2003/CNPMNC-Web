@@ -3,14 +3,24 @@ body {
   box-sizing: border-box;
 }
 
-/*Hình avatar*/
+/*Hình Xe*/
 .avatar {
   display: block;
   margin-left: auto;
   margin-right: auto;
   height: 300px;
   width: 400px;
-  object-fit: contain;
+  object-fit: fill;
+}
+
+/*Hình Xe - Đặt xe*/
+.carPicture {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+  width: 500px;
+  object-fit: fill;
 }
 
 /*Chỉnh nút upload hình*/

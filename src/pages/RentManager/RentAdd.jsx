@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -6,7 +6,6 @@ import Form from 'react-bootstrap/Form';
 
 import "../../css/Detail.css"
 import handleSubmit from "../../backend/CarManager/carEdit";
-import convertToBase64 from "../../backend/Feature/convertToBase64";
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
 
@@ -17,11 +16,10 @@ export default function EditCar() {
     const [image, setFile] = useState(location.state.HinhAnh);
     const [temp, setTemp] = useState(location.state.HinhAnh);
     const [Progress, setProgress] = useState();
-    const [inUploadProgress, setInUploadProgress] = useState(false);
 
     const [formData, setFormData] = useState({
         _id: `${location.state._id}`,
-        ID: `${location.state.ID}`,
+        IDXe: `${location.state.ID}`,
         TenXe: `${location.state.TenXe}`,
         BienSo: `${location.state.BienSo}`,
         SoCho: `${location.state.SoCho}`,
@@ -33,13 +31,28 @@ export default function EditCar() {
         TinhTrang: `${location.state.TinhTrang}`,
     });
 
-    const Input = (e) => { setFormData({ ...formData, [e.target.name]: e.target.value }); };
+    const Input = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const onFileChange = (event) => {
         // Updating the state 
         setFile(event.target.files[0]);
-        convertToBase64(event, setTemp)
+        convertToBase64(event)
     };
+
+    function convertToBase64(e) {
+        console.log(e);
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        reader.onload = () => {
+            setTemp(reader.result);
+        };
+        reader.onerror = error => {
+            console.log("Error: ", error);
+        };
+    }
+
 
     return (
         <div>
@@ -47,33 +60,61 @@ export default function EditCar() {
 
                 <div className="d-flex justify-content-between">
                     <button className="btn btn-primary mb-0" onClick={(e) => navigate("/Car")}>Quay lại</button>
-                    <h4 className="font-weight-bold"> Thông tin xe </h4>
+                    <h3> Đơn thuê xe </h3>
                 </div>
 
                 {/*Thanh Sidebar*/}
                 <div className="card overflow-hidden mt-1 d-flex">
                     <div className="row no-gutters row-bordered row-border-light">
-                        <div className="col-md-3">
+                        <div className="col-md-5">
 
-                            <div className="list-group list-group-flush account-settings-links">
+                            <div className="list-group list-group-flush account-settings-links  ml-5 ">
+
+                                <h3 className="mt-1">Thông tin xe</h3>
 
                                 {/*Hình Avatar*/}
-                                <div className="justify-content-center form-group col mt-5 ml-5">
-                                    <img src={`${temp}`} className="avatar" />
+                                <div className="justify-content-center form-group col">
+                                    <img src={`${temp}`} className="carPicture" />
                                 </div>
+
+                                {/*Tên xe*/}
+                                <h2 className="mt-1">{formData.TenXe}</h2>
+
+                                {/*ID Xe & Tình trạng*/}
+                                <div className="form-group row mt-1">
+                                    <p className="col"><strong>ID Xe: </strong> {formData.IDXe}</p>
+                                    <p className="col"><strong>Tình trạng: </strong> {formData.TinhTrang}</p>
+                                </div>
+
+                                {/*Biển số & Trạng thái*/}
+                                <div className="form-group row mt-1">
+                                    <p className="col"><strong>Biển số: </strong> {formData.BienSo}</p>
+                                    <p className="col"><strong>Số chỗ: </strong> {formData.SoCho}</p>
+                                </div>
+
+                                {/*Truyền động & Nhiên liệu*/}
+                                <div className="form-group row mt-1">
+                                    <p className="col"><strong>Truyền động: </strong> {formData.TruyenDong}</p>
+                                    <p className="col"><strong>Nhiên liệu: </strong> {formData.NhienLieu}</p>
+                                </div>
+
+                                <p><strong>Mô tả</strong></p>
+                                <p>{formData.MoTa}</p>
                             </div>
                         </div>
 
 
-                        <div className="col-md-9">
+                        <div className="col-md-7">
                             <div className="tab-content">
 
-                                {/*Thông tin xe*/}
+                                {/*Thông tin người thuê*/}
                                 <div className="tab-pane fade active show">
+                                    <h3 className="mt-1 ml-2">Thông tin xe</h3>
 
-                                    <form onSubmit={(e) => handleSubmit(e, formData, image, setFile, setProgress, inUploadProgress, setInUploadProgress)}>
+                                    <form onSubmit={(e) => handleSubmit(e, formData, image, setProgress)}>
                                         < div className="card-body">
-                                            <div className="form-group row mt-1">
+
+                                            <div className="form-group row mt-0">
                                                 <div className="col">
                                                     <label className="form-label">ID Xe</label>
                                                     <input className="form-control" defaultValue={formData.ID} disabled />
@@ -89,7 +130,7 @@ export default function EditCar() {
                                             </div>
 
                                             {/*Tên Xe*/}
-                                            <div className="form-group">
+                                            <div className="form-group mt-2">
                                                 <div className="col">
                                                     <label className="form-label">Tên xe</label>
                                                     <input className="form-control" type="text" autoComplete="off" name="TenXe" defaultValue={formData.TenXe} onChange={Input} />
@@ -151,10 +192,9 @@ export default function EditCar() {
                                                     setFile("Default")
                                                     setTemp(defaultPicture)
                                                 }}>Mặc định</button>
-                                                <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG và PNG</label>
+                                                <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG, GIF và PNG</label>
+                                                {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> : ""}
                                             </div>
-
-                                            {Progress >= 0 || Progress != undefined ? <ProgressBar now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> : ""}
 
                                             {/*Mô tả*/}
                                             <div className="form-group mt-1">
@@ -164,10 +204,7 @@ export default function EditCar() {
                                         </div>
 
                                         <div className="d-flex flex-row-reverse mb-1 mr-1   ">
-                                            {!inUploadProgress ?
-                                                <button type="submit" className="btn btn-success">Lưu chỉnh sửa</button> :
-                                                <button className="btn btn-secondary">Đang lưu dữ liệu</button>
-                                            }
+                                            <button type="submit" className="btn btn-success">Lưu chỉnh sửa</button>&nbsp;
                                         </div>
 
                                     </form>
