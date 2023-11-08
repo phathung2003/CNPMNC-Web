@@ -5,6 +5,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Form from 'react-bootstrap/Form';
 
 import "../../css/Detail.css"
+import "../../css/pictureUpload.css"
 import handleSubmit from "../../backend/CarManager/carEdit";
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
@@ -26,7 +27,7 @@ export default function EditCar() {
         TruyenDong: `${location.state.TruyenDong}`,
         NhienLieu: `${location.state.NhienLieu}`,
         MoTa: `${location.state.MoTa}`,
-        SoTien: `${location.state.SoTien}`,
+        SoTien: parseInt(`${location.state.SoTien}`),
         HinhAnh: `${location.state.HinhAnh}`,
         TinhTrang: `${location.state.TinhTrang}`,
     });
@@ -109,103 +110,122 @@ export default function EditCar() {
 
                                 {/*Thông tin người thuê*/}
                                 <div className="tab-pane fade active show">
-                                    <h3 className="mt-1 ml-2">Thông tin xe</h3>
+                                    <h3 className="mt-1 ml-2">Thông tin người thuê</h3>
 
                                     <form onSubmit={(e) => handleSubmit(e, formData, image, setProgress)}>
                                         < div className="card-body">
 
                                             <div className="form-group row mt-0">
                                                 <div className="col">
-                                                    <label className="form-label">ID Xe</label>
-                                                    <input className="form-control" defaultValue={formData.ID} disabled />
+                                                    <label className="form-label">Họ và tên</label>
+                                                    <input className="form-control" />
                                                 </div>
+
                                                 <div className="col">
-                                                    <label className="form-label">Tình trạng</label>
-                                                    <Form.Select name="TinhTrang" defaultValue={formData.TinhTrang} onChange={Input}>
-                                                        <option value="Còn trống">Còn trống</option>
-                                                        <option value="Đặt trước">Đặt trước</option>
-                                                        <option value="Đang thuê">Đang thuê</option>
-                                                    </Form.Select>
+                                                    <label className="form-label">Ngày sinh</label>
+                                                    <input className="form-control" />
                                                 </div>
                                             </div>
 
-                                            {/*Tên Xe*/}
-                                            <div className="form-group mt-2">
+                                            <div className="form-group row mt-2">
                                                 <div className="col">
-                                                    <label className="form-label">Tên xe</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="TenXe" defaultValue={formData.TenXe} onChange={Input} />
+                                                    <label className="form-label">Địa chỉ</label>
+                                                    <input className="form-control" defaultValue={formData.ID} />
+                                                </div>
+
+                                                <div className="col">
+                                                    <label className="form-label">Số điện thoại</label>
+                                                    <input className="form-control" defaultValue={formData.ID} />
                                                 </div>
                                             </div>
 
                                             {/*Biển số xe & Truyền động & Số chỗ ngồi*/}
-                                            <div className="form-group row mt-1">
-                                                {/*Biển số xe*/}
-                                                <div className="col">
-                                                    <label className="form-label">Biển số xe</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="BienSo" defaultValue={formData.BienSo} onChange={Input} />
-                                                </div>
-
-                                                {/*Số chỗ ngồi*/}
-                                                <div className="col">
-                                                    <label className="form-label">Số chỗ ngồi</label>
-                                                    <Form.Select name="SoCho" defaultValue={formData.SoCho} onChange={Input}>
-                                                        <option value="4 chỗ">4 chỗ</option>
-                                                        <option value="4 chỗ">8 chỗ</option>
-                                                        <option value="16 chỗ">16 chỗ</option>
-                                                        <option value="30 chỗ">30 chỗ</option>
-                                                        <option value="45 chỗ">45 chỗ</option>
-                                                    </Form.Select>
-                                                </div>
-                                            </div>
-
-                                            {/*Nhiên liệu & Nhiên liệu tiêu hao & Số tiền*/}
-                                            <div className="form-group row mt-1">
-
-                                                {/*Nhiên liệu*/}
-                                                <div className="col">
-                                                    <label className="form-label">Nhiên liệu</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="NhienLieu" defaultValue={formData.NhienLieu} onChange={Input} />
-                                                </div>
-
-                                                {/*Truyền động*/}
-                                                <div className="col">
-                                                    <label className="form-label">Truyền động</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="TruyenDong" defaultValue={formData.TruyenDong} onChange={Input} />
-                                                </div>
-
-                                                {/*Số tiền*/}
-                                                <div className="col">
-                                                    <label className="form-label">Số tiền/1 ngày</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="SoTien" defaultValue={formData.SoTien} onChange={Input} />
-                                                </div>
-                                            </div>
-
                                             {/*Upload hình*/}
                                             <div className="form-group row mt-2">
 
-                                                <label className="col-3"> Hình ảnh của xe </label>
-                                                <label className="btn btn-outline-primary col-3">
-                                                    Tải hình mới
-                                                    <input type="file" className="account-settings-fileinput" onChange={onFileChange} />
-                                                </label> &nbsp;
-                                                <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
-                                                    setFile("Default")
-                                                    setTemp(defaultPicture)
-                                                }}>Mặc định</button>
-                                                <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG, GIF và PNG</label>
-                                                {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> : ""}
+
+                                                <div className="col">
+                                                    <div className="form-group col">
+                                                        <div className="col">
+                                                            <label className="form-label">CMND/CCCD</label>
+                                                            <input className="form-control" defaultValue={formData.ID} />
+                                                        </div>
+
+                                                        <div class="img-area mt-2">
+                                                            <img src={`${temp}`} className="carPicture" />
+                                                            <h3>Hình CMND</h3>
+                                                        </div>
+
+                                                        {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> :
+                                                            <label label className="select-image btn btn-outline-primary mt-1">
+                                                                Tải hình CMND/CCCD
+                                                                <input type="file" className="account-settings-fileinput" onChange={onFileChange} />
+                                                            </label>
+                                                        }
+                                                    </div>
+                                                </div>
+
+                                                <div className="col">
+                                                    <div className="form-group col">
+                                                        <div className="col">
+                                                            <label className="form-label">Giấy phép lái xe</label>
+                                                            <input className="form-control" defaultValue={formData.ID} />
+                                                        </div>
+
+                                                        <div class="img-area mt-2">
+                                                            <img src={`${temp}`} className="carPicture" />
+                                                            <h3>Hình CMND</h3>
+                                                        </div>
+
+                                                        {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> :
+                                                            <label label className="select-image btn btn-outline-primary mt-1 p-2">
+                                                                Tải hình giấy phép lái xe
+                                                                <input type="file" className="account-settings-fileinput" onChange={onFileChange} />
+                                                            </label>
+                                                        }
+                                                    </div>
+                                                </div>
                                             </div>
 
-                                            {/*Mô tả*/}
-                                            <div className="form-group mt-1">
-                                                <label className="form-label">Mô tả</label>
-                                                <textarea className="form-control" type="text" name="MoTa" defaultValue={formData.MoTa} onChange={Input} />
+
+
+                                            <h3 className="mt-3 ml-2">Thông tin thuê</h3>
+
+
+                                            <div className="form-group row mt-0">
+                                                <div className="col">
+                                                    <label className="form-label">Ngày bắt đầu</label>
+                                                    <input className="form-control" />
+                                                </div>
+
+                                                <div className="col">
+                                                    <label className="form-label">Ngày kết thúc</label>
+                                                    <input className="form-control" />
+                                                </div>
                                             </div>
+
+                                            <label className="form-label mt-2">Hoá đơn</label>
+
+                                            <div className="form-group row mt-0">
+                                                <hr></hr>
+                                                <p className="col">Đơn giá 1 ngày</p>
+                                                <p className="col">{formData.SoTien.toLocaleString('en-US')} đ/ngày</p>
+                                                <hr></hr>
+                                                <p className="col">Tổng phí thuê xe</p>
+                                                <p className="col">{formData.SoTien.toLocaleString('en-US')} đ x 17 ngày</p>
+                                                <hr></hr>
+                                                <h5 className="col font-bold">Tổng cộng</h5>
+                                                <p className="col font-bold">{formData.SoTien.toLocaleString('en-US')} đ</p>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div className="form-group">
+                                            <button type="submit" className="btn btn-success row mb-2" style={{width: "100%"}}>Lưu</button>
                                         </div>
 
-                                        <div className="d-flex flex-row-reverse mb-1 mr-1   ">
-                                            <button type="submit" className="btn btn-success">Lưu chỉnh sửa</button>&nbsp;
-                                        </div>
+
 
                                     </form>
 
@@ -215,8 +235,8 @@ export default function EditCar() {
                     </div>
                 </div>
 
-            </div>
-        </div>
+            </div >
+        </div >
     );
 
 }
