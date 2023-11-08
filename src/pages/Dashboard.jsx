@@ -15,6 +15,7 @@ import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
 import CarEdit from './CarManager/EditCar'
 
+import RentMain from './RentManager/RentMain'
 export default function Drawer() {
     return (
         <div>
@@ -74,7 +75,7 @@ export default function Drawer() {
                     <li>
                         <div className="iocn-link">
                             <div className="link">
-                                <a href="#">
+                                <a href="/Rent">
                                     <i><BookIcon /></i>
                                     <span className="link_name">Sổ xe</span>
                                 </a>
@@ -82,7 +83,7 @@ export default function Drawer() {
                         </div >
 
                         <ul className="sub-menu" >
-                            <li><a className="link_name" href="#">Sổ xe</a></li >
+                            <li><a className="link_name" href="/Rent">Sổ xe</a></li >
                         </ul>
                     </li >
                 </ul >
@@ -121,8 +122,10 @@ export default function Drawer() {
                 <Routes>
                     <Route path="/" element={<p className="text-3xl font-bold underline">Trang Chủ</p>} />
                     <Route path="/Car" element={<CarMain />} />
-                    <Route path="/CarAdd" element={<CarAdd />} />
-                    <Route path="/CarEdit" element={<CarEdit />} />
+                    <Route path="/Car/Add" element={<CarAdd />} />
+                    <Route path="/Car/Edit" element={<CarEdit />} />
+
+                    <Route path="/Rent" element={<RentMain />} />
                 </Routes>
             </div>
         </div>

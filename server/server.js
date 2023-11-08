@@ -89,8 +89,8 @@ if(result){
         }
     });
 
-    app.get("/carMain",(req,res) => {
-        carModel.find()
+    app.get("/carMain", async (req,res) => {
+        await carModel.find()
         .then(info => res.json(info))
         .catch(err => res.json(err))
     })
