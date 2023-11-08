@@ -9,7 +9,6 @@ export default async function DeletePicture(image) {
     if (image != defaultPicture) {
         deleteObject(desertRef).then(() => {
             console.log("Xoá thành công")
-            return true;
-        }).catch((error) => { console.log(error); return false; });
+        }).catch((error) => { console.log(error) });
     }
 }
