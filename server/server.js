@@ -24,7 +24,6 @@ if(result){
     
 
     app.post("/main", (req,res) => {
-        console.log(req.body)
         const {email, password} = req.body;
         contactModel.findOne({email : email}).then(
             user => {
@@ -65,7 +64,6 @@ if(result){
     });
 
     app.post('/CarEdit', async (req, res) => {
-        console.log(req.body)
         const {IDXe, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
         await XeModel.updateOne({ _id : `${IDXe}`},{
             $set: {
