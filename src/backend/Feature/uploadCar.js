@@ -1,7 +1,7 @@
 import axios from 'axios';
 import checkUri from "../checkUri"
 
-export default async function uploadCar(apiType, formData, setInUploadProgress) {
+export default async function uploadCar(apiType, formData) {
 
     const myPromise = new Promise(
         function (resolve) {
@@ -9,7 +9,7 @@ export default async function uploadCar(apiType, formData, setInUploadProgress) 
             const [result, api] = checkUri(apiType);
 
         if (result) {
-            var ID = formData.ID;
+            var IDXe = formData.IDXe;
             var TenXe = formData.TenXe;
             var BienSo = formData.BienSo;
             var SoCho = formData.SoCho;
@@ -19,8 +19,9 @@ export default async function uploadCar(apiType, formData, setInUploadProgress) 
             var SoTien = formData.SoTien;
             var HinhAnh = formData.HinhAnh;
             var TinhTrang = formData.TinhTrang;
+            var IDDon = formData.IDDon;
 
-        axios.post(api, { ID, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang })
+        axios.post(api, { IDXe, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang, IDDon })
             .then((result) => {
                 alert(result.data.msg)
                 console.log(result.data.msg);
@@ -39,11 +40,5 @@ export default async function uploadCar(apiType, formData, setInUploadProgress) 
             resolve(false);
         }
         });
-
-                
-    //Trả lại trạng thái để upload tiếp
-    setInUploadProgress(false);
     return myPromise;
-   
-
 }

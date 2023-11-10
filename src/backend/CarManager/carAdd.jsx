@@ -10,10 +10,12 @@ export default async function handleSubmit(e, formData, image, setProgress, inUp
             formData.HinhAnh = await uploadImage(image, setProgress)
 
         var currentdate = new Date();
-        formData.ID = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
+        formData.IDXe = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
 
-        if (await pushToDatabase("CarAdd", formData, setInUploadProgress))
+        if (await pushToDatabase("CarAdd", formData))
             window.location.reload(false);
+        
+        setInUploadProgress(false);
     }
 }
 

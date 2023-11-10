@@ -8,7 +8,8 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 300px;
+  margin-top: 4em;
+  height: 200px;
   width: 400px;
   object-fit: fill;
 }

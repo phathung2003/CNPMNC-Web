@@ -20,17 +20,18 @@ export default function EditCar() {
     const [inUploadProgress, setInUploadProgress] = useState(false);
 
     const [formData, setFormData] = useState({
-        _id: `${location.state._id}`,
-        ID: `${location.state.ID}`,
+        ID: `${location.state.IDXe}`,
+        IDXe: `${location.state._id}`,
         TenXe: `${location.state.TenXe}`,
         BienSo: `${location.state.BienSo}`,
-        SoCho: `${location.state.SoCho}`,
+        SoCho: location.state.SoCho,
         TruyenDong: `${location.state.TruyenDong}`,
         NhienLieu: `${location.state.NhienLieu}`,
         MoTa: `${location.state.MoTa}`,
-        SoTien: `${location.state.SoTien}`,
+        SoTien: location.state.SoTien,
         HinhAnh: `${location.state.HinhAnh}`,
         TinhTrang: `${location.state.TinhTrang}`,
+        IDDon: `${location.state.IDDon}`,
     });
 
     const Input = (e) => { setFormData({ ...formData, [e.target.name]: e.target.value }); };
@@ -108,11 +109,11 @@ export default function EditCar() {
                                                 <div className="col">
                                                     <label className="form-label">Số chỗ ngồi</label>
                                                     <Form.Select name="SoCho" defaultValue={formData.SoCho} onChange={Input}>
-                                                        <option value="4 chỗ">4 chỗ</option>
-                                                        <option value="4 chỗ">8 chỗ</option>
-                                                        <option value="16 chỗ">16 chỗ</option>
-                                                        <option value="30 chỗ">30 chỗ</option>
-                                                        <option value="45 chỗ">45 chỗ</option>
+                                                        <option value={4}>4 chỗ</option>
+                                                        <option value={8}>8 chỗ</option>
+                                                        <option value={16}>16 chỗ</option>
+                                                        <option value={30}>30 chỗ</option>
+                                                        <option value={45}>45 chỗ</option>
                                                     </Form.Select>
                                                 </div>
                                             </div>
@@ -135,7 +136,7 @@ export default function EditCar() {
                                                 {/*Số tiền*/}
                                                 <div className="col">
                                                     <label className="form-label">Số tiền/1 ngày</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="SoTien" defaultValue={formData.SoTien} onChange={Input} />
+                                                    <input className="form-control" type="number" autoComplete="off" name="SoTien" defaultValue={formData.SoTien} onChange={Input} />
                                                 </div>
                                             </div>
 

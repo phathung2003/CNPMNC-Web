@@ -22,7 +22,8 @@ export default async function handleSubmit(e, formData, image, setFile, setProgr
 
 
         formData.ID = formData._id;
-        await pushToDatabase("CarEdit", formData, setInUploadProgress)
+        await pushToDatabase("CarEdit", formData)
         setProgress(undefined);
+        setInUploadProgress(false);
     }
 }

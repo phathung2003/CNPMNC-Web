@@ -8,7 +8,7 @@ import "../../css/Detail.css"
 import handleSubmit from "../../backend/CarManager/carAdd";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 
-const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
+const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media";
 
 export default function AddCar() {
     const navigate = useNavigate();
@@ -17,15 +17,17 @@ export default function AddCar() {
     const [Progress, setProgress] = useState();
     const [inUploadProgress, setInUploadProgress] = useState(false);
     const [formData, setFormData] = useState({
+        IDXe: "",
         TenXe: "",
         BienSo: "",
-        SoCho: "4 chỗ",
+        SoCho: 4,
         TruyenDong: "",
         NhienLieu: "",
         MoTa: "",
-        SoTien: "",
+        SoTien: 0,
         HinhAnh: `${defaultPicture}`,
         TinhTrang: "Còn trống",
+        IDDon: null,
     });
 
     const Input = (e) => { setFormData({ ...formData, [e.target.name]: e.target.value }); };
@@ -87,12 +89,12 @@ export default function AddCar() {
                                                 {/*Số chỗ ngồi*/}
                                                 <div className="col">
                                                     <label className="form-label">Số chỗ ngồi</label>
-                                                    <Form.Select name="SoCho" defaultValue={"4 chỗ"} onChange={Input}>
-                                                        <option value="4 chỗ">4 chỗ</option>
-                                                        <option value="4 chỗ">8 chỗ</option>
-                                                        <option value="16 chỗ">16 chỗ</option>
-                                                        <option value="30 chỗ">30 chỗ</option>
-                                                        <option value="45 chỗ">45 chỗ</option>
+                                                    <Form.Select name="SoCho" defaultValue={4} onChange={Input}>
+                                                        <option value={4}>4 chỗ</option>
+                                                        <option value={8}>8 chỗ</option>
+                                                        <option value={16}>16 chỗ</option>
+                                                        <option value={30}>30 chỗ</option>
+                                                        <option value={45}>45 chỗ</option>
                                                     </Form.Select>
                                                 </div>
                                             </div>
@@ -115,7 +117,7 @@ export default function AddCar() {
                                                 {/*Số tiền*/}
                                                 <div className="col">
                                                     <label className="form-label">Số tiền/1 ngày</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="SoTien" onChange={Input} />
+                                                    <input className="form-control" type="number" autoComplete="off" name="SoTien" onChange={Input} />
                                                 </div>
                                             </div>
 

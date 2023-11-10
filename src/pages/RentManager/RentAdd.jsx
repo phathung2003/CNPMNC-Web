@@ -1,26 +1,47 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { format, setDate } from 'date-fns';
 
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Form from 'react-bootstrap/Form';
 
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
-import handleSubmit from "../../backend/CarManager/carEdit";
 
-const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
+import handleSubmit from "../../backend/CarManager/carEdit";
+import convertToBase64 from "../../backend/Feature/convertToBase64"
+
+const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
 
 export default function EditCar() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [image, setFile] = useState(location.state.HinhAnh);
-    const [temp, setTemp] = useState(location.state.HinhAnh);
+    const [CMNDimage, setCMNDImage] = useState(defaultPicture);
+    const [Licenseimage, setLicenseImage] = useState(defaultPicture);
+    const [tempCMND, setTempCMND] = useState(defaultPicture);
+    const [tempLicense, setTempLicense] = useState(defaultPicture);
     const [Progress, setProgress] = useState();
+    const [numberOfDay, setNumberOfDay] = useState("");
 
     const [formData, setFormData] = useState({
+        TenKH: "",
+        NgaySinh: "",
+        DiaChi: "",
+        SoDienThoai: "",
+        CMND: "",
+        HinhCMND: defaultPicture,
+        BangLai: "",
+        HinhBangLai: defaultPicture,
+
+        NgayBatDau: `${format(Date.now(), "yyyy-MM-dd")}`,
+        NgayKetThuc: `${format(Date.now(), "yyyy-MM-dd")}`,
+        IDXeThue: `${location.state._id}`,
+    })
+
+    const carInfo = ({
         _id: `${location.state._id}`,
-        IDXe: `${location.state.ID}`,
+        IDXe: `${location.state.IDXe}`,
         TenXe: `${location.state.TenXe}`,
         BienSo: `${location.state.BienSo}`,
         SoCho: `${location.state.SoCho}`,
@@ -32,28 +53,35 @@ export default function EditCar() {
         TinhTrang: `${location.state.TinhTrang}`,
     });
 
-    const Input = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    useEffect(() => {
+        if (formData.NgayBatDau != "" && formData.NgayKetThuc != "") {
+            // To set two dates to two variables 
+            const Start = new Date(formData.NgayBatDau).getTime()
+            const End = new Date(formData.NgayKetThuc).getTime()
+
+            // To calculate the time difference of two dates 
+            const Difference_In_Time = End - Start;
+
+            // To calculate the no. of days between two dates 
+            const day = Difference_In_Time / (1000 * 3600 * 24) + 1;
+            setNumberOfDay(day);
+        }
+        else setNumberOfDay(1);
+    })
+
+    function Input(event) { setFormData({ ...formData, [event.target.name]: event.target.value }) }
 
     const onFileChange = (event) => {
-        // Updating the state 
-        setFile(event.target.files[0]);
-        convertToBase64(event)
+        switch (event.target.name) {
+            case "CMND":
+                setCMNDImage(event.target.files[0]);
+                convertToBase64(event, setTempCMND)
+                break;
+            default:
+                setLicenseImage(event.target.files[0]);
+                convertToBase64(event, setTempLicense)
+        }
     };
-
-    function convertToBase64(e) {
-        console.log(e);
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload = () => {
-            setTemp(reader.result);
-        };
-        reader.onerror = error => {
-            console.log("Error: ", error);
-        };
-    }
-
 
     return (
         <div>
@@ -75,32 +103,32 @@ export default function EditCar() {
 
                                 {/*Hình Avatar*/}
                                 <div className="justify-content-center form-group col">
-                                    <img src={`${temp}`} className="carPicture" />
+                                    <img src={`${carInfo.HinhAnh}`} className="carPicture" />
                                 </div>
 
                                 {/*Tên xe*/}
-                                <h2 className="mt-1">{formData.TenXe}</h2>
+                                <h2 className="mt-1">{carInfo.TenXe}</h2>
 
                                 {/*ID Xe & Tình trạng*/}
                                 <div className="form-group row mt-1">
-                                    <p className="col"><strong>ID Xe: </strong> {formData.IDXe}</p>
-                                    <p className="col"><strong>Tình trạng: </strong> {formData.TinhTrang}</p>
+                                    <p className="col"><strong>ID Xe: </strong> {carInfo.IDXe}</p>
+                                    <p className="col"><strong>Tình trạng: </strong> {carInfo.TinhTrang}</p>
                                 </div>
 
                                 {/*Biển số & Trạng thái*/}
                                 <div className="form-group row mt-1">
-                                    <p className="col"><strong>Biển số: </strong> {formData.BienSo}</p>
-                                    <p className="col"><strong>Số chỗ: </strong> {formData.SoCho}</p>
+                                    <p className="col"><strong>Biển số: </strong> {carInfo.BienSo}</p>
+                                    <p className="col"><strong>Số chỗ: </strong> {carInfo.SoCho}</p>
                                 </div>
 
                                 {/*Truyền động & Nhiên liệu*/}
                                 <div className="form-group row mt-1">
-                                    <p className="col"><strong>Truyền động: </strong> {formData.TruyenDong}</p>
-                                    <p className="col"><strong>Nhiên liệu: </strong> {formData.NhienLieu}</p>
+                                    <p className="col"><strong>Truyền động: </strong> {carInfo.TruyenDong}</p>
+                                    <p className="col"><strong>Nhiên liệu: </strong> {carInfo.NhienLieu}</p>
                                 </div>
 
                                 <p><strong>Mô tả</strong></p>
-                                <p>{formData.MoTa}</p>
+                                <p>{carInfo.MoTa}</p>
                             </div>
                         </div>
 
@@ -112,30 +140,30 @@ export default function EditCar() {
                                 <div className="tab-pane fade active show">
                                     <h3 className="mt-1 ml-2">Thông tin người thuê</h3>
 
-                                    <form onSubmit={(e) => handleSubmit(e, formData, image, setProgress)}>
+                                    <form onSubmit={(e) => handleSubmit(e, carInfo, image, setProgress)}>
                                         < div className="card-body">
 
                                             <div className="form-group row mt-0">
                                                 <div className="col">
                                                     <label className="form-label">Họ và tên</label>
-                                                    <input className="form-control" />
+                                                    <input className="form-control" type="text" autoComplete="off" name="TenKH" onChange={Input} />
                                                 </div>
 
                                                 <div className="col">
                                                     <label className="form-label">Ngày sinh</label>
-                                                    <input className="form-control" />
+                                                    <input className="form-control" type="date" autoComplete="off" name="NgaySinh" onChange={Input} />
                                                 </div>
                                             </div>
 
                                             <div className="form-group row mt-2">
                                                 <div className="col">
                                                     <label className="form-label">Địa chỉ</label>
-                                                    <input className="form-control" defaultValue={formData.ID} />
+                                                    <input className="form-control" type="text" autoComplete="off" name="DiaChi" onChange={Input} />
                                                 </div>
 
                                                 <div className="col">
                                                     <label className="form-label">Số điện thoại</label>
-                                                    <input className="form-control" defaultValue={formData.ID} />
+                                                    <input className="form-control" type="text" autoComplete="off" name="SoDienThoai" onChange={Input} />
                                                 </div>
                                             </div>
 
@@ -148,18 +176,18 @@ export default function EditCar() {
                                                     <div className="form-group col">
                                                         <div className="col">
                                                             <label className="form-label">CMND/CCCD</label>
-                                                            <input className="form-control" defaultValue={formData.ID} />
+                                                            <input className="form-control" type="text" autoComplete="off" name="CMND" onChange={Input} />
                                                         </div>
 
-                                                        <div class="img-area mt-2">
-                                                            <img src={`${temp}`} className="carPicture" />
+                                                        <div className="img-area mt-2">
+                                                            <img src={`${tempCMND}`} className="carPicture" />
                                                             <h3>Hình CMND</h3>
                                                         </div>
 
                                                         {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> :
-                                                            <label label className="select-image btn btn-outline-primary mt-1">
+                                                            <label className="select-image btn btn-outline-primary mt-1">
                                                                 Tải hình CMND/CCCD
-                                                                <input type="file" className="account-settings-fileinput" onChange={onFileChange} />
+                                                                <input type="file" className="account-settings-fileinput" name="CMND" onChange={onFileChange} />
                                                             </label>
                                                         }
                                                     </div>
@@ -169,16 +197,16 @@ export default function EditCar() {
                                                     <div className="form-group col">
                                                         <div className="col">
                                                             <label className="form-label">Giấy phép lái xe</label>
-                                                            <input className="form-control" defaultValue={formData.ID} />
+                                                            <input className="form-control" type="text" autoComplete="off" name="BangLai" onChange={Input} />
                                                         </div>
 
-                                                        <div class="img-area mt-2">
-                                                            <img src={`${temp}`} className="carPicture" />
+                                                        <div className="img-area mt-2">
+                                                            <img src={`${tempLicense}`} className="carPicture" />
                                                             <h3>Hình CMND</h3>
                                                         </div>
 
                                                         {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> :
-                                                            <label label className="select-image btn btn-outline-primary mt-1 p-2">
+                                                            <label className="select-image btn btn-outline-primary mt-1 p-2">
                                                                 Tải hình giấy phép lái xe
                                                                 <input type="file" className="account-settings-fileinput" onChange={onFileChange} />
                                                             </label>
@@ -195,12 +223,12 @@ export default function EditCar() {
                                             <div className="form-group row mt-0">
                                                 <div className="col">
                                                     <label className="form-label">Ngày bắt đầu</label>
-                                                    <input className="form-control" />
+                                                    <input className="form-control" type="date" autoComplete="off" value={formData.NgayBatDau} name="NgayBatDau" onChange={Input} />
                                                 </div>
 
                                                 <div className="col">
                                                     <label className="form-label">Ngày kết thúc</label>
-                                                    <input className="form-control" />
+                                                    <input className="form-control" type="date" autoComplete="off" value={formData.NgayKetThuc} name="NgayKetThuc" onChange={Input} />
                                                 </div>
                                             </div>
 
@@ -209,34 +237,26 @@ export default function EditCar() {
                                             <div className="form-group row mt-0">
                                                 <hr></hr>
                                                 <p className="col">Đơn giá 1 ngày</p>
-                                                <p className="col">{formData.SoTien.toLocaleString('en-US')} đ/ngày</p>
+                                                <p className="col">{carInfo.SoTien.toLocaleString('en-US')} đ/ngày</p>
                                                 <hr></hr>
                                                 <p className="col">Tổng phí thuê xe</p>
-                                                <p className="col">{formData.SoTien.toLocaleString('en-US')} đ x 17 ngày</p>
+                                                <p className="col">{carInfo.SoTien.toLocaleString('en-US')} đ x {numberOfDay} ngày</p>
                                                 <hr></hr>
                                                 <h5 className="col font-bold">Tổng cộng</h5>
-                                                <p className="col font-bold">{formData.SoTien.toLocaleString('en-US')} đ</p>
+                                                <p className="col font-bold">{(carInfo.SoTien * numberOfDay).toLocaleString('en-US')}    đ</p>
                                             </div>
-
-
 
                                         </div>
                                         <div className="form-group">
-                                            <button type="submit" className="btn btn-success row mb-2" style={{width: "100%"}}>Lưu</button>
+                                            <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Lưu</button>
                                         </div>
-
-
-
                                     </form>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div >
         </div >
     );
-
 }

@@ -2,7 +2,7 @@ const check = require("./checkConnection");
 const contactModel = require("./models/Contact");
 const [result, port, app] = check(true);
 
-const carModel = require("./models/Car");
+const XeModel = require("./models/Xe");
 
 if(result){
     app.post('/contact', (req,res) => {``
@@ -50,23 +50,24 @@ if(result){
     
     //--------- Xử lý quản lý xe ---------///
     
-    app.post('/carAdd', async (req,res) => {
-        await carModel.create(req.body)
+    app.post('/CarAdd', async (req,res) => {
+        await XeModel.create(req.body)
         .then(() => res.json({success: true, msg: 'Thêm xe thành công'}))
         .catch(() => res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' }))
     })
 
 
-    app.post('/carDelete', async (req, res) => {
+    app.post('/CarDelete', async (req, res) => {
         const {id} = req.body;
-        await carModel.deleteOne({ _id : `${id}`})
+        await XeModel.deleteOne({ _id : `${id}`})
         .then(() => res.json({ success: true, msg: 'Xoá xe thành công' }))
         .catch(() => res.json({ success: false, msg: 'Xoá xe thất bại. Vui lòng thử lại sau !' }))
     });
 
-    app.post('/carEdit', async (req, res) => {
-        const {ID, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
-        await carModel.updateOne({ _id : `${ID}`},{
+    app.post('/CarEdit', async (req, res) => {
+        console.log(req.body)
+        const {IDXe, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
+        await XeModel.updateOne({ _id : `${IDXe}`},{
             $set: {
                 TenXe : TenXe,
                 BienSo :  BienSo,
@@ -83,8 +84,8 @@ if(result){
         .catch(() => res.json({ success: false, msg: 'Cập nhật thất bại. Vui lòng thử lại sau !' }))
     });
 
-    app.get("/carMain", async (req,res) => {
-        await carModel.find()
+    app.get("/CarMain", async (req,res) => {
+        await XeModel.find()
         .then(info => res.json(info))
         .catch(err => res.json(err))
     })

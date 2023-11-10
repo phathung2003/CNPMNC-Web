@@ -53,7 +53,7 @@ export default function Info() {
                         {
                             carList.length != 0 ? carList.map(info => {
                                 return <tr key={info._id}>
-                                    <td align="center" style={{ width: "5%" }}>{info.ID}</td>
+                                    <td align="center" style={{ width: "5%" }}>{info.IDXe}</td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhAnh}`}></img></td>
                                     <td style={{ textAlign: "center" }}>{info.BienSo}</td>
                                     <td style={{ textAlign: "center" }}>{info.SoCho}</td>
