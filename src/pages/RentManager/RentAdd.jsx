@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
 
-import handleSubmit from "../../backend/CarManager/carEdit";
+import handleSubmit from "../../backend/RentManager/View/rentAdd";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
@@ -17,14 +17,19 @@ export default function EditCar() {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const [CMNDimage, setCMNDImage] = useState(defaultPicture);
-    const [Licenseimage, setLicenseImage] = useState(defaultPicture);
+    const [CMNDImage, setCMNDImage] = useState("Default");
     const [tempCMND, setTempCMND] = useState(defaultPicture);
+    const [CMNDProgress, setCMNDProgress] = useState();
+
+    const [licenseImage, setLicenseImage] = useState("Default");
     const [tempLicense, setTempLicense] = useState(defaultPicture);
-    const [Progress, setProgress] = useState();
+    const [licenseProgress, setLicenseProgress] = useState();
+
+    const [inUploadProgress, setInUploadProgress] = useState(false);
     const [numberOfDay, setNumberOfDay] = useState("");
 
     const [formData, setFormData] = useState({
+        IDKH: "",
         TenKH: "",
         NgaySinh: "",
         DiaChi: "",
@@ -88,7 +93,7 @@ export default function EditCar() {
             <div className="container light-style flex-grow-1 container-p-y">
 
                 <div className="d-flex justify-content-between">
-                    <button className="btn btn-primary mb-0" onClick={(e) => navigate("/Car")}>Quay lại</button>
+                    <button className="btn btn-primary mb-0" onClick={(e) => navigate("/Rent")}>Quay lại</button>
                     <h3> Đơn thuê xe </h3>
                 </div>
 
@@ -140,7 +145,7 @@ export default function EditCar() {
                                 <div className="tab-pane fade active show">
                                     <h3 className="mt-1 ml-2">Thông tin người thuê</h3>
 
-                                    <form onSubmit={(e) => handleSubmit(e, carInfo, image, setProgress)}>
+                                    <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress)}>
                                         < div className="card-body">
 
                                             <div className="form-group row mt-0">
@@ -184,7 +189,7 @@ export default function EditCar() {
                                                             <h3>Hình CMND</h3>
                                                         </div>
 
-                                                        {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> :
+                                                        {CMNDProgress >= 0 || CMNDProgress != undefined ? <ProgressBar className="mt-3" now={CMNDProgress} label={`${CMNDProgress != 100 ? CMNDProgress + "%" : "Tải thành công"}`} /> :
                                                             <label className="select-image btn btn-outline-primary mt-1">
                                                                 Tải hình CMND/CCCD
                                                                 <input type="file" className="account-settings-fileinput" name="CMND" onChange={onFileChange} />
@@ -205,7 +210,7 @@ export default function EditCar() {
                                                             <h3>Hình CMND</h3>
                                                         </div>
 
-                                                        {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> :
+                                                        {licenseProgress >= 0 || licenseProgress != undefined ? <ProgressBar className="mt-3" now={licenseProgress} label={`${licenseProgress != 100 ? licenseProgress + "%" : "Tải thành công"}`} /> :
                                                             <label className="select-image btn btn-outline-primary mt-1 p-2">
                                                                 Tải hình giấy phép lái xe
                                                                 <input type="file" className="account-settings-fileinput" onChange={onFileChange} />

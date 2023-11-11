@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
 import "../../css/table.css"
-import Data from "../../backend/CarManager/carMain"
+import Data from "../../backend/CarManager/View/carMain"
 import Delete from "../../backend/CarManager/carDelete";
-import SearchData from "../../backend/Feature/searchCar"
+import SearchData from "../../backend/CarManager/searchCar"
 
 export default function Info() {
     const navigate = useNavigate();

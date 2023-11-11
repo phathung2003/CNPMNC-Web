@@ -3,6 +3,7 @@ const contactModel = require("./models/Contact");
 const [result, port, app] = check(true);
 
 const XeModel = require("./models/Xe");
+const KhachHangModel = require("./models/KhachHang");
 
 if(result){
     app.post('/contact', (req,res) => {``
@@ -86,6 +87,13 @@ if(result){
         await XeModel.find()
         .then(info => res.json(info))
         .catch(err => res.json(err))
+    })
+
+    //--------- Xử lý quản lý sổ xe ---------///
+    app.post('/CustomerAdd', async (req,res) => {
+        await KhachHangModel.create(req.body)
+        .then(() => res.json({success: true, msg: 'Thêm xe thành công'}))
+        .catch(() => res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' }))
     })
 
     try{app.listen(port, () =>{console.log("Server khởi động tại port " + port)})}

@@ -5,10 +5,10 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Form from 'react-bootstrap/Form';
 
 import "../../css/Detail.css"
-import handleSubmit from "../../backend/CarManager/carEdit";
+import handleSubmit from "../../backend/CarManager/View/carEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64";
 
-const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
+const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_vehicle.png?alt=media";
 
 export default function EditCar() {
     const navigate = useNavigate();

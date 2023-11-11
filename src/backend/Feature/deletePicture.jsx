@@ -1,7 +1,7 @@
 import { storage } from "../firebase";
 import { ref, deleteObject } from "firebase/storage";
 
-const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media";
+const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_vehicle.png?alt=media";
 
 export default async function DeletePicture(image) {
     const myPromise = new Promise(

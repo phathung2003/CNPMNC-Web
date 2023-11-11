@@ -1,6 +1,6 @@
-import uploadImage from "../Feature/uploadPicture"
-import pushToDatabase from "../Feature/uploadCar";
-import DeletePicture from '../Feature/deletePicture';
+import uploadImage from "../../Feature/uploadPicture"
+import pushToDatabase from "../uploadCar";
+import DeletePicture from '../../Feature/deletePicture';
 
 export default async function handleSubmit(e, formData, image, setFile, setProgress, inUploadProgress, setInUploadProgress) {
     e.preventDefault();
@@ -9,7 +9,7 @@ export default async function handleSubmit(e, formData, image, setFile, setProgr
         setInUploadProgress(true);
 
         if (image != null && image != "" && formData.HinhAnh != image && image != "Default") {
-            const newUrl = await uploadImage(image, setProgress)
+            const newUrl = await uploadImage("car",image, setProgress)
 
             if (await DeletePicture(formData.HinhAnh)) {
                 formData.HinhAnh = newUrl

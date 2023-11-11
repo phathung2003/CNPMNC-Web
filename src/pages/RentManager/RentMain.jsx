@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
 import "../../css/table.css"
-import Data from "../../backend/CarManager/carMain"
+import Data from "../../backend/CarManager/View/carMain"
 import Delete from "../../backend/CarManager/carDelete";
-import SearchData from "../../backend/Feature/searchCar"
+import SearchData from "../../backend/CarManager/searchCar"
 
 export default function Info() {
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function Info() {
 
     return (
         <div>
-            <h2>Quản lý xe</h2>
+            <h2>Quản lý sổ xe</h2>
             <div className="d-flex justify-content-between mb-3">
                 <div className="row">
                     <div className="input-group">
@@ -32,7 +32,7 @@ export default function Info() {
                 </div>
 
                 <div className="d-flex justify-content-end">
-                    <button className="btn btn-success" onClick={(e) => navigate("/CarAdd")}>Thêm xe</button>
+                    {/* <button className="btn btn-success" onClick={(e) => navigate("/CarAdd")}>Thêm xe</button> */}
                 </div>
             </div>
 
@@ -53,7 +53,7 @@ export default function Info() {
                         {
                             carList.length != 0 ? carList.map(info => {
                                 return <tr key={info._id}>
-                                    <td align="center" style={{ width: "5%" }}>{info.ID}</td>
+                                    <td align="center" style={{ width: "5%" }}>{info.IDXe}</td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhAnh}`}></img></td>
                                     <td style={{ textAlign: "center" }}>{info.BienSo}</td>
                                     <td style={{ textAlign: "center" }}>{info.SoCho}</td>

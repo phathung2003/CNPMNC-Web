@@ -15,6 +15,8 @@ export default defineConfig({
     'process.env.VITE_API_CAR_ADD': JSON.stringify(process.env.VITE_API_CAR_ADD),
     'process.env.VITE_API_CAR_EDIT': JSON.stringify(process.env.VITE_API_CAR_EDIT),
     'process.env.VITE_API_CAR_DELETE': JSON.stringify(process.env.VITE_API_CAR_DELETE),
-    'process.env.VITE_API_CAR_MAIN': JSON.stringify(process.env.VITE_API_CAR_MAIN)
+    'process.env.VITE_API_CAR_MAIN': JSON.stringify(process.env.VITE_API_CAR_MAIN),
+
+    'process.env.VITE_API_CUSTOMER_ADD': JSON.stringify(process.env.VITE_API_CUSTOMER_ADD)
   }
 })

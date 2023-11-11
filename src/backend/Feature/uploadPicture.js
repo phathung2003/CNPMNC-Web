@@ -2,11 +2,11 @@ import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid'
 
-export default async function uploadPicture(image, setProgress) {
+export default async function uploadPicture(location,image, setProgress) {
     const myPromise = new Promise(
         function (resolve) {
 
-            const imageRef = ref(storage, `car/${Date.now() + v4()}`)
+            const imageRef = ref(storage, `${location}/${Date.now() + v4()}`)
 
             const progress = uploadBytesResumable(imageRef, image)
 
@@ -15,7 +15,7 @@ export default async function uploadPicture(image, setProgress) {
 
                 //Lấy tỷ lệ phần trăm
                 const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-                console.log("Tiến trình tải: " + progress + "%")
+                console.log(`Tiến trình tải hình vào ${location}: ` + progress + "%")
                 setProgress(progress);
             }, (err) => console.log(err),
 
