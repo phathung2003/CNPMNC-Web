@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { format, setDate } from 'date-fns';
+import { format } from 'date-fns';
 
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Form from 'react-bootstrap/Form';
@@ -73,7 +73,7 @@ export default function EditCar() {
             setNumberOfDay(day);
         }
         else setNumberOfDay(1);
-    })
+    }, [formData.NgayBatDau, formData.NgayKetThuc])
 
     function Input(event) { setFormData({ ...formData, [event.target.name]: event.target.value }) }
 
