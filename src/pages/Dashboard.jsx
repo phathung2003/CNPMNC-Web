@@ -1,5 +1,5 @@
 import "../css/Dashboard.css"
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes} from "react-router-dom";
 import { IconButton } from "@mui/material";
 
 import Logo from "../assets/images/Logo_DarkMode.png"
@@ -17,6 +17,7 @@ import CarEdit from './CarManager/EditCar'
 
 import RentMain from './RentManager/RentMain'
 import RentAdd from './RentManager/RentAdd'
+import RentDetail from './RentManager/RentDetail'
 
 export default function Drawer() {
     return (
@@ -129,6 +130,7 @@ export default function Drawer() {
 
                     <Route path="/Rent" element={<RentMain />} />
                     <Route path="/Rent/Add" element={<RentAdd />} />
+                    <Route path="/Rent/Detail/:id" element={<RentDetail />} />
                 </Routes>
             </div>
         </div>

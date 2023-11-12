@@ -7,7 +7,7 @@ const KhachHangModel = require("./models/KhachHang");
 const SoXeModel = require("./models/SoXe");
 
 const mongoose = require("mongoose");
-const { object } = require("yup");
+const params = require('params');
 const ObjectId = mongoose.Types.ObjectId;
 
 if(result){
@@ -119,6 +119,15 @@ if(result){
         }
         catch{() => {res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' })}}
     })
+
+    app.get('/RentDetail/:IDDon', async (req,res) => {
+        const info = await SoXeModel.find({_id : `${req.params.IDDon}`}).populate("IDXe").populate("IDKH")
+
+        
+        res.json(info)
+        // .catch(err => res.json(err))
+    })
+
 
     try{app.listen(port, () =>{console.log("Server khởi động tại port " + port)})}
     catch{console.log("Server khởi động thất bại")}

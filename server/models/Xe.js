@@ -11,10 +11,10 @@ const XeSchema = new mongoose.Schema({
     SoTien: Number,
     HinhAnh: String,
     TinhTrang: String,
-    IDDon: {
+    IDDon: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "SoXe"
-    }
+    }]
     
 })
 
