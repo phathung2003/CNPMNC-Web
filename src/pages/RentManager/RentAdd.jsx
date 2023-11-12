@@ -40,6 +40,7 @@ export default function EditCar() {
         BangLai: "",
         HinhBangLai: defaultPicture,
 
+        _idDon: "",
         IDDon: "",
         NgayBatDau: `${format(Date.now(), "yyyy-MM-dd")}`,
         NgayKetThuc: `${format(Date.now(), "yyyy-MM-dd")}`,
@@ -255,8 +256,8 @@ export default function EditCar() {
                                         </div>
                                         <div className="form-group">
                                             {!inUploadProgress ?
-                                                <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Lưu</button> :
-                                                <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Đang lưu dữ liệu</button>
+                                                <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Tạo đơn</button> :
+                                                <button type="submit" className="btn btn-secondary row mb-2" style={{ width: "100%" }}>Đang xử lý dữ liệu</button>
                                             }
 
                                         </div>

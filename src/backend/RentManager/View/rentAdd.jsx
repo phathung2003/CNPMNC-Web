@@ -7,12 +7,14 @@ export default async function handleSubmit(e, formData, CMNDImage, licenseImage,
     if (!inUploadProgress) {
         setInUploadProgress(true);
 
-        await uploadPicture(formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress)
+
+        await uploadPicture(formData, CMNDImage, setCMNDProgress, "CMND")
+        await uploadPicture(formData, licenseImage, setLicenseProgress, "License")
 
         var currentdate = new Date();
         formData.IDKH = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
+
         if (await pushCustomerToDatabase("CustomerAdd", formData)) {
-            console.log("Pharse 1 Completed")
             formData.IDDon = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
             if (await pushToDatabase("RentAdd", formData)) {
                 navigate("/Rent")
@@ -22,10 +24,9 @@ export default async function handleSubmit(e, formData, CMNDImage, licenseImage,
     }
 }
 
-async function uploadPicture(formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress) {
-    if (CMNDImage != null && CMNDImage != "" && CMNDImage != "Default")
-        formData.CMNDImage = await uploadImage("CMND", CMNDImage, setCMNDProgress)
-
-    if (licenseImage != null && licenseImage != "" && licenseImage != "Default")
-        formData.licenseImage = await uploadImage("License", licenseImage, setLicenseProgress)
+async function uploadPicture(formData, Image, Progress, type) {
+    if (Image != null && Image != "" && Image != "Default" && type == "CMND")
+        formData.HinhCMND = await uploadImage(type, Image, Progress)
+    if (Image != null && Image != "" && Image != "Default" && type == "License")
+        formData.HinhBangLai = await uploadImage(type, Image, Progress)
 }

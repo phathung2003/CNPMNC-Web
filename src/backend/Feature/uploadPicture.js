@@ -2,7 +2,7 @@ import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid'
 
-export default async function uploadPicture(location,image, setProgress) {
+export default async function uploadPicture(location, image, setProgress) {
     const myPromise = new Promise(
         function (resolve) {
 

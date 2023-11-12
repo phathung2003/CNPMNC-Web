@@ -1,18 +1,12 @@
-import { useParams } from "react-router-dom"
-
-
+import { useParams, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { format } from 'date-fns';
 
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import Form from 'react-bootstrap/Form';
-
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
 
-import RentInfo from "../../backend/RentManager/getInfo"
-import handleSubmit from "../../backend/RentManager/View/rentAdd";
+import fetchData from "../../backend/RentManager/fetchData"
+import handleSubmit from "../../backend/RentManager/View/rentEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
@@ -38,46 +32,7 @@ export default function testing() {
     const [numberOfDay, setNumberOfDay] = useState("");
 
     //Transfer from API
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await RentInfo(IDParams);
-            if (data) {
-                setData(data)
-                setFormData({
-                    //Thông tin Khách Hàng
-                    _idKH: data.IDKH._id,
-                    IDKH: data.IDKH.IDKH,
-                    TenKH: data.IDKH.TenKH,
-                    NgaySinh: `${format(data.IDKH.NgaySinh, "yyyy-MM-dd")}`,
-                    DiaChi: data.IDKH.DiaChi,
-                    SoDienThoai: data.IDKH.SoDienThoai,
-                    CMND: data.IDKH.CMND,
-                    HinhCMND: data.IDKH.HinhCMND,
-                    BangLai: data.IDKH.BangLai,
-                    HinhBangLai: data.IDKH.HinhBangLai,
-
-                    //Thông tin xe
-                    _idXe: data.IDXe._id,
-
-                    //Thông tin đơn thuê
-                    _idDon: data._id,
-                    IDDon: data.IDDon,
-                    NgayBatDau: `${format(data.NgayBatDau, "yyyy-MM-dd")}`,
-                    NgayKetThuc: `${format(data.NgayKetThuc, "yyyy-MM-dd")}`,
-                    TinhTrang: data.TinhTrang,
-
-                    loading: true,
-                })
-                setCMNDImage(`${data.IDKH.HinhCMND}`)
-                setTempCMND(`${data.IDKH.HinhCMND}`)
-                setLicenseImage(`${data.IDKH.HinhBangLai}`)
-                setTempLicense(`${data.IDKH.HinhBangLai}`)
-            }
-        };
-        fetchData();
-
-
-    }, [])
+    useEffect(() => { fetchData(IDParams, setData, setFormData, setCMNDImage, setTempCMND, setLicenseImage, setTempLicense); }, [])
 
     useEffect(() => {
         if (formData.NgayBatDau != "" && formData.NgayKetThuc != "") {
@@ -169,11 +124,11 @@ export default function testing() {
 
                                         <div className="d-flex justify-content-between mt-1 mb-0 align-middle">
                                             <h3 className="ml-2">Thông tin người thuê</h3>
-                                            <p className="mt-2 mr-2"><strong>Mã khách hàng: </strong> {`${(formData.IDKH).trim()}`}</p>
+                                            <p className="mt-2 mr-2"><strong>Mã khách hàng: </strong> {`${formData.IDKH}`}</p>
                                         </div>
 
 
-                                        <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, navigate)}>
+                                        <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, setCMNDImage, setLicenseImage)}>
                                             < div className="card-body mt-0">
 
 
@@ -240,10 +195,12 @@ export default function testing() {
                                                             </div>
 
                                                             {licenseProgress >= 0 || licenseProgress != undefined ? <ProgressBar className="mt-3" now={licenseProgress} label={`${licenseProgress != 100 ? licenseProgress + "%" : "Tải thành công"}`} /> :
-                                                                <label className="select-image btn btn-outline-primary mt-1 p-2">
-                                                                    Tải hình giấy phép lái xe
-                                                                    <input type="file" className="account-settings-fileinput" onChange={onFileChange} />
-                                                                </label>
+                                                                <div>
+                                                                    <label className="select-image btn btn-outline-primary mt-1 p-2">
+                                                                        Tải hình giấy phép lái xe
+                                                                        <input type="file" className="account-settings-fileinput" onChange={onFileChange} />
+                                                                    </label>
+                                                                </div>
                                                             }
                                                         </div>
                                                     </div>
@@ -257,7 +214,7 @@ export default function testing() {
                                                 <div className="form-group row mt-0">
                                                     <div className="col">
                                                         <label className="form-label">Ngày bắt đầu</label>
-                                                        <input className="form-control" type="date" autoComplete="off" defaultValue={formData.NgayBatDau} name="NgayBatDau" onChange={Input} />
+                                                        <input className="form-control" type="date" autoComplete="off" defaultValue={formData.NgayBatDau} name="NgayBatDau" disabled />
                                                     </div>
 
                                                     <div className="col">
@@ -284,7 +241,7 @@ export default function testing() {
                                             <div className="form-group">
                                                 {!inUploadProgress ?
                                                     <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Lưu</button> :
-                                                    <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Đang lưu dữ liệu</button>
+                                                    <button type="submit" className="btn btn-secondary row mb-2" style={{ width: "100%" }}>Đang lưu dữ liệu</button>
                                                 }
 
                                             </div>

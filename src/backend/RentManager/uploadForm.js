@@ -16,7 +16,7 @@ export default async function uploadForm(apiType, formData) {
                     var IDXe = formData.IDXe;
                     var IDKH = formData._idKH
 
-                    axios.post(api, {IDDon, NgayBatDau, NgayKetThuc, TinhTrang, IDXe, IDKH})
+                    axios.post(`${api}/${formData._idDon}`, {IDDon, NgayBatDau, NgayKetThuc, TinhTrang, IDXe, IDKH})
                     .then((result) => {
                         alert(result.data.msg)
                         console.log(result.data.msg);

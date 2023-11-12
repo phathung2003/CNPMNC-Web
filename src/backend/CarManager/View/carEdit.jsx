@@ -9,14 +9,14 @@ export default async function handleSubmit(e, formData, image, setFile, setProgr
         setInUploadProgress(true);
 
         if (image != null && image != "" && formData.HinhAnh != image && image != "Default") {
-            const newUrl = await uploadImage("car",image, setProgress)
+            const newUrl = await uploadImage("car", image, setProgress)
 
             if (await DeletePicture(formData.HinhAnh)) {
                 formData.HinhAnh = newUrl
                 setFile(formData.HinhAnh);
             }
             else
-                await DeletePicture(url)
+                await DeletePicture(newUrl)
         }
 
 

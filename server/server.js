@@ -95,13 +95,34 @@ if(result){
     })
 
     //--------- Xử lý quản lý sổ xe ---------///
-    app.post('/CustomerAdd', async (req,res) => {
+    app.post('/CustomerAdd/', async (req,res) => {
         await KhachHangModel.create(req.body)
         .then((KhachHangInfo) => res.json({success: true, msg: `${KhachHangInfo._id}`}))
-        .catch(() => res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' }))
+        .catch(() => res.json({ success: false, msg: 'Thêm khách hàng thất bại. Vui lòng thử lại sau !' }))
     })
 
-    app.post('/RentAdd', async (req,res) => {
+    app.post('/CustomerEdit/:ID', async (req,res) => {
+        const {TenKH, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND, BangLai, HinhBangLai} = req.body;
+
+        await KhachHangModel.updateOne({ _id : `${req.params.ID}`},{
+            $set: {
+                TenKH: TenKH, 
+                NgaySinh : NgaySinh, 
+                DiaChi : DiaChi, 
+                SoDienThoai : SoDienThoai, 
+                CMND : CMND, 
+                HinhCMND : HinhCMND, 
+                BangLai : BangLai, 
+                HinhBangLai : HinhBangLai
+            }
+        })
+        .then(() => res.json({ success: true, msg:`${req.params.ID}` }))
+        .catch(() => res.json({ success: false, msg: 'Cập nhật thất bại. Vui lòng thử lại sau !' }))
+
+    })
+
+
+    app.post('/RentAdd/', async (req,res) => {
         req.body.IDXe = new ObjectId(`${req.body.IDXe}`);
         req.body.IDKH = new ObjectId(`${req.body.IDKH}`);
         
@@ -118,6 +139,19 @@ if(result){
             }) 
         }
         catch{() => {res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' })}}
+    })
+
+    app.post('/RentEdit/:ID', async (req,res) => {
+        const {NgayKetThuc,TinhTrang} = req.body;
+
+        await SoXeModel.updateOne({ _id : `${req.params.ID}`},{
+            $set: {
+              NgayKetThuc : NgayKetThuc,
+              TinhTrang : TinhTrang
+            }
+        })
+        .then(() => res.json({ success: true, msg: 'Cập nhật thành công !' }))
+        .catch(() => res.json({ success: false, msg: 'Cập nhật thất bại. Vui lòng thử lại sau !' }))
     })
 
     app.get('/RentDetail/:IDDon', async (req,res) => {

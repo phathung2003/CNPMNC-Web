@@ -6,7 +6,6 @@ export default async function uploadCar(apiType, formData) {
         function (resolve) {
             try{
                 const [result, api] = checkUri(apiType);
-
                 if (result) {
                     var IDKH = formData.IDKH;
                     var TenKH = formData.TenKH;
@@ -15,10 +14,11 @@ export default async function uploadCar(apiType, formData) {
                     var SoDienThoai = formData.SoDienThoai
                     var CMND = formData.CMND;
                     var HinhCMND = formData.HinhCMND
+                    console.log(CMND)
                     var BangLai = formData.BangLai;
                     var HinhBangLai = formData.HinhBangLai;
-     
-                    axios.post(api, { IDKH, TenKH, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND, BangLai, HinhBangLai})
+
+                    axios.post(`${api}/${formData._idKH}`, { IDKH, TenKH, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND, BangLai, HinhBangLai})
                     .then((result) => {
                         formData._idKH = result.data.msg
                         resolve(result.data.success);
