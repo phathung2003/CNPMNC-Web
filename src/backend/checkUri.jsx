@@ -31,8 +31,12 @@ function getUri(type) {
         case 'CarMain':
             return [import.meta.env.VITE_API_CAR_MAIN];
 
+
         case 'CustomerAdd':
             return [import.meta.env.VITE_API_CUSTOMER_ADD];
+        case 'RentAdd':
+            return [import.meta.env.VITE_API_RENT_ADD];
+        
         default:
             return null;
     }

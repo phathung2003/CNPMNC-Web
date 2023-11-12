@@ -2,7 +2,6 @@ import axios from 'axios';
 import checkUri from "../checkUri"
 
 export default async function uploadCar(apiType, formData) {
-
     const myPromise = new Promise(
         function (resolve) {
             try{
@@ -21,8 +20,7 @@ export default async function uploadCar(apiType, formData) {
      
                     axios.post(api, { IDKH, TenKH, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND, BangLai, HinhBangLai})
                     .then((result) => {
-                        alert(result.data.msg)
-                        console.log(result.data.msg);
+                        formData._idKH = result.data.msg
                         resolve(result.data.success);
                     })
                     .catch((err) => {

@@ -1,20 +1,23 @@
 import uploadImage from "../../Feature/uploadPicture"
-import pushCustomerToDatabase from "../../RentManager/uploadCustomer";
+import pushCustomerToDatabase from "../uploadCustomer";
+import pushToDatabase from "../uploadForm";
 
-export default async function handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress) {
+export default async function handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, navigate) {
     e.preventDefault();
-
     if (!inUploadProgress) {
         setInUploadProgress(true);
 
         await uploadPicture(formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress)
-        console.log(formData)
 
         var currentdate = new Date();
         formData.IDKH = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
-        if (pushCustomerToDatabase("CustomerAdd", formData))
-            window.location.reload(false);
+        if (await pushCustomerToDatabase("CustomerAdd", formData)) {
+            console.log("Pharse 1 Completed")
 
+            if (await pushToDatabase("RentAdd", formData)) {
+                navigate("/Rent")
+            }
+        }
         setInUploadProgress(false);
     }
 }

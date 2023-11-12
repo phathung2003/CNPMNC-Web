@@ -29,6 +29,7 @@ export default function EditCar() {
     const [numberOfDay, setNumberOfDay] = useState("");
 
     const [formData, setFormData] = useState({
+        _idKH: "",
         IDKH: "",
         TenKH: "",
         NgaySinh: "",
@@ -41,11 +42,10 @@ export default function EditCar() {
 
         NgayBatDau: `${format(Date.now(), "yyyy-MM-dd")}`,
         NgayKetThuc: `${format(Date.now(), "yyyy-MM-dd")}`,
-        IDXeThue: `${location.state._id}`,
+        IDXe: `${location.state._id}`,
     })
 
     const carInfo = ({
-        _id: `${location.state._id}`,
         IDXe: `${location.state.IDXe}`,
         TenXe: `${location.state.TenXe}`,
         BienSo: `${location.state.BienSo}`,
@@ -145,7 +145,7 @@ export default function EditCar() {
                                 <div className="tab-pane fade active show">
                                     <h3 className="mt-1 ml-2">Thông tin người thuê</h3>
 
-                                    <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress)}>
+                                    <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, navigate)}>
                                         < div className="card-body">
 
                                             <div className="form-group row mt-0">
@@ -253,7 +253,11 @@ export default function EditCar() {
 
                                         </div>
                                         <div className="form-group">
-                                            <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Lưu</button>
+                                            {!inUploadProgress ?
+                                                <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Lưu</button> :
+                                                <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Đang lưu dữ liệu</button>
+                                            }
+
                                         </div>
                                     </form>
                                 </div>
