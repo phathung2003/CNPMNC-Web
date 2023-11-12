@@ -124,7 +124,7 @@ if(result){
         const info = await SoXeModel.find({_id : `${req.params.IDDon}`}).populate("IDXe").populate("IDKH")
 
         
-        res.json(info)
+        res.json(info[0])
         // .catch(err => res.json(err))
     })
 

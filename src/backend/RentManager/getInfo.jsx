@@ -4,18 +4,12 @@ import checkUri from "../checkUri";
 
 const [result, api] = checkUri("RentDetail");
 
-export default function infoProcess(ID) {
-    var carInfo = "";
+export default async function infoProcess(ID) {
+    var data;
     if (result) {
-        axios.get(`${api}/${ID} `)
-            .then((info) => {
-                console.log(info.data)
-                carInfo = info.data
-            }
-            )
+        await axios.get(`${api}/${ID} `)
+            .then(info => data = info.data)
             .catch(err => console.log(err.data))
-
     }
-
-    // return carInfo;
+    return data;
 }
