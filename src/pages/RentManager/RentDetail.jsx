@@ -40,7 +40,6 @@ export default function EditCar() {
         BangLai: "",
         HinhBangLai: defaultPicture,
 
-        IDDon: "",
         NgayBatDau: `${format(Date.now(), "yyyy-MM-dd")}`,
         NgayKetThuc: `${format(Date.now(), "yyyy-MM-dd")}`,
         IDXe: `${location.state._id}`,

@@ -13,7 +13,7 @@ export default async function handleSubmit(e, formData, CMNDImage, licenseImage,
         formData.IDKH = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
         if (await pushCustomerToDatabase("CustomerAdd", formData)) {
             console.log("Pharse 1 Completed")
-
+            formData.IDDon = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
             if (await pushToDatabase("RentAdd", formData)) {
                 navigate("/Rent")
             }

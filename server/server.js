@@ -7,6 +7,7 @@ const KhachHangModel = require("./models/KhachHang");
 const SoXeModel = require("./models/SoXe");
 
 const mongoose = require("mongoose");
+const { object } = require("yup");
 const ObjectId = mongoose.Types.ObjectId;
 
 if(result){
@@ -96,27 +97,27 @@ if(result){
     //--------- Xử lý quản lý sổ xe ---------///
     app.post('/CustomerAdd', async (req,res) => {
         await KhachHangModel.create(req.body)
-        .then(() => {
-            KhachHangModel.findOne({IDKH : req.body.IDKH}).then(
-                user => res.json({success: true, msg: `${user._id}`}))
-            })
+        .then((KhachHangInfo) => res.json({success: true, msg: `${KhachHangInfo._id}`}))
         .catch(() => res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' }))
     })
 
     app.post('/RentAdd', async (req,res) => {
         req.body.IDXe = new ObjectId(`${req.body.IDXe}`);
-        req.body.IDKH  = new ObjectId(`${req.body.IDKH}`);
+        req.body.IDKH = new ObjectId(`${req.body.IDKH}`);
         
         try{
-            await XeModel.updateOne({ _id : `${req.body.IDXe}`},{
-                $set: {
-                    TinhTrang : "Đang thuê",
-                }
-            })
             await SoXeModel.create(req.body)
-            .then(() => res.json({success: true, msg: 'Thêm xe thành công'}))
+            .then((SoXeInfo) => {
+                    XeModel.updateOne({ _id : `${req.body.IDXe}`},{
+                        $set: {
+                            TinhTrang : "Đang thuê",
+                            IDDon: SoXeInfo._id
+                        }
+                    })
+                    .then(() => res.json({success: true, msg: "Tạo đơn thành công"}))
+            }) 
         }
-        catch{res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' })}
+        catch{() => {res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' })}}
     })
 
     try{app.listen(port, () =>{console.log("Server khởi động tại port " + port)})}
