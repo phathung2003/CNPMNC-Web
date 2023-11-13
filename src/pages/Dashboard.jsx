@@ -18,6 +18,7 @@ import CarEdit from './CarManager/EditCar'
 import RentMain from './RentManager/RentMain'
 import RentAdd from './RentManager/RentAdd'
 import RentDetail from './RentManager/RentDetail'
+import RentCheckout from './RentManager/RentCheckout'
 
 export default function Drawer() {
     return (
@@ -131,6 +132,7 @@ export default function Drawer() {
                     <Route path="/Rent" element={<RentMain />} />
                     <Route path="/Rent/Add" element={<RentAdd />} />
                     <Route path="/Rent/Detail/:id" element={<RentDetail />} />
+                    <Route path="/Rent/Checkout/:id" element={<RentCheckout />} />
                 </Routes>
             </div>
         </div>

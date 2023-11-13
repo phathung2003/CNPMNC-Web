@@ -8,6 +8,7 @@ import "../../css/pictureUpload.css"
 import fetchData from "../../backend/RentManager/fetchData"
 import handleSubmit from "../../backend/RentManager/View/rentEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
+import rentCheckout from "../../backend/RentManager/View/rentCheckout"
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
 
@@ -237,13 +238,17 @@ export default function testing() {
                                                     <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay).toLocaleString('vi-VN')}đ</p>
                                                 </div>
 
-                                            </div>
-                                            <div className="form-group">
-                                                {!inUploadProgress ?
-                                                    <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Lưu</button> :
-                                                    <button type="submit" className="btn btn-secondary row mb-2" style={{ width: "100%" }}>Đang lưu dữ liệu</button>
-                                                }
-
+                                                <div className="form-group row mt-2" >
+                                                    <div className="col">
+                                                        {!inUploadProgress ?
+                                                            <button type="submit" className="btn btn-success w-100">Lưu</button> :
+                                                            <button className="btn btn-secondary w-100">Đang lưu dữ liệu</button>
+                                                        }
+                                                    </div>
+                                                    <div className="col">
+                                                        <button type="button" className="btn btn-danger w-100" onClick={(e) => navigate(`/Rent/Checkout/${data._id}`)}>Trả xe</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>

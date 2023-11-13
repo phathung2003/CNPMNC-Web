@@ -13,10 +13,10 @@ export default async function uploadForm(apiType, formData) {
                     var NgayBatDau = new Date(formData.NgayBatDau).getTime();
                     var NgayKetThuc = new Date(formData.NgayKetThuc).getTime();
                     var TinhTrang = "Hoạt động";
-                    var IDXe = formData.IDXe;
+                    var IDXe = formData._idXe;
                     var IDKH = formData._idKH
 
-                    axios.post(`${api}/${formData._idDon}`, {IDDon, NgayBatDau, NgayKetThuc, TinhTrang, IDXe, IDKH})
+                    axios.post(`${api}/${formData._idXe}/${formData._idDon}`, {IDDon, NgayBatDau, NgayKetThuc, TinhTrang, IDXe, IDKH})
                     .then((result) => {
                         alert(result.data.msg)
                         console.log(result.data.msg);

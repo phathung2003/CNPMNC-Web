@@ -44,9 +44,9 @@ export default function EditCar() {
         IDDon: "",
         NgayBatDau: `${format(Date.now(), "yyyy-MM-dd")}`,
         NgayKetThuc: `${format(Date.now(), "yyyy-MM-dd")}`,
-        IDXe: `${location.state._id}`,
+        _idXe: `${location.state._id}`,
     })
-
+    
     const carInfo = ({
         IDXe: `${location.state.IDXe}`,
         TenXe: `${location.state.TenXe}`,

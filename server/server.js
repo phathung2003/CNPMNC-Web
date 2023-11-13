@@ -122,17 +122,16 @@ if(result){
     })
 
 
-    app.post('/RentAdd/', async (req,res) => {
-        req.body.IDXe = new ObjectId(`${req.body.IDXe}`);
+    app.post('/RentAdd/:IDXe/', async (req,res) => {
+        req.body.IDXe = new ObjectId(`${req.params.IDXe}`);
         req.body.IDKH = new ObjectId(`${req.body.IDKH}`);
-        
         try{
             await SoXeModel.create(req.body)
             .then((SoXeInfo) => {
-                    XeModel.updateOne({ _id : `${req.body.IDXe}`},{
+                    XeModel.updateOne({ _id : `${req.params.IDXe}`},{
                         $set: {
                             TinhTrang : "Đang thuê",
-                            IDDon: SoXeInfo._id
+                            IDDon: new ObjectId(`${SoXeInfo._id}`),
                         }
                     })
                     .then(() => res.json({success: true, msg: "Tạo đơn thành công"}))
@@ -141,10 +140,10 @@ if(result){
         catch{() => {res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' })}}
     })
 
-    app.post('/RentEdit/:ID', async (req,res) => {
+    app.post('/RentEdit/:IDXe/:IDDon', async (req,res) => {
         const {NgayKetThuc,TinhTrang} = req.body;
 
-        await SoXeModel.updateOne({ _id : `${req.params.ID}`},{
+        await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
             $set: {
               NgayKetThuc : NgayKetThuc,
               TinhTrang : TinhTrang
@@ -154,7 +153,22 @@ if(result){
         .catch(() => res.json({ success: false, msg: 'Cập nhật thất bại. Vui lòng thử lại sau !' }))
     })
 
-    app.get('/RentDetail/:IDDon', async (req,res) => {
+
+    app.post('/RentCheckout/:IDXe/:IDDon', async (req,res) => {
+        
+        await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
+            $set: {TinhTrang : "Hoàn thành"}
+        })
+
+        await XeModel.updateOne({ _id : `${req.params.IDXe}`},{
+            $set: {TinhTrang : "Còn trống", IDDon : null}
+        })
+        .then(() => res.json({ success: true, msg: 'Trả xe thành công !' }))
+        .catch(() => res.json({ success: false, msg: 'Trả xe thất bại. Vui lòng thử lại sau !' }))
+    })
+
+
+    app.get('/RentDetail/:IDDon/', async (req,res) => {
         const info = await SoXeModel.find({_id : `${req.params.IDDon}`}).populate("IDXe").populate("IDKH")
 
         

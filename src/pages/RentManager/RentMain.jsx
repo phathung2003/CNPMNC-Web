@@ -63,11 +63,10 @@ export default function Info() {
                                         {info.TinhTrang == "Còn trống" ?
                                             <button className="btn btn-success" onClick={(e) => navigate("/Rent/Add", { state: info })}>Làm đơn</button> :
                                             <div>
-                                                <button className="btn btn-primary" onClick={(e) => navigate(`/Rent/Detail/${info.IDDon}`, { state: info })}>Chi tiết</button>
-                                                <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.HinhAnh)}>Xoá bài</button>
+                                                <button className="btn btn-primary" onClick={(e) => navigate(`/Rent/Detail/${info.IDDon}`)}>Chi tiết</button>
+                                                <button className="btn btn-danger ml-2" onClick={(e) => navigate(`/Rent/Checkout/${info.IDDon}`)}>Trả xe</button>
                                             </div>
                                         }
-
                                     </td>
                                 </tr>
                             }) : <tr><td colSpan={6} height={100} className='text-center text-2xl font-bold bg-transparent'>Hiện tại chưa có xe nào !</td></tr>
