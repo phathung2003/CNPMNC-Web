@@ -130,7 +130,7 @@ export default function Drawer() {
                     <Route path="/Car/Edit" element={<CarEdit />} />
 
                     <Route path="/Rent" element={<RentMain />} />
-                    <Route path="/Rent/Add" element={<RentAdd />} />
+                    <Route path="/Rent/Add/:id" element={<RentAdd />} />
                     <Route path="/Rent/Detail/:id" element={<RentDetail />} />
                     <Route path="/Rent/Checkout/:id" element={<RentCheckout />} />
                 </Routes>

@@ -61,7 +61,7 @@ export default function Info() {
                                     <td style={{ textAlign: "center" }}>{info.TinhTrang}</td>
                                     <td>
                                         {info.TinhTrang == "Còn trống" ?
-                                            <button className="btn btn-success" onClick={(e) => navigate("/Rent/Add", { state: info })}>Làm đơn</button> :
+                                            <button className="btn btn-success" onClick={(e) => navigate(`/Rent/Add/${info._id}`, { state: info })}>Làm đơn</button> :
                                             <div>
                                                 <button className="btn btn-primary" onClick={(e) => navigate(`/Rent/Detail/${info.IDDon}`)}>Chi tiết</button>
                                                 <button className="btn btn-danger ml-2" onClick={(e) => navigate(`/Rent/Checkout/${info.IDDon}`)}>Trả xe</button>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
 
-import fetchData from "../../backend/RentManager/fetchData"
+import fetchData from "../../backend/RentManager/fetchFormData"
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 import rentCheckout from "../../backend/RentManager/View/rentCheckout"
 
@@ -23,7 +23,7 @@ export default function testing() {
     const [numberOfDay, setNumberOfDay] = useState("");
 
     //Transfer from API
-    useEffect(() => { fetchData(IDParams, setData, setFormData, "", "", "", ""); }, [])
+    useEffect(() => { fetchData(IDParams, setData, setFormData, "", "", "", "", navigate); }, [])
 
     useEffect(() => {
         if (formData.NgayBatDau != "" && formData.NgayKetThuc != "") {

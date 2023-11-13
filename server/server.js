@@ -47,7 +47,7 @@ if(result){
         )
     })
 
-    app.get("/info",(req,res) => {
+    app.get("/info", async (req,res) => {
         contactModel.find()
         .then(info => res.json(info))
         .catch(err => res.json(err))
@@ -92,6 +92,11 @@ if(result){
         await XeModel.find()
         .then(info => res.json(info))
         .catch(err => res.json(err))
+    })
+
+    app.get("/CarDetail/:IDXe", async (req,res) => {
+        const info = await XeModel.findOne({_id : `${req.params.IDXe}`}).populate("IDDon")
+        res.json(info)
     })
 
     //--------- Xử lý quản lý sổ xe ---------///
@@ -169,10 +174,8 @@ if(result){
 
 
     app.get('/RentDetail/:IDDon/', async (req,res) => {
-        const info = await SoXeModel.find({_id : `${req.params.IDDon}`}).populate("IDXe").populate("IDKH")
-
-        
-        res.json(info[0])
+        const info = await SoXeModel.findOne({_id : `${req.params.IDDon}`}).populate("IDXe").populate("IDKH")
+        res.json(info)
         // .catch(err => res.json(err))
     })
 

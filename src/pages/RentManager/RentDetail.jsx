@@ -5,10 +5,9 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
 
-import fetchData from "../../backend/RentManager/fetchData"
+import fetchData from "../../backend/RentManager/fetchFormData"
 import handleSubmit from "../../backend/RentManager/View/rentEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
-import rentCheckout from "../../backend/RentManager/View/rentCheckout"
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
 
@@ -30,10 +29,10 @@ export default function testing() {
     const [licenseProgress, setLicenseProgress] = useState();
 
     const [inUploadProgress, setInUploadProgress] = useState(false);
-    const [numberOfDay, setNumberOfDay] = useState("");
+    const [numberOfDay, setNumberOfDay] = useState(1);
 
     //Transfer from API
-    useEffect(() => { fetchData(IDParams, setData, setFormData, setCMNDImage, setTempCMND, setLicenseImage, setTempLicense); }, [])
+    useEffect(() => { fetchData(IDParams, setData, setFormData, setCMNDImage, setTempCMND, setLicenseImage, setTempLicense, navigate); }, [])
 
     useEffect(() => {
         if (formData.NgayBatDau != "" && formData.NgayKetThuc != "") {

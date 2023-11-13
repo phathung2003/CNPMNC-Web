@@ -30,7 +30,8 @@ function getUri(type) {
             return [import.meta.env.VITE_API_CAR_DELETE];
         case 'CarMain':
             return [import.meta.env.VITE_API_CAR_MAIN];
-
+        case 'CarDetail':
+            return [import.meta.env.VITE_API_CAR_DETAIL];
 
         case 'CustomerAdd':
             return [import.meta.env.VITE_API_CUSTOMER_ADD];
@@ -43,7 +44,7 @@ function getUri(type) {
             return [import.meta.env.VITE_API_RENT_EDIT];
         case 'RentCheckout':
             return [import.meta.env.VITE_API_RENT_CHECKOUT];
-            
+
         case 'RentDetail':
             return [import.meta.env.VITE_API_RENT_DETAIL];
         default:
