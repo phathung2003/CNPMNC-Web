@@ -31,6 +31,11 @@ export default defineConfig({
     'process.env.VITE_API_BOOK_ADD': JSON.stringify(process.env.VITE_API_BOOK_ADD),
     'process.env.VITE_API_BOOK_CANCEL': JSON.stringify(process.env.VITE_API_BOOK_CANCEL),
     'process.env.VITE_API_BOOK_CREATE_RENT': JSON.stringify(process.env.VITE_API_BOOK_CREATE_RENT),
-    'process.env.VITE_API_BOOK_DETAIL': JSON.stringify(process.env.VITE_API_BOOK_DETAIL)
+    'process.env.VITE_API_BOOK_DETAIL': JSON.stringify(process.env.VITE_API_BOOK_DETAIL),
+
+    'process.env.VITE_API_STAFF_ADD': JSON.stringify(process.env.VITE_API_STAFF_ADD),
+    'process.env.VITE_API_STAFF_EDIT': JSON.stringify(process.env.VITE_API_STAFF_EDIT),
+    'process.env.VITE_API_STAFF_DELETE': JSON.stringify(process.env.VITE_API_STAFF_DELETE),
+    'process.env.VITE_API_STAFF_MAIN': JSON.stringify(process.env.VITE_API_STAFF_MAIN)
   }
 })

@@ -10,6 +10,8 @@ const mongoose = require("mongoose");
 const params = require('params');
 const ObjectId = mongoose.Types.ObjectId;
 
+const staffModel = require("./models/Staff")
+
 if(result){
     app.post('/contact', (req,res) => {``
         
@@ -98,6 +100,7 @@ if(result){
         const info = await XeModel.findOne({_id : `${req.params.IDXe}`}).populate("IDDon")
         res.json(info)
     })
+    
     //--------- Xử lý quản lý sổ đặt xe ---------///
     app.get('/BookDetail/:IDXe', async (req,res) => {
         const info = await SoXeModel.find({ IDXe : `${req.params.IDXe}`})
@@ -227,6 +230,53 @@ if(result){
         // .catch(err => res.json(err))
     })
 
+
+    //--------- Xử lý quản lý nhân viên ---------///    
+
+     
+    app.post('/staffAdd', async (req,res) => {
+        staffModel.create(req.body)
+        .then(info => res.json(info))
+        .catch(err => res.json(err))
+    })
+
+
+    app.post('/staffDelete', async (req, res) => {
+        try{
+            const {id} = req.body;
+            await staffModel.deleteOne({ _id : `${id}`});
+            return res.json({ success: true, msg: 'Xoá nhân viên thành công' });
+        }
+        catch(err){console.error(err);}
+    });
+
+    app.post('/staffEdit', async (req, res) => {
+        try{
+            const {IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND} = req.body;
+            await staffModel.updateOne({ _id : `${ID}`},{
+                $set: {
+                    IDNV: IDNV,
+                    Avatar: Avatar,
+                    TenNV: TenNV,
+                    NgaySinh: NgaySinh,
+                    DiaChi: DiaChi,
+                    SoDienThoai: SoDienThoai,
+                    CMND: CMND,
+                    HinhCMND: HinhCMND,
+                }
+            });
+            return res.json({ success: true, msg: 'Cập nhật thành công !' });
+        }
+        catch(err){
+            console.error(err);
+        }
+    });
+
+    app.get("/staffMain",(req,res) => {
+        staffModel.find()
+        .then(info => res.json(info))
+        .catch(err => res.json(err))
+    })
 
     try{app.listen(port, () =>{console.log("Server khởi động tại port " + port)})}
     catch{console.log("Server khởi động thất bại")}
