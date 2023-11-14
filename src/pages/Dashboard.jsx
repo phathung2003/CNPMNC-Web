@@ -15,7 +15,7 @@ import BookIcon from '@mui/icons-material/CarRental';
 
 import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
-import CarEdit from './CarManager/EditCar'
+import CarEdit from './CarManager/DetailCar'
 
 import RentMain from './RentManager/RentMain'
 import RentAdd from './RentManager/RentAdd'
@@ -129,7 +129,7 @@ export default function Drawer() {
                     <Route path="/" element={<p className="text-3xl font-bold underline">Trang Chủ</p>} />
                     <Route path="/Car" element={<CarMain />} />
                     <Route path="/Car/Add" element={<CarAdd />} />
-                    <Route path="/Car/Edit" element={<CarEdit />} />
+                    <Route path="/Car/Detail/:id" element={<CarEdit />} />
 
                     <Route path="/Rent" element={<RentMain />} />
                     <Route path="/Rent/Add/:id" element={<RentAdd />} />

@@ -17,6 +17,7 @@ export default function testing() {
 
     const [inUploadProgress, setInUploadProgress] = useState(false);
     const [numberOfDay, setNumberOfDay] = useState("");
+    const [pay, setPay] = useState(0);
     const [temp, setTemp] = useState(null)
     //Transfer from API
     useEffect(() => { fetchData(IDParams, setData, setFormData, setTemp, setTemp, setTemp, setTemp, navigate); }, [])
@@ -212,18 +213,18 @@ export default function testing() {
                                                                 <hr />
                                                                 <p className="col">Khách trả</p>
                                                                 <div className="flex align-middle col">
-                                                                    <input className="flex form-control" style={{ width: "95%" }} type="number" min={0} autoComplete="off" name="KhachTra" defaultValue={0} onChange={Input} /> <span className="mx-2"> đ</span>
+                                                                    <input className="flex form-control" style={{ width: "95%" }} type="number" min={0} autoComplete="off" name="KhachTra" defaultValue={0} onChange={(e) => setPay(e.target.value)} /> <span className="mx-2"> đ</span>
                                                                 </div>
                                                                 <hr className="mt-2" />
                                                                 <div>
-                                                                    {(data.IDXe.SoTien * numberOfDay - data.KhachTra) - formData.KhachTra >= 0 ?
+                                                                    {(data.IDXe.SoTien * numberOfDay - data.KhachTra) - pay >= 0 ?
                                                                         <div className="row">
                                                                             <p className="col">Còn lại</p>
-                                                                            <p className="col">{((data.IDXe.SoTien * numberOfDay - data.KhachTra) - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
+                                                                            <p className="col">{((data.IDXe.SoTien * numberOfDay - data.KhachTra) - pay).toLocaleString('vi-VN')} đ</p>
                                                                         </div> :
                                                                         <div className="row">
                                                                             <p className="col">Tiền thừa</p>
-                                                                            <p className="col">{Math.abs(data.IDXe.SoTien * numberOfDay - data.KhachTra - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
+                                                                            <p className="col">{Math.abs((data.IDXe.SoTien * numberOfDay - data.KhachTra) - pay).toLocaleString('vi-VN')} đ</p>
                                                                         </div>
                                                                     }
                                                                 </div>
@@ -239,7 +240,7 @@ export default function testing() {
                                             <div className="form-group row mt-2" >
                                                 <div className="col">
                                                     {!inUploadProgress ?
-                                                        <button className="btn btn-success w-100" onClick={(e) => rentCheckout(e, formData, inUploadProgress, setInUploadProgress, navigate, data.KhachTra, (data.IDXe.SoTien * numberOfDay - data.KhachTra) - formData.KhachTra)}> Thanh toán </button> :
+                                                        <button className="btn btn-success w-100" onClick={(e) => rentCheckout(e, formData, inUploadProgress, setInUploadProgress, navigate, pay, (data.IDXe.SoTien * numberOfDay - data.KhachTra) - pay)}> Thanh toán </button> :
                                                         <button className="btn btn-secondary w-100">Đang xử lý dữ liệu</button>
                                                     }
                                                 </div>

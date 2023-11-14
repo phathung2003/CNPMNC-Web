@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import "../../css/table.css"
 import Data from "../../backend/CarManager/View/carMain"
-import SearchData from "../../backend/CarManager/searchCar"
+import SearchData from "../../backend/RentManager/searchRentCar"
 
 export default function Info() {
     const navigate = useNavigate();
@@ -50,7 +50,7 @@ export default function Info() {
 
                     <tbody>
                         {
-                            carList.length != 0 ? carList.map(info => {
+                            carList.length != 0 ? carList.map((info) => {
                                 return <tr key={info._id}>
                                     <td align="center" style={{ width: "5%" }}>{info.IDXe}</td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhAnh}`}></img></td>

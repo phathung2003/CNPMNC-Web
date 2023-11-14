@@ -1,4 +1,4 @@
-import CarInfo from '../../CarManager/carDetail'
+import CarInfo from '../../CarManager/Get/carDetail'
 import { format } from 'date-fns';
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
@@ -28,7 +28,7 @@ export default async function fetchCar(IDParams, setData, setFormData, navigate)
                 NgayKetThuc: `${format(Date.now(), "yyyy-MM-dd")}`,
                 KhachTra: 0,
                 _idXe: `${IDParams}`,
-                
+
                 loading: true,
                 searchOn: true
             }

@@ -1,5 +1,5 @@
 import uploadImage from "../../Feature/uploadPicture"
-import pushToDatabase from "../uploadCar";
+import pushToDatabase from "../Post/uploadCar";
 
 export default async function handleSubmit(e, formData, image, setProgress, inUploadProgress, setInUploadProgress) {
     e.preventDefault();

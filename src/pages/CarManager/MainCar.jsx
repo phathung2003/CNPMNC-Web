@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import "../../css/table.css"
 import Data from "../../backend/CarManager/View/carMain"
-import Delete from "../../backend/CarManager/carDelete";
+import Delete from "../../backend/CarManager/Post/carDelete";
 import SearchData from "../../backend/CarManager/searchCar"
 
 export default function Info() {
@@ -58,8 +58,8 @@ export default function Info() {
                                     <td style={{ textAlign: "center" }}>{info.SoCho}</td>
                                     <td style={{ textAlign: "center" }}>{info.TinhTrang}</td>
                                     <td>
-                                        <button className="btn btn-primary" onClick={(e) => navigate("/Car/Edit", { state: info })}>Chi tiết</button>
-                                        <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.HinhAnh)}>Xoá bài</button>
+                                        <button className="btn btn-primary" onClick={(e) => navigate(`/Car/Detail/${info._id}`, { state: info })}>Chi tiết</button>
+                                        {info.TinhTrang != "Đang thuê" ? <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.HinhAnh)}>Xoá bài</button> : <div />}
                                     </td>
                                 </tr>
                             }) : <tr><td colSpan={6} height={100} className='text-center text-2xl font-bold bg-transparent'>Hiện tại chưa có xe nào !</td></tr>

@@ -2,7 +2,7 @@
 import axios from 'axios';
 import checkUri from "../../checkUri"
 const [result, api] = checkUri("RentCheckout");
-export default async function handleSubmit(e, formData, inUploadProgress, setInUploadProgress, navigate, originalMoney, totalLeft) {
+export default async function handleSubmit(e, formData, inUploadProgress, setInUploadProgress, navigate, payMoney, totalLeft) {
     e.preventDefault();
 
     if (!inUploadProgress) {
@@ -10,7 +10,10 @@ export default async function handleSubmit(e, formData, inUploadProgress, setInU
         if (confirmSave(totalLeft)) {
             try {
                 if (result) {
-                    formData.KhachTra += originalMoney
+                    if (payMoney == "")
+                        payMoney = 0
+
+                    formData.KhachTra += payMoney
                     axios.post(`${api}/${formData._idXe}/${formData._idDon}`, formData)
                         .then((result) => {
                             alert(result.data.msg)

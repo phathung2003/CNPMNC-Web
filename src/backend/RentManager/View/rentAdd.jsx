@@ -2,13 +2,16 @@ import uploadImage from "../../Feature/uploadPicture"
 import pushCustomerToDatabase from "../Post/uploadCustomer";
 import pushToDatabase from "../Post/uploadForm";
 import updateCustomer from "../updateCustomer";
-import getIDForm from "../../CarManager/carDetail"
+import getIDForm from "../../CarManager/Get/carDetail"
 
 export default async function handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, navigate, TienCoc) {
     e.preventDefault();
 
     if (!inUploadProgress) {
         setInUploadProgress(true);
+
+        if (formData.KhachTra == "")
+            formData.KhachTra = 0
 
         if (confirmSave(formData, TienCoc)) {
 

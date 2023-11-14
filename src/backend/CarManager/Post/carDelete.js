@@ -1,8 +1,8 @@
 import axios from 'axios';
-import checkUri from "../checkUri"
+import checkUri from "../../checkUri"
 const [result, api] = checkUri("CarDelete");
 
-import DeletePicture from '../Feature/deletePicture';
+import DeletePicture from '../../Feature/deletePicture';
 
 export default async function onDelete(id, HinhAnh) {
     try {
@@ -25,7 +25,7 @@ async function deleteCar(id) {
     const myPromise = new Promise(
         function (resolve) {
             if (result) {
-                axios.post(api, { id }).then((result) => {
+                axios.post(`${api}/${id}`).then((result) => {
                     alert(result.data.msg)
                     console.log(result.data.msg);
                     resolve(result.data.success);

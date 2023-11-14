@@ -344,7 +344,7 @@ export default function RentAdd() {
                                                         <p className="col">Khách trả</p>
 
                                                         <div className="flex align-middle col">
-                                                            <input className="flex form-control" style={{ width: "95%" }} type="number" min={0} autoComplete="off" name="KhachTra" defaultValue={0} onChange={Input} /> <span className="mx-2"> đ</span>
+                                                            <input className="flex form-control" style={{ width: "95%" }} type="number" min={0}  autoComplete="off" name="KhachTra" defaultValue={0} onChange={Input} /> <span className="mx-2"> đ</span>
                                                         </div>
                                                     </div>
                                                     <hr className="mt-2"></hr>

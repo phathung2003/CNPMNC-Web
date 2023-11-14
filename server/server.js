@@ -55,23 +55,25 @@ if(result){
     
     //--------- Xử lý quản lý xe ---------///
     
-    app.post('/CarAdd', async (req,res) => {
+    app.post('/CarAdd/', async (req,res) => {
         await XeModel.create(req.body)
         .then(() => res.json({success: true, msg: 'Thêm xe thành công'}))
         .catch(() => res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' }))
     })
 
 
-    app.post('/CarDelete', async (req, res) => {
-        const {id} = req.body;
-        await XeModel.deleteOne({ _id : `${id}`})
+    app.post('/CarDelete/:ID', async (req, res) => {
+        await SoXeModel.deleteMany({IDXe : `${req.params.ID}`})
+        await XeModel.deleteOne({ _id : `${req.params.ID}`})
+
         .then(() => res.json({ success: true, msg: 'Xoá xe thành công' }))
         .catch(() => res.json({ success: false, msg: 'Xoá xe thất bại. Vui lòng thử lại sau !' }))
     });
 
-    app.post('/CarEdit', async (req, res) => {
-        const {IDXe, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
-        await XeModel.updateOne({ _id : `${IDXe}`},{
+    
+    app.post('/CarEdit/:ID', async (req, res) => {
+        const {TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
+        await XeModel.updateOne({ _id : `${req.params.ID}`},{
             $set: {
                 TenXe : TenXe,
                 BienSo :  BienSo,

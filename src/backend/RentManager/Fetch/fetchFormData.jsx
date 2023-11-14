@@ -30,7 +30,7 @@ export default async function fetchData(IDParams, setData, setFormData, setCMNDI
                 IDDon: data.IDDon,
                 NgayBatDau: `${format(data.NgayBatDau, "yyyy-MM-dd")}`,
                 NgayKetThuc: `${format(data.NgayKetThuc, "yyyy-MM-dd")}`,
-                KhachTra: 0,
+                KhachTra: data.KhachTra,
                 TinhTrang: data.TinhTrang,
 
                 loading: true,
