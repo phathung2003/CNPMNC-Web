@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import checkUri from "../checkUri";
-const [result, api] = checkUri("StaffMain");
+import checkUri from "../checkUri"
+const [result, api] = checkUri('StaffMain')
 
-export default function infoStaff() {
+export default function infoProcess() {
 
     const [staffInfo, setInfo] = useState([]);
 
@@ -16,7 +16,7 @@ export default function infoStaff() {
         }, [])
         
     }
-    console.log(staffInfo)
+   
     
     return staffInfo;
 }
