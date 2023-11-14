@@ -46,6 +46,7 @@ export default function Info() {
                             <th>Hình CMND</th>
 =======
 >>>>>>> c0566bb (fix mainStaff)
+                            <th>Hình CMND</th>
                             <th>Tên nhân viên</th>
                             <th>Ngày Sinh</th>
                             <th>Địa chi</th>
@@ -75,13 +76,13 @@ export default function Info() {
                                     <td style={{ textAlign: "center" }}>{info.DiaChi}</td>
                                     
 =======
-                                    <td align="center" style={{ width: "5%" }}>{info.ID}</td>
+                                    <td align="center" style={{ width: "5%" }}>{info.IDNV}</td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.Avatar}`}></img></td>
+                                    <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhCMND}`}></img></td>
                                     <td style={{ textAlign: "center" }}>{info.TenNV}</td>
                                     <td style={{ textAlign: "center" }}>{info.NgaySinh}</td>
                                     <td style={{ textAlign: "center" }}>{info.DiaChi}</td>
                                     {console.log("hello")}
->>>>>>> c0566bb (fix mainStaff)
                                     <td>
                                         <button className="btn btn-primary" onClick={(e) => navigate("/StaffEdit", { state: info })}>Chi tiết</button>
                                         <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.Avatar)}>Xoá bài</button>
