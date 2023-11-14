@@ -124,15 +124,19 @@ export default function testing() {
 
                                         <div className="d-flex justify-content-between mt-1 mb-0 align-middle">
                                             <h3 className="ml-2">Thông tin người thuê</h3>
-                                            <p className="mt-2 mr-2"><strong>Mã khách hàng: </strong> {`${formData.IDKH}`}</p>
+                                            {/* <p className="mt-2 mr-2"><strong>Mã khách hàng: </strong> {`${formData.IDKH}`}</p> */}
                                         </div>
 
 
                                         <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, setCMNDImage, setLicenseImage)}>
                                             < div className="card-body mt-0">
 
+                                                <div className="form-group col mt-0 ">
+                                                    <label className="form-label col">ID Khách hàng</label>
+                                                    <input className="form-control col" type="text" autoComplete="off" value={formData.IDKH} disabled />
+                                                </div>
 
-                                                <div className="form-group row mt-0">
+                                                <div className="form-group row mt-2">
                                                     <div className="col">
                                                         <label className="form-label">Họ và tên</label>
                                                         <input className="form-control" type="text" autoComplete="off" name="TenKH" defaultValue={`${formData.TenKH}`} onChange={Input} />
@@ -207,8 +211,8 @@ export default function testing() {
                                                 </div>
 
 
-
-                                                <h3 className="mt-3 ml-2">Thông tin thuê</h3>
+                                                <hr></hr>
+                                                <h3 className="mt-3">Thông tin thuê</h3>
 
 
                                                 <div className="form-group row mt-0">
@@ -223,7 +227,7 @@ export default function testing() {
                                                     </div>
                                                 </div>
 
-                                                <label className="form-label mt-2">Hoá đơn</label>
+                                                <label className="form-label mt-3">Hoá đơn</label>
 
                                                 <div className="form-group row mt-0">
                                                     <hr></hr>
@@ -235,6 +239,22 @@ export default function testing() {
                                                     <hr></hr>
                                                     <h5 className="col font-bold">Tổng cộng</h5>
                                                     <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay).toLocaleString('vi-VN')}đ</p>
+                                                    <hr></hr>
+                                                    <p className="col">Số tiền khách đã trả</p>
+                                                    <p className="col">{(formData.KhachTra).toLocaleString('vi-VN')} đ</p>
+                                                    <p></p>
+                                                    <div>
+                                                        {data.IDXe.SoTien * numberOfDay - formData.KhachTra >= 0 ?
+                                                            <div className="row">
+                                                                <p className="col">Còn lại</p>
+                                                                <p className="col">{(data.IDXe.SoTien * numberOfDay - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
+                                                            </div> :
+                                                            <div className="row">
+                                                                <p className="col">Còn lại:</p>
+                                                                <p className="col">0 đ</p>
+                                                            </div>
+                                                        }
+                                                    </div>
                                                 </div>
 
                                                 <div className="form-group row mt-2" >

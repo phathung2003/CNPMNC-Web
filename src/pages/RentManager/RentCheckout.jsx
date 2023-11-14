@@ -17,9 +17,9 @@ export default function testing() {
 
     const [inUploadProgress, setInUploadProgress] = useState(false);
     const [numberOfDay, setNumberOfDay] = useState("");
-
+    const [temp, setTemp] = useState(null)
     //Transfer from API
-    useEffect(() => { fetchData(IDParams, setData, setFormData, "", "", "", "", navigate); }, [])
+    useEffect(() => { fetchData(IDParams, setData, setFormData, setTemp, setTemp, setTemp, setTemp, navigate); }, [])
 
     useEffect(() => {
         if (formData.NgayBatDau != "" && formData.NgayKetThuc != "") {
@@ -36,6 +36,8 @@ export default function testing() {
         }
         else setNumberOfDay(1);
     }, [formData.NgayBatDau, formData.NgayKetThuc])
+
+    function Input(event) { setFormData({ ...formData, [event.target.name]: event.target.value }) }
 
     if (!formData.loading) return;
     else {
@@ -97,15 +99,19 @@ export default function testing() {
 
                                         <div className="d-flex justify-content-between mt-1 mb-0 align-middle">
                                             <h3 className="ml-2">Thông tin người thuê</h3>
-                                            <p className="mt-2 mr-2"><strong>Mã khách hàng: </strong> {`${formData.IDKH}`}</p>
+                                            {/* <p className="mt-2 mr-2"><strong>Mã khách hàng: </strong> {`${formData.IDKH}`}</p> */}
                                         </div>
 
 
 
                                         < div className="card-body mt-0">
 
+                                            <div className="form-group col mt-0 ">
+                                                <label className="form-label col">ID Khách hàng</label>
+                                                <input className="form-control col" type="text" autoComplete="off" value={formData.IDKH} disabled />
+                                            </div>
 
-                                            <div className="form-group row mt-0">
+                                            <div className="form-group row mt-2">
                                                 <div className="col">
                                                     <label className="form-label">Họ và tên</label>
                                                     <input className="form-control" type="text" defaultValue={`${formData.TenKH}`} disabled />
@@ -164,7 +170,7 @@ export default function testing() {
                                             </div>
 
 
-
+                                            <hr></hr>
                                             <h3 className="mt-4 ml-2">Thông tin thuê</h3>
 
 
@@ -180,24 +186,60 @@ export default function testing() {
                                                 </div>
                                             </div>
 
-                                            <label className="form-label mt-2">Hoá đơn</label>
+                                            <label className="form-label mt-3">Hoá đơn</label>
 
                                             <div className="form-group row mt-0">
                                                 <hr></hr>
-                                                <p className="col">Đơn giá 1 ngày</p>
-                                                <p className="col">{data.IDXe.SoTien.toLocaleString('vi-VN')} đ/ngày</p>
+                                                <p className="col">Đơn giá</p>
+                                                <p className="col">{data.IDXe.SoTien.toLocaleString('vi-VN')} đ x {numberOfDay} ngày</p>
+
                                                 <hr></hr>
                                                 <p className="col">Tổng phí thuê xe</p>
-                                                <p className="col">{data.IDXe.SoTien.toLocaleString('vi-VN')} đ x {numberOfDay} ngày</p>
+                                                <p className="col">{(data.IDXe.SoTien * numberOfDay).toLocaleString('vi-VN')} đ</p>
+
+                                                <p></p>
+                                                <p className="col">Số tiền khách đã trả</p>
+                                                <p className="col">{(data.KhachTra).toLocaleString('vi-VN')} đ</p>
+
                                                 <hr></hr>
                                                 <h5 className="col font-bold">Tổng cộng</h5>
-                                                <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay).toLocaleString('vi-VN')}đ</p>
+                                                <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay - data.KhachTra).toLocaleString('vi-VN')}đ</p>
+
+                                                <div>
+                                                    {(data.IDXe.SoTien * numberOfDay - data.KhachTra) - data.KhachTra > 0 ?
+                                                        <div>
+                                                            <div className="row">
+                                                                <hr />
+                                                                <p className="col">Khách trả</p>
+                                                                <div className="flex align-middle col">
+                                                                    <input className="flex form-control" style={{ width: "95%" }} type="number" min={0} autoComplete="off" name="KhachTra" defaultValue={0} onChange={Input} /> <span className="mx-2"> đ</span>
+                                                                </div>
+                                                                <hr className="mt-2" />
+                                                                <div>
+                                                                    {(data.IDXe.SoTien * numberOfDay - data.KhachTra) - formData.KhachTra >= 0 ?
+                                                                        <div className="row">
+                                                                            <p className="col">Còn lại</p>
+                                                                            <p className="col">{((data.IDXe.SoTien * numberOfDay - data.KhachTra) - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
+                                                                        </div> :
+                                                                        <div className="row">
+                                                                            <p className="col">Tiền thừa</p>
+                                                                            <p className="col">{Math.abs(data.IDXe.SoTien * numberOfDay - data.KhachTra - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
+                                                                        </div>
+                                                                    }
+                                                                </div>
+                                                            </div>
+
+                                                        </div> :
+                                                        <div />
+                                                    }
+                                                </div>
+                                                <hr className="mt-2" />
                                             </div>
 
                                             <div className="form-group row mt-2" >
                                                 <div className="col">
                                                     {!inUploadProgress ?
-                                                        <button className="btn btn-success w-100" onClick={(e) => rentCheckout(e, formData, inUploadProgress, setInUploadProgress, navigate)}> Thanh toán </button> :
+                                                        <button className="btn btn-success w-100" onClick={(e) => rentCheckout(e, formData, inUploadProgress, setInUploadProgress, navigate, data.KhachTra, (data.IDXe.SoTien * numberOfDay - data.KhachTra) - formData.KhachTra)}> Thanh toán </button> :
                                                         <button className="btn btn-secondary w-100">Đang xử lý dữ liệu</button>
                                                     }
                                                 </div>

@@ -167,7 +167,11 @@ if(result){
     app.post('/RentCheckout/:IDXe/:IDDon', async (req,res) => {
         
         await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
-            $set: {TinhTrang : "Hoàn thành"}
+            $set: {
+                KhachTra : `${req.body.KhachTra}`,
+                TinhTrang : "Hoàn thành",
+                
+            }
         })
 
         await XeModel.updateOne({ _id : `${req.params.IDXe}`},{

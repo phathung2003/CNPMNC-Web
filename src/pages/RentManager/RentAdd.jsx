@@ -125,10 +125,7 @@ export default function RentAdd() {
         }
     }
 
-    useEffect(() => {
-        setOnSearch(formData.searchOn)
-        console.log(formData)
-    }, [formData, search])
+    useEffect(() => { setOnSearch(formData.searchOn) }, [formData, search])
 
 
     if (!formData.loading) return;
@@ -310,8 +307,8 @@ export default function RentAdd() {
                                                 </div>
 
 
-
-                                                <h3 className="mt-3 ml-2">Thông tin thuê</h3>
+                                                <hr></hr>
+                                                <h3 className="mt-3">Thông tin thuê</h3>
 
 
                                                 <div className="form-group row mt-0">
@@ -326,7 +323,7 @@ export default function RentAdd() {
                                                     </div>
                                                 </div>
 
-                                                <label className="form-label mt-2">Hoá đơn</label>
+                                                <label className="form-label mt-3">Hoá đơn</label>
 
                                                 <div className="form-group row mt-0">
                                                     <hr></hr>
@@ -352,6 +349,16 @@ export default function RentAdd() {
                                                     </div>
                                                     <hr className="mt-2"></hr>
 
+
+                                                    <div>
+                                                        {data.SoTien * numberOfDay * 0.5 - formData.KhachTra > 0 ?
+                                                            <div className="row">
+                                                                <p className="col">Tiền cọc còn lại</p>
+                                                                <p className="col">{(data.SoTien * numberOfDay * 0.5 - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
+                                                            </div> :
+                                                            <div />
+                                                        }
+                                                    </div>
 
                                                     <div>
                                                         {data.SoTien * numberOfDay - formData.KhachTra >= 0 ?

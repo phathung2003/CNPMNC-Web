@@ -30,14 +30,15 @@ export default async function fetchData(IDParams, setData, setFormData, setCMNDI
                 IDDon: data.IDDon,
                 NgayBatDau: `${format(data.NgayBatDau, "yyyy-MM-dd")}`,
                 NgayKetThuc: `${format(data.NgayKetThuc, "yyyy-MM-dd")}`,
+                KhachTra: 0,
                 TinhTrang: data.TinhTrang,
 
                 loading: true,
-            })
-            setCMNDImage(`${data.IDKH.HinhCMND}`)
-            setTempCMND(`${data.IDKH.HinhCMND}`)
-            setLicenseImage(`${data.IDKH.HinhBangLai}`)
-            setTempLicense(`${data.IDKH.HinhBangLai}`)
+            });
+            setCMNDImage(`${data.IDKH.HinhCMND}`);
+            setTempCMND(`${data.IDKH.HinhCMND}`);
+            setLicenseImage(`${data.IDKH.HinhBangLai}`);
+            setTempLicense(`${data.IDKH.HinhBangLai}`);
         }
     }
 };
