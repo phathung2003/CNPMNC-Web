@@ -35,7 +35,7 @@ function getUri(type) {
         case 'StaffMain':
             return [import.meta.env.VITE_API_STAFF_MAIN];
         case 'StaffAdd':
-            return [import.meta.env.VITE_API_STAFF_ADD]
+            return [import.meta.env.VITE_API_STAFF_ADD];
         case 'StaffEdit':
             return [import.meta.env.VITE_API_STAFF_EDIT];
         case 'StaffDelete':
