@@ -11,6 +11,11 @@ import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
 import PersonIcon from '@mui/icons-material/Person';
+<<<<<<< HEAD
+=======
+
+// import Test from './test/test'
+>>>>>>> 84aaed1 (fix mainStaff)
 
 import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
@@ -30,10 +35,13 @@ import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
 
+<<<<<<< HEAD
 import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
 
+=======
+>>>>>>> 84aaed1 (fix mainStaff)
 export default function Drawer() {
     return (
         <div>
