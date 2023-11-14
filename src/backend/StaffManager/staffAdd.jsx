@@ -1,5 +1,6 @@
 import axios from 'axios';
 import checkUri from "../checkUri"
+
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid'
@@ -54,6 +55,7 @@ function uploadImage(formData, image, setProgress, formFieldKey) {
     });
 }
 
+
 function pushToDatabase(formData) {
     if (result) {
         var currentdate = new Date();
@@ -74,6 +76,7 @@ function pushToDatabase(formData) {
                 console.log(result.data.Avatar);
                 console.log(result.data.HinhCMND);
                 alert("Lưu thành công !");
+                
                 window.location.reload(false);
                 console.log('Lưu Thành Công !');
             })

@@ -12,6 +12,7 @@ const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600
 
 export default function AddStaff() {
     const navigate = useNavigate();
+
     const [imageNV, setNVImage] = useState("Default");
     const [tempNV, setNVTemp] = useState(defaultPicture);
     const [ProgressNV, setNVProgress] = useState();
@@ -128,10 +129,10 @@ export default function AddStaff() {
                                             {/*Upload hình NV*/}
                                             <div className="form-group row mt-2">
 
-                                                <label className="col-3"> Hình ảnh Nhân viên </label>
+                                                <label className="col-3"> Hình ảnh nhân viên </label>
                                                 <label className="btn btn-outline-primary col-3">
                                                     Tải hình mới
-                                                    <input type="file" name="nhanvien" className="account-settings-fileinput" onChange={onFileChange} />
+                                                    <input type="file" name="NV" className="account-settings-fileinput" onChange={onFileChange} />
                                                 </label> &nbsp;
                                                 <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
                                                     setNVImage("Default")
