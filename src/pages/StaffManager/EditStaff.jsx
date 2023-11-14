@@ -28,17 +28,16 @@ export default function EditCar() {
 
 
     const [formData, setFormData] = useState({
-        
         _id: `${location.state._id}`,
-        IDNV: `${location.state.IDNV}`,
+        ID: `${location.state.ID}`,
         TenNV: `${location.state.TenNV}`,
-        // NgaySinh: `${location.state.NgaySinh}`,
         NgaySinh: `${location.state.NgaySinh}`,
         DiaChi: `${location.state.DiaChi}`,
         CMND: `${location.state.CMND}`,
-        SoDienThoai: `${location.state.SoDienThoai}`,
+        SoDienThoai: `${location.SoDienThoai}`,
         HinhCMND: `${location.state.HinhCMND}`,
         Avatar: `${location.state.Avatar}`
+        
     });
 
     const Input = (e) => {
@@ -111,7 +110,7 @@ export default function EditCar() {
                                             <div className="form-group">
                                                 <div className="col">
                                                 <label className="form-label">Ngày sinh</label>
-                                                <input className="form-control" type="date" autoComplete="off" name="NgaySinh" defaultValue={formatDate(formData.NgaySinh)} onChange={Input} />
+                                                <input className="form-control" type="date" autoComplete="off" name="NgaySinh" defaultValue={formData.NgaySinh} onChange={Input} />
                                                 </div>
                                             </div>
 

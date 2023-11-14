@@ -12,8 +12,6 @@ import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
 import PersonIcon from '@mui/icons-material/Person';
 
-// import Test from './test/test'
-
 import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
 import CarEdit from './CarManager/DetailCar'
@@ -27,6 +25,10 @@ import RentMain from './RentManager/RentMain'
 import RentAdd from './RentManager/RentAdd'
 import RentDetail from './RentManager/RentDetail'
 import RentCheckout from './RentManager/RentCheckout'
+
+import StaffMain from './StaffManager/MainStaff'
+import StaffAdd from './StaffManager/AddStaff'
+import StaffEdit from './StaffManager/EditStaff'
 
 import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'

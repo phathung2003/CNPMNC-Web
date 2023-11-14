@@ -15,6 +15,7 @@ export default function EditCar() {
 
     const [image, setFile] = useState(location.state.HinhAnh);
     const [temp, setTemp] = useState(location.state.HinhAnh);
+    
     const [Progress, setProgress] = useState();
 
     const [formData, setFormData] = useState({
