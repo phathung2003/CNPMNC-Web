@@ -30,6 +30,26 @@ function getUri(type) {
             return [import.meta.env.VITE_API_CAR_DELETE];
         case 'CarMain':
             return [import.meta.env.VITE_API_CAR_MAIN];
+        case 'CarDetail':
+            return [import.meta.env.VITE_API_CAR_DETAIL];
+
+        //Khách hàng
+        case 'CustomerAdd':
+            return [import.meta.env.VITE_API_CUSTOMER_ADD];
+        case 'CustomerEdit':
+            return [import.meta.env.VITE_API_CUSTOMER_EDIT];
+        case 'CustomerMain':
+            return [import.meta.env.VITE_API_CUSTOMER_MAIN];
+
+        case 'RentAdd':
+            return [import.meta.env.VITE_API_RENT_ADD];
+        case 'RentEdit':
+            return [import.meta.env.VITE_API_RENT_EDIT];
+        case 'RentCheckout':
+            return [import.meta.env.VITE_API_RENT_CHECKOUT];
+
+        case 'RentDetail':
+            return [import.meta.env.VITE_API_RENT_DETAIL];
         default:
             return null;
     }

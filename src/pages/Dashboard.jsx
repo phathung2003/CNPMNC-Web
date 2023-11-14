@@ -11,9 +11,16 @@ import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
 
+// import Test from './test/test'
+
 import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
-import CarEdit from './CarManager/EditCar'
+import CarEdit from './CarManager/DetailCar'
+
+import RentMain from './RentManager/RentMain'
+import RentAdd from './RentManager/RentAdd'
+import RentDetail from './RentManager/RentDetail'
+import RentCheckout from './RentManager/RentCheckout'
 
 export default function Drawer() {
     return (
@@ -74,7 +81,7 @@ export default function Drawer() {
                     <li>
                         <div className="iocn-link">
                             <div className="link">
-                                <a href="#">
+                                <a href="/Rent">
                                     <i><BookIcon /></i>
                                     <span className="link_name">Sổ xe</span>
                                 </a>
@@ -82,7 +89,7 @@ export default function Drawer() {
                         </div >
 
                         <ul className="sub-menu" >
-                            <li><a className="link_name" href="#">Sổ xe</a></li >
+                            <li><a className="link_name" href="/Rent">Sổ xe</a></li >
                         </ul>
                     </li >
                 </ul >
@@ -121,11 +128,15 @@ export default function Drawer() {
                 <Routes>
                     <Route path="/" element={<p className="text-3xl font-bold underline">Trang Chủ</p>} />
                     <Route path="/Car" element={<CarMain />} />
-                    <Route path="/CarAdd" element={<CarAdd />} />
-                    <Route path="/CarEdit" element={<CarEdit />} />
+                    <Route path="/Car/Add" element={<CarAdd />} />
+                    <Route path="/Car/Detail/:id" element={<CarEdit />} />
+
+                    <Route path="/Rent" element={<RentMain />} />
+                    <Route path="/Rent/Add/:id" element={<RentAdd />} />
+                    <Route path="/Rent/Detail/:id" element={<RentDetail />} />
+                    <Route path="/Rent/Checkout/:id" element={<RentCheckout />} />
                 </Routes>
             </div>
         </div>
-
     );
 }

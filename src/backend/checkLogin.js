@@ -27,7 +27,5 @@ export default function checkLogin(e, email, password, setError, navigate){
                 setError('An error occurred. Please try again later.');
             });
     }
-    else {
-        setError('F12 để biết thông tin')
-    }
+    else {setError('F12 để biết thông tin')}
 };
