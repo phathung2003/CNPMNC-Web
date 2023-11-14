@@ -5,7 +5,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
 
-import fetchData from "../../backend/RentManager/fetchFormData"
+import fetchData from "../../backend/RentManager/Fetch/fetchFormData"
 import handleSubmit from "../../backend/RentManager/View/rentEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 
@@ -259,5 +259,4 @@ export default function testing() {
             </div >
         );
     }
-
 }

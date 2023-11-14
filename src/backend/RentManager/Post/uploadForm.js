@@ -1,5 +1,5 @@
 import axios from 'axios';
-import checkUri from "../checkUri"
+import checkUri from "../../checkUri"
 
 export default async function uploadForm(apiType, formData) {
     const myPromise = new Promise(
@@ -13,10 +13,11 @@ export default async function uploadForm(apiType, formData) {
                     var NgayBatDau = new Date(formData.NgayBatDau).getTime();
                     var NgayKetThuc = new Date(formData.NgayKetThuc).getTime();
                     var TinhTrang = "Hoạt động";
+                    var KhachTra = formData.KhachTra;
                     var IDXe = formData._idXe;
                     var IDKH = formData._idKH
 
-                    axios.post(`${api}/${formData._idXe}/${formData._idDon}`, {IDDon, NgayBatDau, NgayKetThuc, TinhTrang, IDXe, IDKH})
+                    axios.post(`${api}/${formData._idXe}/${formData._idDon}`, {IDDon, NgayBatDau, NgayKetThuc, TinhTrang, KhachTra, IDXe, IDKH})
                     .then((result) => {
                         alert(result.data.msg)
                         console.log(result.data.msg);

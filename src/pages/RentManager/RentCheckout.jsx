@@ -4,12 +4,8 @@ import { useState, useEffect } from "react";
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
 
-import fetchData from "../../backend/RentManager/fetchFormData"
-import convertToBase64 from "../../backend/Feature/convertToBase64"
+import fetchData from "../../backend/RentManager/Fetch/fetchFormData"
 import rentCheckout from "../../backend/RentManager/View/rentCheckout"
-
-const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
-
 //---------------------------------------------//
 export default function testing() {
     const params = useParams();
@@ -216,5 +212,4 @@ export default function testing() {
             </div >
         );
     }
-
 }

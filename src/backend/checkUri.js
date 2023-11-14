@@ -33,10 +33,13 @@ function getUri(type) {
         case 'CarDetail':
             return [import.meta.env.VITE_API_CAR_DETAIL];
 
+        //Khách hàng
         case 'CustomerAdd':
             return [import.meta.env.VITE_API_CUSTOMER_ADD];
         case 'CustomerEdit':
             return [import.meta.env.VITE_API_CUSTOMER_EDIT];
+        case 'CustomerMain':
+            return [import.meta.env.VITE_API_CUSTOMER_MAIN];
 
         case 'RentAdd':
             return [import.meta.env.VITE_API_RENT_ADD];

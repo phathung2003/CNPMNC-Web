@@ -11,7 +11,6 @@ export default function Info() {
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
     var carList = SearchData(Data(), search);
-
     return (
         <div>
             <h2>Quản lý xe</h2>

@@ -4,9 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import "../../css/table.css"
 import Data from "../../backend/CarManager/View/carMain"
-import Delete from "../../backend/CarManager/carDelete";
 import SearchData from "../../backend/CarManager/searchCar"
-import { render } from '@fullcalendar/core/preact';
 
 export default function Info() {
     const navigate = useNavigate();
@@ -74,8 +72,6 @@ export default function Info() {
                     </tbody>
                 </table>
             </div >
-
         </div >
-
     );
 }

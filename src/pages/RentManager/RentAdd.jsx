@@ -5,10 +5,14 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
+import "../../css/searchRecommend.css"
 
 import handleSubmit from "../../backend/RentManager/View/rentAdd";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
-import fetchData from "../../backend/RentManager/fetchCar";
+import fetchData from "../../backend/RentManager/Fetch/fetchCar";
+
+import customerData from "../../backend/RentManager/GET/getCustomer"
+import SearchData from "../../backend/RentManager/searchCustomer"
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
 
@@ -33,6 +37,11 @@ export default function RentAdd() {
     const [inUploadProgress, setInUploadProgress] = useState(false);
     const [numberOfDay, setNumberOfDay] = useState(1);
 
+    const [search, setSearch] = useState("");
+    const [onSearch, setOnSearch] = useState(true);
+
+    var customerList = SearchData(customerData(), search);
+
     //Transfer from API
     useEffect(() => { fetchData(IDParams, setData, setFormData, navigate) }, [])
 
@@ -53,7 +62,7 @@ export default function RentAdd() {
     }, [formData.NgayBatDau, formData.NgayKetThuc])
 
 
-    function Input(event) {setFormData({ ...formData, [event.target.name]: event.target.value })}
+    function Input(event) { setFormData({ ...formData, [event.target.name]: event.target.value }) }
 
     const onFileChange = (event) => {
         switch (event.target.name) {
@@ -66,6 +75,61 @@ export default function RentAdd() {
                 convertToBase64(event, setTempLicense)
         }
     };
+
+    function setCustomer(data) {
+        if (formData.loading) {
+            setFormData({
+                ...formData,
+                ["_idKH"]: data._id,
+                ["IDKH"]: data.IDKH,
+                ["TenKH"]: data.TenKH,
+                ["NgaySinh"]: `${format(data.NgaySinh, "yyyy-MM-dd")}`,
+                ["DiaChi"]: data.DiaChi,
+                ["SoDienThoai"]: data.SoDienThoai,
+                ["CMND"]: data.CMND,
+                ["HinhCMND"]: data.HinhCMND,
+                ["BangLai"]: data.BangLai,
+                ["HinhBangLai"]: data.HinhBangLai,
+                ["searchOn"]: false,
+            })
+            setSearch(data.IDKH)
+            setCMNDImage(data.HinhCMND);
+            setTempCMND(data.HinhCMND)
+            setLicenseImage(data.HinhBangLai)
+            setTempLicense(data.HinhBangLai)
+        }
+    }
+
+    function setSearchValue(event) {
+        setSearch(event.target.value)
+
+        if (formData._idKH != "") {
+            setFormData({
+                ...formData,
+                ["_idKH"]: "",
+                ["IDKH"]: "",
+                ["TenKH"]: "",
+                ["NgaySinh"]: "",
+                ["DiaChi"]: "",
+                ["SoDienThoai"]: "",
+                ["CMND"]: "",
+                ["HinhCMND"]: defaultPicture,
+                ["BangLai"]: "",
+                ["HinhBangLai"]: defaultPicture,
+                ["searchOn"]: true,
+            })
+            setCMNDImage("Default");
+            setTempCMND(defaultPicture)
+            setLicenseImage("Default")
+            setTempLicense(defaultPicture)
+        }
+    }
+
+    useEffect(() => {
+        setOnSearch(formData.searchOn)
+        console.log(formData)
+    }, [formData, search])
+
 
     if (!formData.loading) return;
     else {
@@ -82,7 +146,6 @@ export default function RentAdd() {
                     <div className="card overflow-hidden mt-1 d-flex">
                         <div className="row no-gutters row-bordered row-border-light">
                             <div className="col-md-5">
-
                                 <div className="list-group list-group-flush account-settings-links  ml-5 ">
 
                                     <h3 className="mt-1">Thông tin xe</h3>
@@ -128,27 +191,73 @@ export default function RentAdd() {
                                         <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, navigate, data.SoTien * numberOfDay * 0.5)}>
                                             < div className="card-body">
 
-                                                <div className="form-group row mt-0">
+                                                <div className="form-group col mt-0 ">
+                                                    <label className="form-label col">ID Khách hàng</label>
+                                                    <input className="form-control col" type="text" autoComplete="off" placeholder="Họ tên, Số điện thoại, CMND hoặc ID của khách hàng" value={search} onChange={(event) => setSearchValue(event)} />
+                                                </div>
+
+
+                                                <div>
+                                                    {onSearch == true ?
+                                                        <div>
+                                                            {search == "" ? <div /> :
+                                                                <div>
+
+                                                                    <div className="mt-1 w-250 w-250 text-white text-lg " style={{ background: "#48494B" }}>
+                                                                        <div className="row">
+                                                                            <div className="ml-1 col">Tên khách hàng</div>
+                                                                            <div className="col">Số điện thoại</div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div className="mt-1 w-250 max-h-[150px] overflow-y-auto overflow-x-clip" style={{ background: "FBF4E2" }}>
+
+                                                                        {
+                                                                            customerList.map(info => {
+                                                                                return (
+                                                                                    <div>
+                                                                                        <div key={info._id} className="block hover:bg-gray-200 no-underline text-black" onClick={(e) => setCustomer(info)}>
+                                                                                            <div className="row text-lg">
+                                                                                                <div className="ml-1 col">{info.TenKH}</div>
+                                                                                                <div className="col">{info.SoDienThoai}</div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </div>
+                                                                    <hr></hr>
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                        : <div />}
+
+                                                </div>
+
+
+
+                                                <div className="form-group row mt-2">
                                                     <div className="col">
                                                         <label className="form-label">Họ và tên</label>
-                                                        <input className="form-control" type="text" autoComplete="off" name="TenKH" onChange={Input} />
+                                                        <input className="form-control" type="text" autoComplete="off" value={formData.TenKH} name="TenKH" onChange={Input} />
                                                     </div>
 
                                                     <div className="col">
                                                         <label className="form-label">Ngày sinh</label>
-                                                        <input className="form-control" type="date" autoComplete="off" name="NgaySinh" onChange={Input} />
+                                                        <input className="form-control" type="date" autoComplete="off" value={formData.NgaySinh} name="NgaySinh" onChange={Input} />
                                                     </div>
                                                 </div>
 
                                                 <div className="form-group row mt-2">
                                                     <div className="col">
                                                         <label className="form-label">Địa chỉ</label>
-                                                        <input className="form-control" type="text" autoComplete="off" name="DiaChi" onChange={Input} />
+                                                        <input className="form-control" type="text" autoComplete="off" value={formData.DiaChi} name="DiaChi" onChange={Input} />
                                                     </div>
 
                                                     <div className="col">
                                                         <label className="form-label">Số điện thoại</label>
-                                                        <input className="form-control" type="text" autoComplete="off" name="SoDienThoai" onChange={Input} />
+                                                        <input className="form-control" type="text" autoComplete="off" value={formData.SoDienThoai} name="SoDienThoai" onChange={Input} />
                                                     </div>
                                                 </div>
 
@@ -161,7 +270,7 @@ export default function RentAdd() {
                                                         <div className="form-group col">
                                                             <div className="col">
                                                                 <label className="form-label">CMND/CCCD</label>
-                                                                <input className="form-control" type="text" autoComplete="off" name="CMND" onChange={Input} />
+                                                                <input className="form-control" type="text" autoComplete="off" value={formData.CMND} name="CMND" onChange={Input} />
                                                             </div>
 
                                                             <div className="img-area mt-2">
@@ -182,7 +291,7 @@ export default function RentAdd() {
                                                         <div className="form-group col">
                                                             <div className="col">
                                                                 <label className="form-label">Giấy phép lái xe</label>
-                                                                <input className="form-control" type="text" autoComplete="off" name="BangLai" onChange={Input} />
+                                                                <input className="form-control" type="text" autoComplete="off" value={formData.BangLai} name="BangLai" onChange={Input} />
                                                             </div>
 
                                                             <div className="img-area mt-2">
@@ -238,21 +347,21 @@ export default function RentAdd() {
                                                         <p className="col">Khách trả</p>
 
                                                         <div className="flex align-middle col">
-                                                            <input className="flex form-control" style={{ width: "95%" }} type="number" min={0} autoComplete="off" name="TraTruoc" defaultValue={0} onChange={Input} /> <span className="mx-2"> đ</span>
+                                                            <input className="flex form-control" style={{ width: "95%" }} type="number" min={0} autoComplete="off" name="KhachTra" defaultValue={0} onChange={Input} /> <span className="mx-2"> đ</span>
                                                         </div>
                                                     </div>
                                                     <hr className="mt-2"></hr>
 
 
                                                     <div>
-                                                        {data.SoTien * numberOfDay - formData.TraTruoc >= 0 ?
+                                                        {data.SoTien * numberOfDay - formData.KhachTra >= 0 ?
                                                             <div className="row">
                                                                 <p className="col">Còn lại</p>
-                                                                <p className="col">{(data.SoTien * numberOfDay - formData.TraTruoc).toLocaleString('vi-VN')} đ</p>
+                                                                <p className="col">{(data.SoTien * numberOfDay - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
                                                             </div> :
                                                             <div className="row">
                                                                 <p className="col">Tiền thừa</p>
-                                                                <p className="col">{Math.abs(data.SoTien * numberOfDay - formData.TraTruoc).toLocaleString('vi-VN')} đ</p>
+                                                                <p className="col">{Math.abs(data.SoTien * numberOfDay - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
                                                             </div>
                                                         }
                                                     </div>
@@ -275,5 +384,4 @@ export default function RentAdd() {
             </div >
         );
     }
-
 }

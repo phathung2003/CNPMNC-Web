@@ -126,6 +126,11 @@ if(result){
 
     })
 
+    app.get('/CustomerMain/', async (req,res) => {
+        await KhachHangModel.find()
+        .then(info => res.json(info))
+        .catch(err => res.json(err))
+    })
 
     app.post('/RentAdd/:IDXe/', async (req,res) => {
         req.body.IDXe = new ObjectId(`${req.params.IDXe}`);

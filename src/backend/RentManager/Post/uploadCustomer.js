@@ -1,5 +1,5 @@
 import axios from 'axios';
-import checkUri from "../checkUri"
+import checkUri from "../../checkUri"
 
 export default async function uploadCar(apiType, formData) {
     const myPromise = new Promise(
@@ -14,7 +14,6 @@ export default async function uploadCar(apiType, formData) {
                     var SoDienThoai = formData.SoDienThoai
                     var CMND = formData.CMND;
                     var HinhCMND = formData.HinhCMND
-                    console.log(CMND)
                     var BangLai = formData.BangLai;
                     var HinhBangLai = formData.HinhBangLai;
 
