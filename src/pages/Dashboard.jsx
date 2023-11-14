@@ -171,9 +171,7 @@ export default function Drawer() {
                     <Route path="/StaffAdd" element={<StaffAdd />} />
                     <Route path="/StaffEdit" element={<StaffEdit />} />
                 </Routes>
-            </div>
-
-            
+            </div>  
         </div>
     );
 }
