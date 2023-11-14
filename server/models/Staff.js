@@ -8,7 +8,7 @@ const staffChema = new mongoose.Schema({
     DiaChi: String,
     SoDienThoai: String,
     CMND: String,
-    HinhCMND: String,
+    HinhCMND: String
 })
 
 //const <Tên model> = mongoose.model("<Tên bảng",<Dữ liệu)
