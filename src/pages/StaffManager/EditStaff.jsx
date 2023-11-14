@@ -27,8 +27,9 @@ export default function EditCar() {
 
 
     const [formData, setFormData] = useState({
+        
         _id: `${location.state._id}`,
-        ID: `${location.state.ID}`,
+        IDNV: `${location.state.IDNV}`,
         TenNV: `${location.state.TenNV}`,
         NgaySinh: `${location.state.NgaySinh}`,
         DiaChi: `${location.state.DiaChi}`,
@@ -97,7 +98,7 @@ export default function EditCar() {
                                             <div className="form-group row mt-1">
                                                 <div className="col">
                                                     <label className="form-label">ID Nhân viên</label>
-                                                    <input className="form-control" defaultValue={formData.ID} disabled />
+                                                    <input className="form-control" defaultValue={formData.IDNV} disabled />
                                                 </div>
                                                 <div className="col">
                                                     <label className="form-label">Tên nhân viên</label>
@@ -143,7 +144,7 @@ export default function EditCar() {
                                                 <label className="col-3"> Hình ảnh nhân viên </label>
                                                 <label className="btn btn-outline-primary col-3">
                                                     Tải hình mới
-                                                    <input type="file" className="account-settings-fileinput" onChange={onFileChange} />
+                                                    <input type="file" className="account-settings-fileinput" name="nhanvien" onChange={onFileChange} />
                                                 </label> &nbsp;
                                                 <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
                                                     setNVImage("Default")
@@ -158,7 +159,7 @@ export default function EditCar() {
                                                 <label className="col-3"> Hình ảnh của CMND </label>
                                                 <label className="btn btn-outline-primary col-3">
                                                     Tải hình mới
-                                                    <input type="file" className="account-settings-fileinput" onChange={onFileChange} />
+                                                    <input type="file" className="account-settings-fileinput" name="CMND" onChange={onFileChange} />
                                                 </label> &nbsp;
                                                 <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
                                                     setCMNDImage("Default")
