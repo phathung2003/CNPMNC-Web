@@ -10,10 +10,15 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
+import PersonIcon from '@mui/icons-material/Person';
 
 import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
 import CarEdit from './CarManager/EditCar'
+
+import StaffMain from './StaffManager/MainStaff'
+import StaffAdd from './StaffManager/AddStaff'
+import StaffEdit from './StaffManager/EditStaff'
 
 export default function Drawer() {
     return (
@@ -85,6 +90,21 @@ export default function Drawer() {
                             <li><a className="link_name" href="#">Sổ xe</a></li >
                         </ul>
                     </li >
+
+                    <li>
+                        <div className="iocn-link">
+                            <div className="link">
+                                <Link to="/Staff">
+                                    <i><PersonIcon /></i>
+                                    <span className="link_name">Quản lý nhân viên</span>
+                                </Link>
+                            </div>
+                        </div>
+
+                        <ul className="sub-menu">
+                            <li><a className="link_name" href="/Staff">Quản lý nhân viên</a></li>
+                        </ul>
+                    </li>
                 </ul >
 
                 <div className="profile-content">
@@ -114,6 +134,7 @@ export default function Drawer() {
                     </div>
                 </div>
 
+                
 
             </div >
 
@@ -123,8 +144,16 @@ export default function Drawer() {
                     <Route path="/Car" element={<CarMain />} />
                     <Route path="/CarAdd" element={<CarAdd />} />
                     <Route path="/CarEdit" element={<CarEdit />} />
+                    
+                    <Route path="/" element={<p className="text-3xl font-bold underline">Trang Chủ</p>} />
+                    <Route path="/Staff" element={<StaffMain />} />
+                    <Route path="/StaffAdd" element={<StaffAdd />} />
+                    <Route path="/StaffEdit" element={<StaffEdit />} />
+               
                 </Routes>
             </div>
+
+            
         </div>
 
     );

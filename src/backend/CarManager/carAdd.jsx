@@ -58,8 +58,9 @@ function pushToDatabase(formData) {
         axios
             .post(api, { ID, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang })
             .then((result) => {
-                console.log(result.data);
+                console.log(result.data);             
                 alert("Lưu thành công !")
+                
                 window.location.reload(false);
                 console.log('Lưu Thành Công !');
             })
@@ -101,4 +102,3 @@ function pushToDatabase(formData) {
 //         .then((res) => res.data.success == true ? alert("image uploaded") : alert("Failed") && console.log(res.data.link))
 //         .catch((err) => alert("Failed") && console.log(err));
 // };
-

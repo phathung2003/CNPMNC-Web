@@ -22,6 +22,7 @@ function getUri(type) {
             return [import.meta.env.VITE_API_MAIN];
         case 'Info':
             return [import.meta.env.VITE_API_INFO];
+
         case 'CarAdd':
             return [import.meta.env.VITE_API_CAR_ADD];
         case 'CarEdit':
@@ -30,6 +31,17 @@ function getUri(type) {
             return [import.meta.env.VITE_API_CAR_DELETE];
         case 'CarMain':
             return [import.meta.env.VITE_API_CAR_MAIN];
+
+        case 'StaffMain':
+            return [import.meta.env.VITE_API_STAFF_MAIN];
+        case 'StaffAdd':
+            return [import.meta.env.VITE_API_STAFF_ADD]
+        case 'StaffEdit':
+            return [import.meta.env.VITE_API_STAFF_EDIT];
+        case 'StaffDelete':
+            return [import.meta.env.VITE_API_STAFF_DELETE];
+
+            
         default:
             return null;
     }
