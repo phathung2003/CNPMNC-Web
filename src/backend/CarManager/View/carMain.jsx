@@ -17,5 +17,7 @@ export default function infoProcess() {
         }, [])
         
     }
+    console.log(carInfo)
+    
     return carInfo;
 }

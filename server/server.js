@@ -9,6 +9,10 @@ const KhachHangRoute = require('./routes/KhachHang');
 const CaiDatRoute = require('./routes/CaiDat');
 const LichSuRoute = require("./routes/LichSu")
 
+<<<<<<< HEAD
+=======
+const carModel = require("./models/Car");
+>>>>>>> 84aaed1 (fix mainStaff)
 const staffModel = require("./models/Staff")
 
 if(result){
@@ -102,6 +106,7 @@ if(result){
             const {IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND} = req.body;
             await staffModel.updateOne({ _id : `${IDNV}`},{
                 $set: {                 
+                    IDNV: IDNV,
                     Avatar: Avatar,
                     TenNV: TenNV,
                     NgaySinh: NgaySinh,

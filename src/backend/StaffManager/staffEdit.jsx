@@ -46,6 +46,7 @@ function uploadImage(formData,image, setProgress, formFieldKey) {
         //Sau khi tải xong (Lấy link)
         () => {
             getDownloadURL(progress.snapshot.ref).then(url => {
+<<<<<<< HEAD
                 const DeleteResult = DeletePicture(formData[formFieldKey]);
                 if (DeleteResult) {
                     formData[formFieldKey] = url;
@@ -66,11 +67,31 @@ function pushToDatabase(formData) {
         var Avatar = formData.Avatar;
         var TenNV = formData.TenNV;
         var NgaySinh = formData.NgaySinh;
+=======
+                const DeleteResult = DeletePicture(formData.HinhAnh);
+                if (DeleteResult) {
+                    formData.HinhAnh = url;
+                    pushToDatabase(formData)
+                };
+            })
+        })
+}
+
+
+function pushToDatabase(formData) {
+    if (result) {
+
+        var ID = formData._id;
+        var Avatar = formData.Avatar;
+        var TenNV = formData.TenNV;
+        var NgaySinh = formData.NgaySinh; 
+>>>>>>> 84aaed1 (fix mainStaff)
         var DiaChi = formData.DiaChi;
         var SoDienThoai = formData.SoDienThoai;
         var CMND = formData.CMND;
         var HinhCMND = formData.HinhCMND;
 
+<<<<<<< HEAD
 
         axios.post(api, { IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND })
             .then((result) => {
@@ -88,3 +109,21 @@ function pushToDatabase(formData) {
         console.log("Link API bị lỗi");
     }
 }
+=======
+        axios
+            .post(api, { ID, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND})
+            .then((result) => {
+                console.log(result.data);
+                alert("Lưu thành công !")
+                console.log('Lưu Thành Công !');
+            })
+            .catch((err) => {
+                console.log(err);
+                console.log('An error occurred. Please try again later.');
+            });
+    }
+    else
+        console.log("Link API bị lỗi")
+}
+
+>>>>>>> 84aaed1 (fix mainStaff)

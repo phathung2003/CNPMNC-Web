@@ -16,7 +16,5 @@ export default function infoProcess() {
         }, [])
         
     }
-   
-    
     return staffInfo;
 }

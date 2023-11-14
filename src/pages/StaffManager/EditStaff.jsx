@@ -7,7 +7,7 @@ import Form from 'react-bootstrap/Form';
 import "../../css/Detail.css"
 import handleSubmit from "../../backend/StaffManager/staffEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64";
-import { formatDate } from "@fullcalendar/core";
+import { formatDate } from '@fullcalendar/core';
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
 
@@ -28,18 +28,15 @@ export default function EditCar() {
 
 
     const [formData, setFormData] = useState({
-        
         _id: `${location.state._id}`,
-        IDNV: `${location.state.IDNV}`,
+        ID: `${location.state.ID}`,
         TenNV: `${location.state.TenNV}`,
-        // NgaySinh: `${location.state.NgaySinh}`,
         NgaySinh: `${location.state.NgaySinh}`,
         DiaChi: `${location.state.DiaChi}`,
         CMND: `${location.state.CMND}`,
-        SoDienThoai: `${location.state.SoDienThoai}`,
+        SoDienThoai: `${location.SoDienThoai}`,
         HinhCMND: `${location.state.HinhCMND}`,
         Avatar: `${location.state.Avatar}`
-        
     });
 
     const Input = (e) => {
