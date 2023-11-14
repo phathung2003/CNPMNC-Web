@@ -12,6 +12,7 @@ const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600
 
 export default function AddStaff() {
     const navigate = useNavigate();
+
     const [imageNV, setNVImage] = useState("Default");
     const [tempNV, setNVTemp] = useState(defaultPicture);
     const [ProgressNV, setNVProgress] = useState();
