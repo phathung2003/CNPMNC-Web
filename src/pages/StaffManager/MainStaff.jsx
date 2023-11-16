@@ -80,7 +80,7 @@ export default function Info() {
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.Avatar}`}></img></td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhCMND}`}></img></td>
                                     <td style={{ textAlign: "center" }}>{info.TenNV}</td>
-                                    <td style={{ textAlign: "center" }}>{info.NgaySinh}</td>
+                                    <td style={{ textAlign: "center" }}>{formatDate(info.NgaySinh)}</td>
                                     <td style={{ textAlign: "center" }}>{info.DiaChi}</td>
                                     {console.log("hello")}
                                     <td>
