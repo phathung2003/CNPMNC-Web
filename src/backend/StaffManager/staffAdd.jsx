@@ -1,78 +1,58 @@
 import axios from 'axios';
 import checkUri from "../checkUri"
-const [result, api] = checkUri("StaffAdd");
-
-
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid'
 
+const [result, api] = checkUri("StaffAdd");
+
 export default async function handleSubmit(e, formData, imageNV, imageCMND, setNVProgress, setCMNDProgess) {
     e.preventDefault();
 
-    try {
-        if (imageNV && imageNV !== "" && imageNV !== "Default", "NV") {
-            await uploadImage(formData, imageNV, setNVProgress);
-        }
-
-        if (imageCMND && imageCMND !== "" && imageCMND !== "Default", "CMND") {
-            await uploadImage(formData, imageCMND, setCMNDProgess);
-        }
-
-        pushToDatabase(formData);
-    } catch (error) {
-        console.error(error);
+    if (imageNV && imageNV !== "" && imageNV !== "Default") {
+        await uploadImage(formData, imageNV, setNVProgress, 'Avatar');
     }
+    if (imageCMND && imageCMND !== "" && imageCMND !== "Default") {
+        await uploadImage(formData, imageCMND, setCMNDProgess, 'HinhCMND');
+    }
+
+    pushToDatabase(formData);
 }
 
-function uploadImage(formData, image, setProgress, type) {
+function uploadImage(formData, image, setProgress, formFieldKey) {
     return new Promise((resolve, reject) => {
+        if (!image || image === "Default") {
+            // Resolve immediately if image is not present or is "Default"
+            resolve();
+            return;
+        }
+
         const imageRef = ref(storage, `staff/${Date.now() + v4()}`);
         const progress = uploadBytesResumable(imageRef, image);
 
-        progress.on("state_changed", (snapshot) => {
-            const progressPercent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            console.log(`Progress: ${progressPercent}%`);
-            setProgress(progressPercent);
-        }, (err) => {
-            console.log(err);
-            reject(err);
-        }, () => {
-            getDownloadURL(progress.snapshot.ref).then(url => {
-                if (type === "NV") {
-                    formData.Avatar = url;
-                    pushToDatabase(formData);
-                } else if (type === "CMND") {
-                    formData.HinhCMND = url;
-                    pushToDatabase(formData);
-                }
-                resolve();
-            }).catch(reject);
-        });
+        progress.on("state_changed",
+            (snapshot) => {
+                const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+                console.log("Upload progress: " + progress + "%");
+                setProgress(progress);
+            },
+            (err) => {
+                console.error(err);
+                reject(err); // Reject on error
+            },
+            () => {
+                getDownloadURL(progress.snapshot.ref).then(url => {
+                    // Use formFieldKey to set the appropriate form field
+                    formData[formFieldKey] = url;
+                    resolve(); // Resolve on successful upload
+                }).catch((err) => {
+                    console.error(err);
+                    reject(err); // Reject on error getting download URL
+                });
+            }
+        );
     });
 }
-
-function uploadImageCMND(formData, image, setProgress) {
-
-    const imageRef = ref(storage, `staff/${Date.now() + v4()}`)
-    const progress = uploadBytesResumable(imageRef, image)
-    //Xem tiến trình tải
-    progress.on("state_changed", (snapshot) => {
-
-        //Lấy tỷ lệ phần trăm
-        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-        console.log("Tiến trình tải hình CMND: " + progress + "%")
-        setProgress(progress);
-    }, (err) => console.log(err),
-        //Sau khi tải xong (Lấy link)        
-        () => {
-            getDownloadURL(progress.snapshot.ref).then(url => {
-                formData.HinhCMND = url;
-                pushToDatabase(formData);
-            })         
-        })
-}
-
 
 function pushToDatabase(formData) {
     if (result) {
@@ -87,13 +67,13 @@ function pushToDatabase(formData) {
         var CMND = formData.CMND;
         var HinhCMND = formData.HinhCMND;
 
-        axios
-            .post(api, { IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND })
+        axios.post(api, { IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND })
             .then((result) => {
-                
-                console.log(result.data.Avatar)
-                console.log(result.data.HinhCMND)
-                alert("Lưu thành công !")
+                console.log(result.data.IDNV)
+                console.log(result.data);
+                console.log(result.data.Avatar);
+                console.log(result.data.HinhCMND);
+                alert("Lưu thành công !");
                 window.location.reload(false);
                 console.log('Lưu Thành Công !');
             })
@@ -101,8 +81,7 @@ function pushToDatabase(formData) {
                 console.log(err);
                 console.log('An error occurred. Please try again later.');
             });
+    } else {
+        console.log("Link API bị lỗi");
     }
-    else
-        console.log("Link API bị lỗi")
-
 }

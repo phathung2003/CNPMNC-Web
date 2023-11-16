@@ -8,6 +8,7 @@ import "../../css/Detail.css"
 import handleSubmit from "../../backend/StaffManager/staffEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64";
 import { formatDate } from '@fullcalendar/core';
+import { formatDate } from "@fullcalendar/core";
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
 
@@ -32,10 +33,11 @@ export default function EditCar() {
         _id: `${location.state._id}`,
         IDNV: `${location.state.IDNV}`,
         TenNV: `${location.state.TenNV}`,
+        // NgaySinh: `${location.state.NgaySinh}`,
         NgaySinh: `${location.state.NgaySinh}`,
         DiaChi: `${location.state.DiaChi}`,
         CMND: `${location.state.CMND}`,
-        SoDienThoai: `${location.SoDienThoai}`,
+        SoDienThoai: `${location.state.SoDienThoai}`,
         HinhCMND: `${location.state.HinhCMND}`,
         Avatar: `${location.state.Avatar}`
         
@@ -112,7 +114,7 @@ export default function EditCar() {
                                             <div className="form-group">
                                                 <div className="col">
                                                 <label className="form-label">Ngày sinh</label>
-                                                <input className="form-control" type="date" autoComplete="off" name="NgaySinh" defaultValue={formData.NgaySinh} onChange={Input} />
+                                                <input className="form-control" type="date" autoComplete="off" name="NgaySinh" defaultValue={formatDate(formData.NgaySinh)} onChange={Input} />
                                                 </div>
                                             </div>
 
