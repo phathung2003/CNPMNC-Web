@@ -235,9 +235,16 @@ if(result){
 
      
     app.post('/staffAdd', async (req,res) => {
+        try{
         staffModel.create(req.body)
         .then(info => res.json(info))
-        .catch(err => res.json(err))
+        .catch(err => res.json(err));
+          
+        }
+        catch(err)
+        {
+            console.error(err);
+        }
     })
 
 
@@ -253,9 +260,8 @@ if(result){
     app.post('/staffEdit', async (req, res) => {
         try{
             const {IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND} = req.body;
-            await staffModel.updateOne({ _id : `${ID}`},{
-                $set: {
-                    IDNV: IDNV,
+            await staffModel.updateOne({ _id : `${IDNV}`},{
+                $set: {                 
                     Avatar: Avatar,
                     TenNV: TenNV,
                     NgaySinh: NgaySinh,
