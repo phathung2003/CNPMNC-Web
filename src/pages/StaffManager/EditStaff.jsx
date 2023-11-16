@@ -32,10 +32,11 @@ export default function EditCar() {
         _id: `${location.state._id}`,
         IDNV: `${location.state.IDNV}`,
         TenNV: `${location.state.TenNV}`,
+        // NgaySinh: `${location.state.NgaySinh}`,
         NgaySinh: `${location.state.NgaySinh}`,
         DiaChi: `${location.state.DiaChi}`,
         CMND: `${location.state.CMND}`,
-        SoDienThoai: `${location.SoDienThoai}`,
+        SoDienThoai: `${location.state.SoDienThoai}`,
         HinhCMND: `${location.state.HinhCMND}`,
         Avatar: `${location.state.Avatar}`
     });
@@ -144,7 +145,7 @@ export default function EditCar() {
                                                 <label className="col-3"> Hình ảnh nhân viên </label>
                                                 <label className="btn btn-outline-primary col-3">
                                                     Tải hình mới
-                                                    <input type="file" className="account-settings-fileinput" name="nhanvien" onChange={onFileChange} />
+                                                    <input type="file" className="account-settings-fileinput" name="NV" onChange={onFileChange} />
                                                 </label> &nbsp;
                                                 <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
                                                     setNVImage("Default")
