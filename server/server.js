@@ -10,10 +10,6 @@ const mongoose = require("mongoose");
 const params = require('params');
 const ObjectId = mongoose.Types.ObjectId;
 
-<<<<<<< HEAD
-=======
-const carModel = require("./models/Car");
->>>>>>> 84aaed1 (fix mainStaff)
 const staffModel = require("./models/Staff")
 
 if(result){

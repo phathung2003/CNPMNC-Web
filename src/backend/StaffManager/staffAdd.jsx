@@ -1,6 +1,5 @@
 import axios from 'axios';
 import checkUri from "../checkUri"
-
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid'
@@ -54,7 +53,6 @@ function uploadImage(formData, image, setProgress, formFieldKey) {
         );
     });
 }
-
 
 function pushToDatabase(formData) {
     if (result) {
