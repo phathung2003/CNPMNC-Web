@@ -26,6 +26,9 @@ export default defineConfig({
     'process.env.VITE_API_RENT_EDIT': JSON.stringify(process.env.VITE_API_RENT_EDIT),
     'process.env.VITE_API_RENT_CHECKOUT': JSON.stringify(process.env.VITE_API_RENT_CHECKOUT),
 
-    'process.env.VITE_API_RENT_DETAIL': JSON.stringify(process.env.VITE_API_RENT_DETAIL)
+    'process.env.VITE_API_RENT_DETAIL': JSON.stringify(process.env.VITE_API_RENT_DETAIL),
+
+    'process.env.VITE_API_BOOK_ADD': JSON.stringify(process.env.VITE_API_BOOK_ADD),
+    'process.env.VITE_API_BOOK_DETAIL': JSON.stringify(process.env.VITE_API_BOOK_DETAIL)
   }
 })

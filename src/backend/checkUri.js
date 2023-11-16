@@ -50,6 +50,12 @@ function getUri(type) {
 
         case 'RentDetail':
             return [import.meta.env.VITE_API_RENT_DETAIL];
+
+        case 'BookAdd':
+            return [import.meta.env.VITE_API_BOOK_ADD];
+        case 'BookDetail':
+            return [import.meta.env.VITE_API_BOOK_DETAIL];
+            
         default:
             return null;
     }

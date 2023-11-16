@@ -1,13 +1,14 @@
-import RentInfo from '../Get/getInfo'
+import BookInfo from '../../RentManager/Get/getInfo'
+import RentInfo from '../Get/bookDetail'
+
 import { format } from 'date-fns';
 
-export default async function fetchData(IDParams, setData, setFormData, setCMNDImage, setTempCMND, setLicenseImage, setTempLicense, navigate) {
-    const data = await RentInfo(IDParams);
+export default async function fetchData(IDXe, IDDon, setData, setFormData, setCMNDImage, setTempCMND, setLicenseImage, setTempLicense, setRentData) {
+    const data = await BookInfo(IDDon);
+    const rentData = await RentInfo(IDXe)
     if (data) {
-        if (data.IDXe.TinhTrang == "Còn trống") {
-            navigate("/Rent")
-        }
-        else {
+
+        if (rentData) {
             setData(data)
             setFormData({
                 //Thông tin Khách Hàng
@@ -39,6 +40,8 @@ export default async function fetchData(IDParams, setData, setFormData, setCMNDI
             setTempCMND(`${data.IDKH.HinhCMND}`);
             setLicenseImage(`${data.IDKH.HinhBangLai}`);
             setTempLicense(`${data.IDKH.HinhBangLai}`);
+            setRentData(rentData)
+
         }
     }
 };

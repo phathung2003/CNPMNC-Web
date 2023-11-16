@@ -17,6 +17,10 @@ import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
 import CarEdit from './CarManager/DetailCar'
 
+import BookMain from './BookManager/BookMain'
+import BookAdd from './BookManager/BookAdd'
+import BookDetail from './BookManager/BookDetail'
+
 import RentMain from './RentManager/RentMain'
 import RentAdd from './RentManager/RentAdd'
 import RentDetail from './RentManager/RentDetail'
@@ -63,7 +67,7 @@ export default function Drawer() {
                     <li>
                         <div className="iocn-link">
                             <div className="link">
-                                <a href="#">
+                                <a href="/Book">
 
                                     <i><PreOrderIcon /></i>
 
@@ -74,7 +78,7 @@ export default function Drawer() {
                         </div >
 
                         <ul className="sub-menu">
-                            <li><a className="link_name" href="#">Sổ đặt xe</a></li>
+                            <li><a className="link_name" href="/Book">Sổ đặt xe</a></li>
                         </ul>
                     </li>
 
@@ -131,10 +135,16 @@ export default function Drawer() {
                     <Route path="/Car/Add" element={<CarAdd />} />
                     <Route path="/Car/Detail/:id" element={<CarEdit />} />
 
+                    <Route path="/Book" element={<BookMain />} />
+                    <Route path="/Book/Add/:id" element={<BookAdd />} />
+                    <Route path="/Book/Detail/:IDXe/:IDDon" element={<BookDetail />} />
+
                     <Route path="/Rent" element={<RentMain />} />
                     <Route path="/Rent/Add/:id" element={<RentAdd />} />
                     <Route path="/Rent/Detail/:id" element={<RentDetail />} />
                     <Route path="/Rent/Checkout/:id" element={<RentCheckout />} />
+
+
                 </Routes>
             </div>
         </div>

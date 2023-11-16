@@ -91,16 +91,27 @@ if(result){
     });
 
     app.get("/CarMain", async (req,res) => {
-        await XeModel.find()
-        .then(info => res.json(info))
-        .catch(err => res.json(err))
+        await XeModel.find().then(info => res.json(info)).catch(err => res.json(err))
     })
 
     app.get("/CarDetail/:IDXe", async (req,res) => {
         const info = await XeModel.findOne({_id : `${req.params.IDXe}`}).populate("IDDon")
         res.json(info)
     })
+    //--------- Xử lý quản lý sổ đặt xe ---------///
+    app.get('/BookDetail/:IDXe', async (req,res) => {
+        const info = await SoXeModel.find({ IDXe : `${req.params.IDXe}`})
+        res.json(info)
+        // .catch(err => res.json(err))
+    })
 
+    app.post('/BookAdd/:IDXe/', async (req,res) => {
+        try{
+            await SoXeModel.create(req.body)
+            .then((e) => res.json({success: true, msg: e._id}))
+        }
+        catch{() => {res.json({ success: false, msg: 'Tạo đơn đặt trước xe thất bại. Vui lòng thử lại sau !' })}}
+    })
     //--------- Xử lý quản lý sổ xe ---------///
     app.post('/CustomerAdd/', async (req,res) => {
         await KhachHangModel.create(req.body)
@@ -185,8 +196,12 @@ if(result){
 
 
     app.get('/RentDetail/:IDDon/', async (req,res) => {
-        const info = await SoXeModel.findOne({_id : `${req.params.IDDon}`}).populate("IDXe").populate("IDKH")
-        res.json(info)
+        try{
+            const info = await SoXeModel.findOne({_id : `${req.params.IDDon}`}).populate("IDXe").populate("IDKH")
+            res.json(info)
+        }
+        catch(e){res.json(e)}
+       
         // .catch(err => res.json(err))
     })
 

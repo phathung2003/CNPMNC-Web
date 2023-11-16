@@ -12,7 +12,7 @@ export default async function uploadForm(apiType, formData) {
                     var IDDon = formData.IDDon;
                     var NgayBatDau = new Date(formData.NgayBatDau).getTime();
                     var NgayKetThuc = new Date(formData.NgayKetThuc).getTime();
-                    var TinhTrang = "Hoạt động";
+                    var TinhTrang = formData.TinhTrang;
                     var KhachTra = formData.KhachTra;
                     var IDXe = formData._idXe;
                     var IDKH = formData._idKH
