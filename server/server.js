@@ -112,6 +112,28 @@ if(result){
         }
         catch{() => {res.json({ success: false, msg: 'Tạo đơn đặt trước xe thất bại. Vui lòng thử lại sau !' })}}
     })
+
+    app.post('/BookCancel/:IDDon', async (req,res) => {
+        await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
+            $set: {TinhTrang : "Huỷ đơn"}
+        })
+        .then(() => res.json({ success: true, msg: 'Huỷ đơn đặt trước thành công !' }))
+        .catch(() => res.json({ success: false, msg: 'Huỷ đơn đặt trước thất bại. Vui lòng thử lại sau !' }))
+    })
+
+    app.post('/BookCreateRent/:IDXe/:IDDon', async (req,res) => {
+        const {TinhTrang, KhachTra} = req.body;
+
+        await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
+            $set: {
+              KhachTra : KhachTra,
+              TinhTrang : TinhTrang
+            }
+        })
+        .then(() => res.json({ success: true, msg: 'Tạo đơn thành công !' }))
+        .catch(() => res.json({ success: false, msg: 'Tạo đơn thất bại. Vui lòng thử lại sau !' }))
+    })
+
     //--------- Xử lý quản lý sổ xe ---------///
     app.post('/CustomerAdd/', async (req,res) => {
         await KhachHangModel.create(req.body)

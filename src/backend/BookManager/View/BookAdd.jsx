@@ -9,9 +9,6 @@ export default async function handleSubmit(e, formData, CMNDImage, licenseImage,
     if (!inUploadProgress) {
         setInUploadProgress(true);
 
-        if (formData.KhachTra == "")
-            formData.KhachTra = 0
-
         if (confirmSave(rentList)) {
 
             var currentdate = new Date();
@@ -51,9 +48,7 @@ async function uploadPicture(formData, Image, Progress, type) {
 
 function confirmSave(rentList) {
     if (rentList == 0) return true;
-
-    else if (window.confirm("Đã có người đặt xe này trong khoảng thời gian đó ! \nBạn vẫn muốn tiếp tục tạo đơn này ?")) return true;
-
+    else if (window.confirm("Đã có người đặt xe trong khoảng thời gian này ! \nBạn vẫn muốn tiếp tục tạo đơn không ?")) return true;
     return false;
 }
 

@@ -51,8 +51,13 @@ function getUri(type) {
         case 'RentDetail':
             return [import.meta.env.VITE_API_RENT_DETAIL];
 
+        //Sổ đặt xe
         case 'BookAdd':
             return [import.meta.env.VITE_API_BOOK_ADD];
+        case 'BookCancel':
+            return [import.meta.env.VITE_API_BOOK_CANCEL];
+        case 'BookCreateRent':
+            return [import.meta.env.VITE_API_BOOK_CREATE_RENT];
         case 'BookDetail':
             return [import.meta.env.VITE_API_BOOK_DETAIL];
             
