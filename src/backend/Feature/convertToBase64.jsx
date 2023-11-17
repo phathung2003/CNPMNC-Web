@@ -4,3 +4,4 @@ export default function convertToBase64(event, setItem) {
     reader.onload = () => { setItem(reader.result); };
     reader.onerror = error => { console.log("Error: ", error); };
 }
+

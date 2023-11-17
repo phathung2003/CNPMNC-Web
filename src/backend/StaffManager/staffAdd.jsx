@@ -15,8 +15,8 @@ export default async function handleSubmit(e, formData, imageNV, imageCMND, setN
     if (imageCMND && imageCMND !== "" && imageCMND !== "Default") {
         await uploadImage(formData, imageCMND, setCMNDProgess, 'HinhCMND');
     }
-
     pushToDatabase(formData);
+
 }
 
 function uploadImage(formData, image, setProgress, formFieldKey) {
