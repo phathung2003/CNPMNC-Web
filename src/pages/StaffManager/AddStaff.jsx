@@ -8,7 +8,11 @@ import "../../css/Detail.css"
 import handleSubmit from "../../backend/StaffManager/staffAdd";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 
+<<<<<<< HEAD
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
+=======
+const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_user.jpg?alt=media";
+>>>>>>> 884fdc8 (Fix Dat/NhanVien)
 
 export default function AddStaff() {
     const navigate = useNavigate();

@@ -60,6 +60,16 @@ function getUri(type) {
             return [import.meta.env.VITE_API_BOOK_CREATE_RENT];
         case 'BookDetail':
             return [import.meta.env.VITE_API_BOOK_DETAIL];
+           
+        //Nhân viên
+        case 'StaffMain':
+            return [import.meta.env.VITE_API_STAFF_MAIN];
+        case 'StaffAdd':
+            return [import.meta.env.VITE_API_STAFF_ADD];
+        case 'StaffEdit':
+            return [import.meta.env.VITE_API_STAFF_EDIT];
+        case 'StaffDelete':
+            return [import.meta.env.VITE_API_STAFF_DELETE];
             
         default:
             return null;
