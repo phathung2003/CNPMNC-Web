@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const CaiDatSchema = new mongoose.Schema({
+const caidatSchema = new mongoose.Schema({
     Xe4: Number,
     Xe8: Number,
     Xe16: Number,
