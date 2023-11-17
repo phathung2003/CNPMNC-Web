@@ -32,6 +32,10 @@ import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
 
+import StaffMain from './StaffManager/MainStaff'
+import StaffAdd from './StaffManager/AddStaff'
+import StaffEdit from './StaffManager/EditStaff'
+
 export default function Drawer() {
     return (
         <div>
@@ -178,8 +182,6 @@ export default function Drawer() {
                
                 </Routes>
             </div>
-
-            
         </div>
     );
 }
