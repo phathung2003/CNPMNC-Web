@@ -39,6 +39,7 @@ export default function EditCar() {
         SoDienThoai: `${location.state.SoDienThoai}`,
         HinhCMND: `${location.state.HinhCMND}`,
         Avatar: `${location.state.Avatar}`
+        
     });
 
     const Input = (e) => {

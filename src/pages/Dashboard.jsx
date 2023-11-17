@@ -32,6 +32,10 @@ import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 884fdc8c158e3fe658dbcafa7ca283a78802dfbc
 export default function Drawer() {
     return (
         <div>

@@ -2,13 +2,8 @@ const check = require("./checkConnection");
 const contactModel = require("./models/Contact");
 const [result, port, app] = check(true);
 
-const XeModel = require("./models/Xe");
-const KhachHangModel = require("./models/KhachHang");
-const SoXeModel = require("./models/SoXe");
-
-const mongoose = require("mongoose");
-const params = require('params');
-const ObjectId = mongoose.Types.ObjectId;
+const carModel = require("./models/Xe");
+const staffModel = require("./models/Staff")
 
 const staffModel = require("./models/Staff")
 
@@ -32,6 +27,7 @@ if(result){
     
 
     app.post("/main", (req,res) => {
+        console.log(req.body)
         const {email, password} = req.body;
         contactModel.findOne({email : email}).then(
             user => {
@@ -49,7 +45,7 @@ if(result){
         )
     })
 
-    app.get("/info", async (req,res) => {
+    app.get("/info",(req,res) => {
         contactModel.find()
         .then(info => res.json(info))
         .catch(err => res.json(err))
@@ -170,66 +166,96 @@ if(result){
         .catch(err => res.json(err))
     })
 
-    app.post('/RentAdd/:IDXe/', async (req,res) => {
-        req.body.IDXe = new ObjectId(`${req.params.IDXe}`);
-        req.body.IDKH = new ObjectId(`${req.body.IDKH}`);
+
+    app.post('/carDelete', async (req, res) => {
         try{
-            await SoXeModel.create(req.body)
-            .then((SoXeInfo) => {
-                    XeModel.updateOne({ _id : `${req.params.IDXe}`},{
-                        $set: {
-                            TinhTrang : "Đang thuê",
-                            IDDon: new ObjectId(`${SoXeInfo._id}`),
-                        }
-                    })
-                    .then(() => res.json({success: true, msg: "Tạo đơn thành công"}))
-            }) 
+            const {id} = req.body;
+            await carModel.deleteOne({ _id : `${id}`});
+            return res.json({ success: true, msg: 'Xoá xe thành công' });
         }
-        catch{() => {res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' })}}
-    })
+        catch(err){console.error(err);}
+    });
 
-    app.post('/RentEdit/:IDXe/:IDDon', async (req,res) => {
-        const {NgayKetThuc,TinhTrang} = req.body;
-
-        await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
-            $set: {
-              NgayKetThuc : NgayKetThuc,
-              TinhTrang : TinhTrang
-            }
-        })
-        .then(() => res.json({ success: true, msg: 'Cập nhật thành công !' }))
-        .catch(() => res.json({ success: false, msg: 'Cập nhật thất bại. Vui lòng thử lại sau !' }))
-    })
-
-
-    app.post('/RentCheckout/:IDXe/:IDDon', async (req,res) => {
-        
-        await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
-            $set: {
-                KhachTra : `${req.body.KhachTra}`,
-                TinhTrang : "Hoàn thành",
-                
-            }
-        })
-
-        await XeModel.updateOne({ _id : `${req.params.IDXe}`},{
-            $set: {TinhTrang : "Còn trống", IDDon : null}
-        })
-        .then(() => res.json({ success: true, msg: 'Trả xe thành công !' }))
-        .catch(() => res.json({ success: false, msg: 'Trả xe thất bại. Vui lòng thử lại sau !' }))
-    })
-
-
-    app.get('/RentDetail/:IDDon/', async (req,res) => {
+    app.post('/carEdit', async (req, res) => {
         try{
-            const info = await SoXeModel.findOne({_id : `${req.params.IDDon}`}).populate("IDXe").populate("IDKH")
-            res.json(info)
+            const {ID, TenXe, BienSo, SoCho, TruyenDong, NhienLieu, MoTa, SoTien, HinhAnh, TinhTrang} = req.body;
+            await carModel.updateOne({ _id : `${ID}`},{
+                $set: {
+                    TenXe : TenXe,
+                    BienSo :  BienSo,
+                    SoCho : SoCho,
+                    TruyenDong : TruyenDong,
+                    NhienLieu : NhienLieu,
+                    MoTa : MoTa,
+                    SoTien : SoTien,
+                    HinhAnh : HinhAnh,
+                    TinhTrang : TinhTrang,
+                }
+            });
+            return res.json({ success: true, msg: 'Cập nhật thành công !' });
         }
-        catch(e){res.json(e)}
-       
-        // .catch(err => res.json(err))
+        catch(err){
+            console.error(err);
+        }
+    });
+
+    app.get("/carMain",(req,res) => {
+        carModel.find()
+        .then(info => res.json(info))
+        .catch(err => res.json(err))
     })
 
+    //--------- Xử lý quản lý nhân viên ---------///    
+
+     
+    app.post('/staffAdd', async (req,res) => {
+        try{
+        staffModel.create(req.body)
+        .then(info => res.json(info))
+        .catch(err => res.json(err));         
+        }
+        catch(err)
+        {
+            console.error(err);
+        }
+    })
+
+
+    app.post('/staffDelete', async (req, res) => {
+        try{
+            const {id} = req.body;
+            await staffModel.deleteOne({ _id : `${id}`});
+            return res.json({ success: true, msg: 'Xoá nhân viên thành công' });
+        }
+        catch(err){console.error(err);}
+    });
+
+    app.post('/staffEdit', async (req, res) => {
+        try{
+            const {IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND} = req.body;
+            await staffModel.updateOne({ _id : `${IDNV}`},{
+                $set: {                 
+                    Avatar: Avatar,
+                    TenNV: TenNV,
+                    NgaySinh: NgaySinh,
+                    DiaChi: DiaChi,
+                    SoDienThoai: SoDienThoai,
+                    CMND: CMND,
+                    HinhCMND: HinhCMND,
+                }
+            });
+            return res.json({ success: true, msg: 'Cập nhật thành công !' });
+        }
+        catch(err){
+            console.error(err);
+        }
+    });
+
+    app.get("/staffMain",(req,res) => {
+        staffModel.find()
+        .then(info => res.json(info))
+        .catch(err => res.json(err))
+    })
 
     //--------- Xử lý quản lý nhân viên ---------///    
 

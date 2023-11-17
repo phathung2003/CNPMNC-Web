@@ -66,40 +66,11 @@ function pushToDatabase(formData) {
         var Avatar = formData.Avatar;
         var TenNV = formData.TenNV;
         var NgaySinh = formData.NgaySinh;
-
-                const DeleteResult = DeletePicture(formData[formFieldKey]);
-                try{
-                if (DeleteResult) {
-                    formData[formFieldKey] = url;
-                    resolve();
-                }
-            }).catch((err) => {
-                console.error(err);
-                    reject(err); // Reject on error getting download URL
-            });
-        })
-    })
-}
-
-function pushToDatabase(formData) {
-    if (result) {
-        var IDNV = formData._id;
-        
-        var Avatar = formData.Avatar;
-        var TenNV = formData.TenNV;
-<<<<<<< HEAD
-        var NgaySinh = formData.NgaySinh; 
->>>>>>> 84aaed1 (fix mainStaff)
-=======
-        var NgaySinh = formData.NgaySinh;
->>>>>>> f3f017d (fix edit staff and add staff image)
         var DiaChi = formData.DiaChi;
         var SoDienThoai = formData.SoDienThoai;
         var CMND = formData.CMND;
         var HinhCMND = formData.HinhCMND;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
         axios.post(api, { IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND })
             .then((result) => {
@@ -117,30 +88,3 @@ function pushToDatabase(formData) {
         console.log("Link API bị lỗi");
     }
 }
-=======
-        axios
-            .post(api, { ID, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND})
-=======
-
-        axios.post(api, { IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND })
->>>>>>> f3f017d (fix edit staff and add staff image)
-            .then((result) => {
-                console.log(result.data.TenNV)
-                console.log(result.data);
-                alert("Cập nhật thành công !");
-                window.location.reload(true);
-                console.log('Cập nhật Thành Công !');
-            })
-            .catch((err) => {
-                console.error(err);
-                console.log('An error occurred. Please try again later.');
-            });
-    } else {
-        console.log("Link API bị lỗi");
-    }
-}
-<<<<<<< HEAD
-
->>>>>>> 84aaed1 (fix mainStaff)
-=======
->>>>>>> f3f017d (fix edit staff and add staff image)
