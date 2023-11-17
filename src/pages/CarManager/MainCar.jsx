@@ -1,16 +1,16 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
 import "../../css/table.css"
-import Value from "../../backend/CarManager/carMain"
-import Delete from "../../backend/CarManager/carDelete";
-import { useEffect, useState } from 'react';
+import Data from "../../backend/CarManager/View/carMain"
+import Delete from "../../backend/CarManager/Post/carDelete";
+import SearchData from "../../backend/CarManager/searchCar"
 
 export default function Info() {
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
-    const carInfo = Value();
-
+    var carList = SearchData(Data(), search);
     return (
         <div>
             <h2>Quản lý xe</h2>
@@ -31,7 +31,7 @@ export default function Info() {
                 </div>
 
                 <div className="d-flex justify-content-end">
-                    <button className="btn btn-success" onClick={(e) => navigate("/CarAdd")}>Thêm xe</button>
+                    <button className="btn btn-success" onClick={(e) => navigate("/Car/Add")}>Thêm xe</button>
                 </div>
             </div>
 
@@ -50,36 +50,24 @@ export default function Info() {
 
                     <tbody>
                         {
-                            carInfo.filter((item) => {
-                                if (search === "") return item;
-                                return item.ID.toLowerCase().includes(search) ||
-                                    item.TenXe.toLowerCase().includes(search) ||
-                                    item.BienSo.toLowerCase().includes(search) ||
-                                    item.SoCho.toLowerCase().includes(search) ||
-                                    item.NhienLieu.toLowerCase().includes(search) ||
-                                    item.TruyenDong.toLowerCase().includes(search) ||
-                                    item.SoTien.toLowerCase().includes(search) ||
-                                    item.TinhTrang.toLowerCase().includes(search)
-                            }).map(info => {
+                            carList.length != 0 ? carList.map(info => {
                                 return <tr key={info._id}>
-                                    <td align="center" style={{ width: "5%" }}>{info.ID}</td>
+                                    <td align="center" style={{ width: "5%" }}>{info.IDXe}</td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhAnh}`}></img></td>
                                     <td style={{ textAlign: "center" }}>{info.BienSo}</td>
                                     <td style={{ textAlign: "center" }}>{info.SoCho}</td>
                                     <td style={{ textAlign: "center" }}>{info.TinhTrang}</td>
                                     
                                     <td>
-                                        <button className="btn btn-primary" onClick={(e) => navigate("/CarEdit", { state: info })}>Chi tiết</button>
-                                        <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.HinhAnh)}>Xoá bài</button>
+                                        <button className="btn btn-primary" onClick={(e) => navigate(`/Car/Detail/${info._id}`, { state: info })}>Chi tiết</button>
+                                        {info.TinhTrang != "Đang thuê" ? <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.HinhAnh)}>Xoá bài</button> : <div />}
                                     </td>
                                 </tr>
-                            })
+                            }) : <tr><td colSpan={6} height={100} className='text-center text-2xl font-bold bg-transparent'>Hiện tại chưa có xe nào !</td></tr>
                         }
                     </tbody>
                 </table>
             </div >
-
-        </div>
-
+        </div >
     );
 }

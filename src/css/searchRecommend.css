@@ -1,0 +1,7 @@
+.item {
+  vertical-align: baseline;
+}
+
+.item:hover {
+  background: yellow;
+}

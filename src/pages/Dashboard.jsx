@@ -12,13 +12,26 @@ import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
 import PersonIcon from '@mui/icons-material/Person';
 
+// import Test from './test/test'
+
 import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
-import CarEdit from './CarManager/EditCar'
+import CarEdit from './CarManager/DetailCar'
+
+import BookMain from './BookManager/BookMain'
+import BookAdd from './BookManager/BookAdd'
+import BookDetail from './BookManager/BookDetail'
+import BookCreateRent from './BookManager/BookCreateRent'
+
+import RentMain from './RentManager/RentMain'
+import RentAdd from './RentManager/RentAdd'
+import RentDetail from './RentManager/RentDetail'
+import RentCheckout from './RentManager/RentCheckout'
 
 import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
+
 
 export default function Drawer() {
     return (
@@ -61,7 +74,7 @@ export default function Drawer() {
                     <li>
                         <div className="iocn-link">
                             <div className="link">
-                                <a href="#">
+                                <a href="/Book">
 
                                     <i><PreOrderIcon /></i>
 
@@ -72,14 +85,14 @@ export default function Drawer() {
                         </div >
 
                         <ul className="sub-menu">
-                            <li><a className="link_name" href="#">Sổ đặt xe</a></li>
+                            <li><a className="link_name" href="/Book">Sổ đặt xe</a></li>
                         </ul>
                     </li>
 
                     <li>
                         <div className="iocn-link">
                             <div className="link">
-                                <a href="#">
+                                <a href="/Rent">
                                     <i><BookIcon /></i>
                                     <span className="link_name">Sổ xe</span>
                                 </a>
@@ -87,7 +100,7 @@ export default function Drawer() {
                         </div >
 
                         <ul className="sub-menu" >
-                            <li><a className="link_name" href="#">Sổ xe</a></li >
+                            <li><a className="link_name" href="/Rent">Sổ xe</a></li >
                         </ul>
                     </li >
 
@@ -142,6 +155,20 @@ export default function Drawer() {
                 <Routes>
                     <Route path="/" element={<p className="text-3xl font-bold underline">Trang Chủ</p>} />
                     <Route path="/Car" element={<CarMain />} />
+                    <Route path="/Car/Add" element={<CarAdd />} />
+                    <Route path="/Car/Detail/:id" element={<CarEdit />} />
+
+                    <Route path="/Book" element={<BookMain />} />
+                    <Route path="/Book/Add/:id" element={<BookAdd />} />
+                    <Route path="/Book/Detail/:IDXe/:IDDon" element={<BookDetail />} />
+                    <Route path="/Book/Create/:IDDon" element={<BookCreateRent />} />
+
+                    <Route path="/Rent" element={<RentMain />} />
+                    <Route path="/Rent/Add/:id" element={<RentAdd />} />
+                    <Route path="/Rent/Detail/:id" element={<RentDetail />} />
+                    <Route path="/Rent/Checkout/:id" element={<RentCheckout />} />
+
+
                     <Route path="/CarAdd" element={<CarAdd />} />
                     <Route path="/CarEdit" element={<CarEdit />} />
                     
@@ -152,9 +179,6 @@ export default function Drawer() {
                
                 </Routes>
             </div>
-
-            
         </div>
-
     );
 }

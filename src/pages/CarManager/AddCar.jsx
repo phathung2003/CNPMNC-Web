@@ -5,49 +5,39 @@ import Form from 'react-bootstrap/Form';
 
 import "../../css/Detail.css"
 //Xử lý backend
-import handleSubmit from "../../backend/CarManager/carAdd";
+import handleSubmit from "../../backend/CarManager/View/carAdd";
+import convertToBase64 from "../../backend/Feature/convertToBase64"
 
-const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
+const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_vehicle.png?alt=media";
 
 export default function AddCar() {
     const navigate = useNavigate();
     const [image, setFile] = useState("Default");
     const [temp, setTemp] = useState(defaultPicture);
     const [Progress, setProgress] = useState();
-
+    const [inUploadProgress, setInUploadProgress] = useState(false);
     const [formData, setFormData] = useState({
+        _id: "",
+        IDXe: "",
         TenXe: "",
         BienSo: "",
-        SoCho: "4 chỗ",
-        TruyenDong: "",
-        NhienLieu: "",
+        SoCho: 4,
+        TruyenDong: "Số sàn",
+        NhienLieu: "Xăng dầu",
         MoTa: "",
-        SoTien: "",
+        SoTien: 0,
         HinhAnh: `${defaultPicture}`,
         TinhTrang: "Còn trống",
+        IDDon: null,
     });
 
-    const Input = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const Input = (e) => { setFormData({ ...formData, [e.target.name]: e.target.value }); };
 
     const onFileChange = (event) => {
         // Updating the state 
         setFile(event.target.files[0]);
-        convertToBase64(event)
+        convertToBase64(event, setTemp)
     };
-
-    function convertToBase64(e) {
-        console.log(e);
-        var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        reader.onload = () => {
-            setTemp(reader.result);
-        };
-        reader.onerror = error => {
-            console.log("Error: ", error);
-        };
-    }
 
     return (
         <div>
@@ -65,7 +55,7 @@ export default function AddCar() {
 
                             <div className="list-group list-group-flush account-settings-links">
 
-                                {/*Hình Avatar*/}
+                                {/*Hình Xe*/}
                                 <div className="justify-content-center form-group col mt-5 ml-5">
                                     <img src={`${temp}`} className="avatar" />
                                 </div>
@@ -79,8 +69,9 @@ export default function AddCar() {
                                 {/*Thông tin xe*/}
                                 <div className="tab-pane fade active show">
 
-                                    <form onSubmit={(e) => handleSubmit(e, formData, image, setProgress)}>
+                                    <form onSubmit={(e) => handleSubmit(e, formData, image, setProgress, inUploadProgress, setInUploadProgress)}>
                                         < div className="card-body">
+
                                             {/*Tên Xe*/}
                                             <div className="form-group">
                                                 <div className="col">
@@ -89,7 +80,7 @@ export default function AddCar() {
                                                 </div>
                                             </div>
 
-                                            {/*Biển số xe & Truyền động & Số chỗ ngồi*/}
+                                            {/*Biển số xe & Số chỗ ngồi*/}
                                             <div className="form-group row mt-1">
                                                 {/*Biển số xe*/}
                                                 <div className="col">
@@ -100,35 +91,44 @@ export default function AddCar() {
                                                 {/*Số chỗ ngồi*/}
                                                 <div className="col">
                                                     <label className="form-label">Số chỗ ngồi</label>
-                                                    <Form.Select name="SoCho" defaultValue={"4 chỗ"} onChange={Input}>
-                                                        <option value="4 chỗ">4 chỗ</option>
-                                                        <option value="4 chỗ">8 chỗ</option>
-                                                        <option value="16 chỗ">16 chỗ</option>
-                                                        <option value="30 chỗ">30 chỗ</option>
-                                                        <option value="45 chỗ">45 chỗ</option>
+                                                    <Form.Select name="SoCho" defaultValue={4} onChange={Input}>
+                                                        <option value={4}>4 chỗ</option>
+                                                        <option value={8}>8 chỗ</option>
+                                                        <option value={16}>16 chỗ</option>
+                                                        <option value={30}>30 chỗ</option>
+                                                        <option value={45}>45 chỗ</option>
                                                     </Form.Select>
                                                 </div>
                                             </div>
 
-                                            {/*Nhiên liệu & Nhiên liệu tiêu hao & Số tiền*/}
+                                            {/*Nhiên liệu & Số tiền*/}
                                             <div className="form-group row mt-1">
 
                                                 {/*Nhiên liệu*/}
                                                 <div className="col">
                                                     <label className="form-label">Nhiên liệu</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="NhienLieu" onChange={Input} />
+                                                    <Form.Select name="NhienLieu" defaultValue={"Xăng dầu"} onChange={Input}>
+                                                        <option value={"Xăng dầu"}>Xăng dầu</option>
+                                                        <option value={"Điện"}>Điện</option>
+                                                        <option value={"Xăng dầu + Điện"}>Xăng dầu + Điện</option>
+                                                    </Form.Select>
                                                 </div>
 
                                                 {/*Truyền động*/}
                                                 <div className="col">
                                                     <label className="form-label">Truyền động</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="TruyenDong" onChange={Input} />
+                                                    <Form.Select name="TruyenDong" defaultValue={"Số sàn"} onChange={Input}>
+                                                        <option value={"Số sàn"}>Số sàn</option>
+                                                        <option value={"Số tự động"}>Số tự động</option>
+                                                        <option value={"Số tự động kép"}>Số tự động kép</option>
+                                                        <option value={"Số CVT"}>Số CVT</option>
+                                                    </Form.Select>
                                                 </div>
 
                                                 {/*Số tiền*/}
                                                 <div className="col">
                                                     <label className="form-label">Số tiền/1 ngày</label>
-                                                    <input className="form-control" type="text" autoComplete="off" name="SoTien" onChange={Input} />
+                                                    <input className="form-control" type="number" autoComplete="off" name="SoTien" min={0} max={10000000000} required onChange={Input} />
                                                 </div>
                                             </div>
 
@@ -143,11 +143,11 @@ export default function AddCar() {
                                                 <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
                                                     setFile("Default")
                                                     setTemp(defaultPicture)
-                                                }}>Reset</button>
-                                                <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG, GIF và PNG</label>
-                                                {Progress >= 0 || Progress != undefined ? <ProgressBar className="mt-3" now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> : ""}
-                                            </div>
+                                                }}>Mặc định</button>
+                                                <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG và PNG</label>
 
+                                            </div>
+                                            {Progress >= 0 || Progress != undefined ? <ProgressBar now={Progress} label={`${Progress != 100 ? Progress + "%" : "Tải thành công"}`} /> : ""}
                                             {/*Mô tả*/}
                                             <div className="form-group mt-1">
                                                 <label className="form-label">Mô tả</label>
@@ -156,17 +156,17 @@ export default function AddCar() {
                                         </div>
 
                                         <div className="d-flex flex-row-reverse mb-1 mr-1   ">
-                                            <button type="submit" className="btn btn-success">Lưu</button>&nbsp;
+                                            {!inUploadProgress ?
+                                                <button type="submit" className="btn btn-success">Lưu</button> :
+                                                <button className="btn btn-secondary">Đang lưu dữ liệu</button>
+                                            }
                                         </div>
-
                                     </form>
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );

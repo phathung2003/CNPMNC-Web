@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import checkUri from "../checkUri";
+import checkUri from "../../checkUri";
+
 const [result, api] = checkUri("CarMain");
 
 export default function infoProcess() {

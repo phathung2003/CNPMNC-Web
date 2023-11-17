@@ -2,7 +2,7 @@ const check = require("./checkConnection");
 const contactModel = require("./models/Contact");
 const [result, port, app] = check(true);
 
-const carModel = require("./models/Car");
+const carModel = require("./models/Xe");
 const staffModel = require("./models/Staff")
 
 if(result){
@@ -103,8 +103,7 @@ if(result){
         try{
         staffModel.create(req.body)
         .then(info => res.json(info))
-        .catch(err => res.json(err));
-          
+        .catch(err => res.json(err));         
         }
         catch(err)
         {
