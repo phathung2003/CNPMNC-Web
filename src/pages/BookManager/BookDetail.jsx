@@ -36,10 +36,14 @@ export default function testing() {
     const [inUploadProgress, setInUploadProgress] = useState(false);
     const [numberOfDay, setNumberOfDay] = useState(1);
 
-    const Edit = "Edit";
-    const Cancel = "Cancel";
+    var rentList = fetchRentData(IDDon, rentData, formData.NgayBatDau, formData.NgayKetThuc);
     //Transfer from API
-    useEffect(() => { fetchData(IDXe, IDDon, setData, setFormData, setCMNDImage, setTempCMND, setLicenseImage, setTempLicense, setRentData); }, [])
+    useEffect(() => {
+        fetchData(IDXe, IDDon, setData, setFormData, setCMNDImage, setTempCMND, setLicenseImage, setTempLicense, setRentData);
+        if (formData.loading) {
+            rentList = fetchRentData(IDDon, rentData, formData.NgayBatDau, formData.NgayKetThuc);
+        }
+    }, [])
 
     useEffect(() => {
         if (formData.NgayBatDau != "" && formData.NgayKetThuc != "" && data != null) {
@@ -54,7 +58,7 @@ export default function testing() {
         }
     }, [formData.NgayBatDau, formData.NgayKetThuc])
 
-    var rentList = fetchRentData(rentData, formData.NgayBatDau, formData.NgayKetThuc);
+
 
     useEffect(() => {
         if (formData.NgayBatDau != "" && formData.NgayKetThuc != "") {
@@ -150,7 +154,7 @@ export default function testing() {
                                         </div>
 
 
-                                        <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, setCMNDImage, setLicenseImage, navigate, "Edit")}>
+                                        <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, setCMNDImage, setLicenseImage, rentList, navigate, "Edit")}>
                                             < div className="card-body mt-0">
 
                                                 <div className="form-group col mt-0 ">
@@ -250,7 +254,7 @@ export default function testing() {
                                                 {
                                                     rentList.filter(s => { return s.TinhTrang == "Hoạt động" }).length > 0 ?
                                                         <div>
-                                                            <label className="form-label mt-4">Đơn đang đặt</label>
+                                                            <label className="form-label mt-4">Đơn đang hoạt động</label>
                                                             <div id="table-scroll" className="table-scroll" style={{ maxHeight: "30vw" }}>
                                                                 <table id="main-table" className="main-table" style={{ width: "100%" }}>
                                                                     <thead>
@@ -304,7 +308,7 @@ export default function testing() {
                                                                                     <td style={{ textAlign: "center", width: "15vw" }}>{`${format(info.NgayBatDau, "dd/MM/yyyy")}`}</td>
                                                                                     <td style={{ textAlign: "center", width: "15vw" }}>{`${format(info.NgayKetThuc, "dd/MM/yyyy")}`}</td>
                                                                                     <td className="align-middle" style={{ width: "8vw" }}>
-                                                                                        <button type="button" className="btn btn-primary" onClick={(e) => { navigate(`/Book/Detail/${formData._idXe}/${info._id}`); window.location.reload(false); }}>Chi tiết</button>
+                                                                                        <button type="button" className="btn btn-primary" onClick={(e) => { navigate(`/Book/Detail/${formData._idXe}/${info._id}`); }}>Chi tiết</button>
                                                                                     </td>
                                                                                 </tr>
                                                                             }) : <tr><td colSpan={6} height={100} className='text-center text-2xl font-bold bg-transparent'>Hiện tại chưa có đơn đặt trước nào !</td></tr>
@@ -328,7 +332,7 @@ export default function testing() {
                                                     <h5 className="col font-bold">Tổng cộng</h5>
                                                     <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay).toLocaleString('vi-VN')}đ</p>
                                                     <hr></hr>
-                                                    <p className="col">Tiền cọc trước</p>
+                                                    <p className="col">Tiền cọc</p>
                                                     <p className="col">{(data.IDXe.SoTien * numberOfDay * 0.5).toLocaleString('vi-VN')} đ</p>
 
                                                 </div>

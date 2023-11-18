@@ -41,6 +41,9 @@ function getUri(type) {
         case 'CustomerMain':
             return [import.meta.env.VITE_API_CUSTOMER_MAIN];
 
+        //Sổ xe
+        case 'RentMain':
+            return [import.meta.env.VITE_API_RENT_MAIN];
         case 'RentAdd':
             return [import.meta.env.VITE_API_RENT_ADD];
         case 'RentEdit':

@@ -3,6 +3,7 @@ import pushToDatabase from "../../RentManager/Post/uploadForm";
 import cancelForm from "../Post/cancelForm";
 
 export default async function handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, setCMNDImage, setLicenseImage, rentList, navigate, type) {
+    console.log(rentList)
     e.preventDefault();
     if (!inUploadProgress) {
         if (confirmSave(rentList, type)) {

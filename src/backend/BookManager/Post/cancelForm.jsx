@@ -1,7 +1,7 @@
 import axios from 'axios';
 import checkUri from "../../checkUri"
 
-export default async function uploadForm(apiType, formData) {
+export default async function uploadForm(apiType, IDDon) {
     const myPromise = new Promise(
         function (resolve) {
             try {
@@ -9,7 +9,7 @@ export default async function uploadForm(apiType, formData) {
                 const [result, api] = checkUri(apiType);
 
                 if (result) {
-                    axios.post(`${api}/${formData._idDon}`)
+                    axios.post(`${api}/${IDDon}`)
                         .then((result) => {
                             alert(result.data.msg)
                             console.log(result.data.msg);

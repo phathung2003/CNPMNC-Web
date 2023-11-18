@@ -28,7 +28,6 @@ if(result){
         )
     })
     
-
     app.post("/main", (req,res) => {
         const {email, password} = req.body;
         contactModel.findOne({email : email}).then(
@@ -98,9 +97,13 @@ if(result){
         const info = await XeModel.findOne({_id : `${req.params.IDXe}`}).populate("IDDon")
         res.json(info)
     })
+
     //--------- Xử lý quản lý sổ đặt xe ---------///
-    app.get('/BookDetail/:IDXe', async (req,res) => {
-        const info = await SoXeModel.find({ IDXe : `${req.params.IDXe}`})
+    app.get('/BookDetail/:IDXe/:IDDon', async (req,res) => {
+        const info = await SoXeModel.find({ 
+            IDXe : `${req.params.IDXe}`,
+            _id : { $nin: [req.params.IDDon] }
+        }).populate("IDXe").populate("IDKH")
         res.json(info)
         // .catch(err => res.json(err))
     })
@@ -134,7 +137,7 @@ if(result){
         .catch(() => res.json({ success: false, msg: 'Tạo đơn thất bại. Vui lòng thử lại sau !' }))
     })
 
-    //--------- Xử lý quản lý sổ xe ---------///
+    //--------- Xử lý quản lý sổ xe (Khách hàng) ---------//
     app.post('/CustomerAdd/', async (req,res) => {
         await KhachHangModel.create(req.body)
         .then((KhachHangInfo) => res.json({success: true, msg: `${KhachHangInfo._id}`}))
@@ -165,6 +168,16 @@ if(result){
         await KhachHangModel.find()
         .then(info => res.json(info))
         .catch(err => res.json(err))
+    })
+
+    
+    //--------- Xử lý quản lý sổ xe (Sổ xe) ---------//
+    app.get('/RentMain', async (req,res) => {
+        try{
+            const info = await SoXeModel.find().populate("IDXe").populate("IDKH")
+            res.json(info)
+        }
+        catch(e){res.json(e)}
     })
 
     app.post('/RentAdd/:IDXe/', async (req,res) => {
@@ -198,7 +211,6 @@ if(result){
         .catch(() => res.json({ success: false, msg: 'Cập nhật thất bại. Vui lòng thử lại sau !' }))
     })
 
-
     app.post('/RentCheckout/:IDXe/:IDDon', async (req,res) => {
         
         await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
@@ -215,7 +227,6 @@ if(result){
         .then(() => res.json({ success: true, msg: 'Trả xe thành công !' }))
         .catch(() => res.json({ success: false, msg: 'Trả xe thất bại. Vui lòng thử lại sau !' }))
     })
-
 
     app.get('/RentDetail/:IDDon/', async (req,res) => {
         try{

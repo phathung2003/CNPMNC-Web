@@ -1,12 +1,12 @@
 import axios from "axios";
 import checkUri from "../../checkUri";
 
-const [result, api] = checkUri("BookDetail");
+const [result, api] = checkUri("RentMain");
 
-export default async function infoProcess(IDXe, IDDon) {
+export default async function infoProcess() {
     var data;
     if (result) {
-        await axios.get(`${api}/${IDXe}/${IDDon} `)
+        await axios.get(api)
             .then(info => data = info.data)
             .catch(err => console.log(err.data))
     }
