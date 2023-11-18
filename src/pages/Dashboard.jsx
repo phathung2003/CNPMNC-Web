@@ -17,8 +17,8 @@ import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
 import CarEdit from './CarManager/DetailCar'
 
-import Book from './BookManager/BookMain'
-import BookMain from './BookManager/BookChooseCar'
+import BookMain from './BookManager/BookMain'
+import BookChooseCar from './BookManager/BookChooseCar'
 import BookAdd from './BookManager/BookAdd'
 import BookDetail from './BookManager/BookDetail'
 import BookCreateRent from './BookManager/BookCreateRent'
@@ -137,8 +137,8 @@ export default function Drawer() {
                     <Route path="/Car/Add" element={<CarAdd />} />
                     <Route path="/Car/Detail/:id" element={<CarEdit />} />
 
-                    <Route path="/BookTest" element={<BookMain />} />
-                    <Route path="/Book" element={<Book />} />
+                    <Route path="/Book" element={<BookMain />} />
+                    <Route path="/Book/Add/ChooseCar" element={<BookChooseCar />} />
                     <Route path="/Book/Add/:id" element={<BookAdd />} />
                     <Route path="/Book/Detail/:IDXe/:IDDon" element={<BookDetail />} />
                     <Route path="/Book/Create/:IDDon" element={<BookCreateRent />} />

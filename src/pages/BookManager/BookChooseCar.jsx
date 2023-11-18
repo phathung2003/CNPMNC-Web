@@ -31,8 +31,10 @@ export default function Info() {
                 </div>
 
                 <div className="d-flex justify-content-end">
-                    {/* <button className="btn btn-success" onClick={(e) => navigate("/CarAdd")}>Thêm xe</button> */}
+                    <h3>Chọn xe bạn muốn đặt</h3>
                 </div>
+                <div></div>
+                <div></div>
             </div>
 
             <div id="table-scroll" className="table-scroll">
@@ -57,7 +59,7 @@ export default function Info() {
                                     <td style={{ textAlign: "center" }}>{info.BienSo}</td>
                                     <td style={{ textAlign: "center" }}>{info.SoCho}</td>
                                     <td style={{ textAlign: "center" }}>{info.TinhTrang}</td>
-                                    <td>
+                                    <td style={{ width: "8vw" }}>
                                         <button className="btn btn-success" onClick={(e) => navigate(`/Book/Add/${info._id}`)}>Đặt đơn</button>
                                     </td>
                                 </tr>

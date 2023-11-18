@@ -322,7 +322,14 @@ export default function RentAdd() {
                                                         <input className="form-control" type="date" autoComplete="off" value={formData.NgayKetThuc} name="NgayKetThuc" onChange={Input} />
                                                     </div>
                                                 </div>
-
+                                                {
+                                                    rentList.filter(s => { return s.TinhTrang == "Hoạt động" }).length > 0 && rentList.filter(s => { return s.TinhTrang != "Hoạt động" }).length > 0 ?
+                                                        <p className="text-red-400 mt-2 mb-0">* Xe này hiện đang được chạy và được đặt trước trong quãng thời gian này!</p> :
+                                                        rentList.filter(s => { return s.TinhTrang == "Hoạt động" }).length > 0 ?
+                                                            <p className="text-red-400 mt-2 mb-0">* Xe này hiện đang được chạy trong quãng thời gian này !</p> :
+                                                            rentList.filter(s => { return s.TinhTrang != "Hoạt động" }).length > 0 ?
+                                                                <p className="text-red-400 mt-2 mb-0">* Xe này hiện đang có người đặt trước trong quãng thời gian này !</p> : <></>
+                                                }
                                                 {
                                                     rentList.filter(s => { return s.TinhTrang == "Hoạt động" }).length > 0 ?
                                                         <div>

@@ -40,7 +40,7 @@ export default function Info() {
                     </div>
 
                     <div className="d-flex justify-content-end">
-                        {/* <button className="btn btn-success" onClick={(e) => navigate("/CarAdd")}>Thêm xe</button> */}
+                        <button className="btn btn-success" onClick={(e) => navigate("/Book/Add/ChooseCar")}>Tạo đơn đặt trước</button>
                     </div>
                 </div>
 

@@ -190,8 +190,6 @@ export default function testing() {
                                                 {/*Biển số xe & Truyền động & Số chỗ ngồi*/}
                                                 {/*Upload hình*/}
                                                 <div className="form-group row mt-2">
-
-
                                                     <div className="col">
                                                         <div className="form-group col">
                                                             <div className="col">
@@ -236,7 +234,6 @@ export default function testing() {
                                                         </div>
                                                     </div>
                                                 </div>
-
 
                                                 <hr></hr>
                                                 <h3 className="mt-3">Thông tin thuê</h3>
@@ -364,8 +361,6 @@ export default function testing() {
                                                     </div>
 
                                                 </div>
-
-
                                             </div>
                                         </form>
                                     </div>
