@@ -40,7 +40,7 @@ export default function EditCar() {
                 <div className="container light-style flex-grow-1 container-p-y">
 
                     <div className="d-flex justify-content-between">
-                        <button className="btn btn-primary mb-0" onClick={(e) => navigate("/Car")}>Quay lại</button>
+                        <button className="btn btn-primary mb-0" onClick={(e) => window.history.back()}>Quay lại</button>
                         <h4 className="font-weight-bold"> Thông tin xe </h4>
                     </div>
 

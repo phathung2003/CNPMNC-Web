@@ -34,7 +34,7 @@ export default function Info() {
                     <h3>Chọn xe bạn muốn đặt</h3>
                 </div>
                 <div></div>
-                <div></div>
+                <div><button className="btn btn-primary mb-0" onClick={(e) => window.history.back()}>Quay lại</button></div>
             </div>
 
             <div id="table-scroll" className="table-scroll">

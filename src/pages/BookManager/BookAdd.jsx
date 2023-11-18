@@ -143,7 +143,7 @@ export default function RentAdd() {
                 <div className="container light-style flex-grow-1 container-p-y">
 
                     <div className="d-flex justify-content-between">
-                        <button className="btn btn-primary mb-0" onClick={(e) => navigate("/Book")}>Quay lại</button>
+                        <button className="btn btn-primary mb-0" onClick={(e) => window.history.back()}>Quay lại</button>
                         <h3> Đơn đặt trước xe </h3>
                     </div>
 
@@ -354,7 +354,7 @@ export default function RentAdd() {
                                                                                     <td style={{ textAlign: "center", width: "15vw" }}>{`${format(info.NgayKetThuc, "dd/MM/yyyy")}`}</td>
                                                                                     <td className="align-middle" style={{ width: "8vw" }}>
                                                                                         {
-                                                                                            <button className="btn btn-primary" onClick={(e) => navigate(`/Rent/Detail/${info._id}`)}>Chi tiết</button>
+                                                                                            <button className="btn btn-primary" onClick={(e) => { navigate(`/Rent/Detail/${info._id}`), { state: `{/BookAdd/${IDParams}}` } }}>Chi tiết</button>
                                                                                         }
 
                                                                                     </td>

@@ -71,7 +71,7 @@ export default function testing() {
                 <div className="container light-style flex-grow-1 container-p-y">
 
                     <div className="d-flex justify-content-between">
-                        <button className="btn btn-primary mb-0" onClick={(e) => navigate("/Rent")}>Quay lại</button>
+                        <button className="btn btn-primary mb-0" onClick={(e) => window.history.back()}>Quay lại</button>
                         <h3 className="flex align-middle"><span className="text-lg mt-1"><span className="font-bold">Mã đơn: </span> {data.IDDon} - </span><span className="ml-1 mr-1">Đơn thuê xe</span></h3>
                     </div>
 
