@@ -251,7 +251,10 @@ export default function testing() {
                                                         <input className="form-control" type="date" autoComplete="off" value={formData.NgayKetThuc} name="NgayKetThuc" onChange={Input} />
                                                     </div>
                                                 </div>
-
+                                                {
+                                                    rentData.filter(s => { return s.TinhTrang == "Hoạt động" }).length != 0 ?
+                                                        <p className="text-red-400 mt-2 mb-0">* Xe này hiện đang được chạy nên không thể đặt xe được !</p> : <></>
+                                                }
                                                 {
                                                     rentList.filter(s => { return s.TinhTrang == "Hoạt động" }).length > 0 ?
                                                         <div>
@@ -349,7 +352,7 @@ export default function testing() {
 
 
                                                     {
-                                                        rentList.filter(s => { return s.TinhTrang == "Hoạt động" }).length == 0 ?
+                                                        rentData.filter(s => { return s.TinhTrang == "Hoạt động" }).length == 0 ?
                                                             <div className="col">
                                                                 <button type="button" className="btn btn-primary w-100" onClick={(e) => navigate(`/Book/Create/${IDDon}`)}> Tạo đơn thuê</button>
                                                             </div> : <></>
@@ -362,10 +365,7 @@ export default function testing() {
 
                                                 </div>
 
-                                                {
-                                                    rentList.filter(s => { return s.TinhTrang == "Hoạt động" }).length != 0 ?
-                                                        <p className="text-red-400 mt-2">* Xe này hiện đang được chạy nên không thể đặt xe được !</p> : <></>
-                                                }
+
                                             </div>
                                         </form>
                                     </div>

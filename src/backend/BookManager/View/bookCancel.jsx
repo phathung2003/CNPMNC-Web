@@ -5,6 +5,7 @@ export default async function handleSubmit(e, IDDon, navigate) {
     if (confirmSave()) {
         if (await cancelForm("BookCancel", IDDon)) {
             navigate("/Book")
+            window.location.reload(false);  
         }
     }
 }
