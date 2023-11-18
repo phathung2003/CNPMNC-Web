@@ -2,6 +2,7 @@ import RentInfo from '../Get/getInfo'
 import { format } from 'date-fns';
 
 export default async function fetchData(IDParams, setData, setFormData, setCMNDImage, setTempCMND, setLicenseImage, setTempLicense, navigate) {
+    console.log(IDParams)
     const data = await RentInfo(IDParams);
     if (data) {
         if (data.IDXe.TinhTrang == "Còn trống" && data.TinhTrang != "Đặt trước") {

@@ -72,7 +72,7 @@ export default function testing() {
 
                     <div className="d-flex justify-content-between">
                         <button className="btn btn-primary mb-0" onClick={(e) => navigate("/Rent")}>Quay lại</button>
-                        <h3 className="flex align-middle"><span className="text-lg mt-1"><span className="font-bold">Mã đơn: </span> {data.IDDon} - </span><span className="ml-1 mr-1">Chi tiết đơn</span></h3>
+                        <h3 className="flex align-middle"><span className="text-lg mt-1"><span className="font-bold">Mã đơn: </span> {data.IDDon} - </span><span className="ml-1 mr-1">Đơn thuê xe</span></h3>
                     </div>
 
                     {/*Thanh Sidebar*/}

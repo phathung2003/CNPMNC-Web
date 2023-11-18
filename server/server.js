@@ -108,6 +108,12 @@ if(result){
         // .catch(err => res.json(err))
     })
 
+    app.get('/BookDetail/:IDXe/', async (req,res) => {
+        const info = await SoXeModel.find({ IDXe : `${req.params.IDXe}`,}).populate("IDXe").populate("IDKH")
+        res.json(info)
+        // .catch(err => res.json(err))
+    })
+
     app.post('/BookAdd/:IDXe/', async (req,res) => {
         try{
             await SoXeModel.create(req.body)
@@ -127,14 +133,23 @@ if(result){
     app.post('/BookCreateRent/:IDXe/:IDDon', async (req,res) => {
         const {TinhTrang, KhachTra} = req.body;
 
-        await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
-            $set: {
-              KhachTra : KhachTra,
-              TinhTrang : TinhTrang
-            }
-        })
-        .then(() => res.json({ success: true, msg: 'Tạo đơn thành công !' }))
-        .catch(() => res.json({ success: false, msg: 'Tạo đơn thất bại. Vui lòng thử lại sau !' }))
+        try{
+            await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
+                $set: {
+                  KhachTra : KhachTra,
+                  TinhTrang : TinhTrang
+                }
+            })    
+            .then(async() => {await XeModel.updateOne({ _id : `${req.params.IDXe}`},{
+                    $set: {
+                        TinhTrang : "Đang thuê",
+                        IDDon: new ObjectId(`${req.params.IDDon}`),
+                    }
+                })
+                .then(() => res.json({success: true, msg: "Tạo đơn thành công"}))
+        }) 
+        }
+        catch{() => res.json({ success: false, msg: 'Tạo đơn thất bại. Vui lòng thử lại sau !' })}
     })
 
     //--------- Xử lý quản lý sổ xe (Khách hàng) ---------//

@@ -45,7 +45,7 @@ export default function RentAdd() {
     const [numberOfDay, setNumberOfDay] = useState(1);
 
     var customerList = SearchData(customerData(), search);
-    var rentList = fetchRentData(rentData, formData.NgayBatDau, formData.NgayKetThuc);
+    var rentList = fetchRentData("", rentData, formData.NgayBatDau, formData.NgayKetThuc);
     //Transfer from API
     useEffect(() => { fetchData(IDParams, setData, setFormData, setRentData) }, [])
 

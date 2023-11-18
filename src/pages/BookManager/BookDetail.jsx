@@ -8,6 +8,7 @@ import "../../css/pictureUpload.css"
 import fetchData from "../../backend/BookManager/Fetch/fetchDetail"
 import fetchRentData from "../../backend/BookManager/Fetch/fetchRent"
 
+import CancelForm from "../../backend/BookManager/View/bookCancel"
 import handleSubmit from "../../backend/BookManager/View/BookEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 
@@ -338,19 +339,33 @@ export default function testing() {
                                                 </div>
 
                                                 <div className="form-group row mt-2" >
+
                                                     <div className="col">
                                                         {!inUploadProgress ?
                                                             <button type="submit" className="btn btn-success w-100">Lưu</button> :
                                                             <button className="btn btn-secondary w-100">Đang lưu dữ liệu</button>
                                                         }
                                                     </div>
+
+
+                                                    {
+                                                        rentList.filter(s => { return s.TinhTrang == "Hoạt động" }).length == 0 ?
+                                                            <div className="col">
+                                                                <button type="button" className="btn btn-primary w-100" onClick={(e) => navigate(`/Book/Create/${IDDon}`)}> Tạo đơn thuê</button>
+                                                            </div> : <></>
+                                                    }
+
+
                                                     <div className="col">
-                                                        <button type="button" className="btn btn-primary w-100" onClick={(e) => navigate(`/Book/Create/${IDDon}`)}> Tạo đơn thuê</button>
+                                                        <button type="button" className="btn btn-danger w-100" onClick={(e) => CancelForm(e, IDDon, navigate)}>Huỷ đơn</button>
                                                     </div>
-                                                    <div className="col">
-                                                        <button type="button" className="btn btn-danger w-100" onClick={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, setCMNDImage, setLicenseImage, rentList, navigate, "Cancel")}>Huỷ đơn</button>
-                                                    </div>
+
                                                 </div>
+
+                                                {
+                                                    rentList.filter(s => { return s.TinhTrang == "Hoạt động" }).length != 0 ?
+                                                        <p className="text-red-400 mt-2">* Xe này hiện đang được chạy nên không thể đặt xe được !</p> : <></>
+                                                }
                                             </div>
                                         </form>
                                     </div>
