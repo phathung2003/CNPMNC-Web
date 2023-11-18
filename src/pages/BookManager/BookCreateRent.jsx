@@ -6,7 +6,7 @@ import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
 
 import fetchData from "../../backend/RentManager/Fetch/fetchFormData"
-import handleSubmit from "../../backend/RentManager/View/rentEdit";
+import handleSubmit from "../../backend/BookManager/View/BookCreateRent";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
@@ -16,7 +16,7 @@ export default function testing() {
     const params = useParams();
     const navigate = useNavigate();
 
-    const IDParams = params.id;
+    const IDParams = params.IDDon;
     const [data, setData] = useState(null)
     const [formData, setFormData] = useState({ loading: false })
 
@@ -72,7 +72,7 @@ export default function testing() {
 
                     <div className="d-flex justify-content-between">
                         <button className="btn btn-primary mb-0" onClick={(e) => window.history.back()}>Quay lại</button>
-                        <h3 className="flex align-middle"><span className="text-lg mt-1"><span className="font-bold">Mã đơn: </span> {data.IDXe.IDXe} - </span><span className="ml-1 mr-1">Chi tiết đơn</span></h3>
+                        <h3 className="flex align-middle"><span className="text-lg mt-1"><span className="font-bold">Mã đơn: </span> {data.IDDon} - </span><span className="ml-1 mr-1">Đơn thuê xe</span></h3>
                     </div>
 
                     {/*Thanh Sidebar*/}
@@ -128,7 +128,7 @@ export default function testing() {
                                         </div>
 
 
-                                        <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, setCMNDImage, setLicenseImage)}>
+                                        <form onSubmit={(e) => handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, navigate, data.IDXe.SoTien * numberOfDay * 0.5)}>
                                             < div className="card-body mt-0">
 
                                                 <div className="form-group col mt-0 ">
@@ -218,17 +218,16 @@ export default function testing() {
                                                 <div className="form-group row mt-0">
                                                     <div className="col">
                                                         <label className="form-label">Ngày bắt đầu</label>
-                                                        <input className="form-control" type="date" autoComplete="off" defaultValue={formData.NgayBatDau} name="NgayBatDau" disabled />
+                                                        <input className="form-control" type="date" autoComplete="off" defaultValue={formData.NgayBatDau} disabled />
                                                     </div>
 
                                                     <div className="col">
                                                         <label className="form-label">Ngày kết thúc</label>
-                                                        <input className="form-control" type="date" autoComplete="off" defaultValue={formData.NgayKetThuc} name="NgayKetThuc" onChange={Input} />
+                                                        <input className="form-control" type="date" autoComplete="off" defaultValue={formData.NgayKetThuc} disabled />
                                                     </div>
                                                 </div>
 
                                                 <label className="form-label mt-3">Hoá đơn</label>
-
                                                 <div className="form-group row mt-0">
                                                     <hr></hr>
                                                     <p className="col">Đơn giá 1 ngày</p>
@@ -238,11 +237,32 @@ export default function testing() {
                                                     <p className="col">{data.IDXe.SoTien.toLocaleString('vi-VN')} đ x {numberOfDay} ngày</p>
                                                     <hr></hr>
                                                     <h5 className="col font-bold">Tổng cộng</h5>
-                                                    <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay).toLocaleString('vi-VN')}đ</p>
+                                                    <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay).toLocaleString('vi-VN')} đ</p>
                                                     <hr></hr>
-                                                    <p className="col">Số tiền khách đã trả</p>
-                                                    <p className="col">{(formData.KhachTra).toLocaleString('vi-VN')} đ</p>
+                                                    <p className="col">{"Phí cọc (50%)"}</p>
+                                                    <p className="col">{(data.IDXe.SoTien * numberOfDay * 0.5).toLocaleString('vi-VN')} đ</p>
                                                     <p></p>
+
+                                                    <div className="row">
+                                                        <p className="col">Khách trả</p>
+
+                                                        <div className="flex align-middle col">
+                                                            <input className="flex form-control" style={{ width: "95%" }} type="number" min={0} autoComplete="off" name="KhachTra" defaultValue={0} onChange={Input} /> <span className="mx-2"> đ</span>
+                                                        </div>
+                                                    </div>
+                                                    <hr className="mt-2"></hr>
+
+
+                                                    <div>
+                                                        {data.IDXe.SoTien * numberOfDay * 0.5 - formData.KhachTra > 0 ?
+                                                            <div className="row">
+                                                                <p className="col">Tiền cọc còn lại</p>
+                                                                <p className="col">{(data.IDXe.SoTien * numberOfDay * 0.5 - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
+                                                            </div> :
+                                                            <div />
+                                                        }
+                                                    </div>
+
                                                     <div>
                                                         {data.IDXe.SoTien * numberOfDay - formData.KhachTra >= 0 ?
                                                             <div className="row">
@@ -250,23 +270,18 @@ export default function testing() {
                                                                 <p className="col">{(data.IDXe.SoTien * numberOfDay - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
                                                             </div> :
                                                             <div className="row">
-                                                                <p className="col">Còn lại:</p>
-                                                                <p className="col">0 đ</p>
+                                                                <p className="col">Tiền thừa</p>
+                                                                <p className="col">{Math.abs(data.IDXe.SoTien * numberOfDay - formData.KhachTra).toLocaleString('vi-VN')} đ</p>
                                                             </div>
                                                         }
                                                     </div>
                                                 </div>
 
-                                                <div className="form-group row mt-2" >
-                                                    <div className="col">
-                                                        {!inUploadProgress ?
-                                                            <button type="submit" className="btn btn-success w-100">Lưu</button> :
-                                                            <button className="btn btn-secondary w-100">Đang lưu dữ liệu</button>
-                                                        }
-                                                    </div>
-                                                    <div className="col">
-                                                        <button type="button" className="btn btn-danger w-100" onClick={(e) => navigate(`/Rent/Checkout/${data._id}`)}>Trả xe</button>
-                                                    </div>
+                                                <div className="form-group">
+                                                    {!inUploadProgress ?
+                                                        <button type="submit" className="btn btn-success row mb-2" style={{ width: "100%" }}>Tạo đơn</button> :
+                                                        <button type="submit" className="btn btn-secondary row mb-2" style={{ width: "100%" }}>Đang xử lý dữ liệu</button>
+                                                    }
                                                 </div>
                                             </div>
                                         </form>

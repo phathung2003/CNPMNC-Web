@@ -22,10 +22,17 @@ export default defineConfig({
     'process.env.VITE_API_CUSTOMER_EDIT': JSON.stringify(process.env.VITE_API_CUSTOMER_EDIT),
     'process.env.VITE_API_CUSTOMER_MAIN': JSON.stringify(process.env.VITE_API_CUSTOMER_MAIN),
 
+    'process.env.VITE_API_RENT_MAIN': JSON.stringify(process.env.VITE_API_RENT_MAIN),
     'process.env.VITE_API_RENT_ADD': JSON.stringify(process.env.VITE_API_RENT_ADD),
     'process.env.VITE_API_RENT_EDIT': JSON.stringify(process.env.VITE_API_RENT_EDIT),
     'process.env.VITE_API_RENT_CHECKOUT': JSON.stringify(process.env.VITE_API_RENT_CHECKOUT),
 
-    'process.env.VITE_API_RENT_DETAIL': JSON.stringify(process.env.VITE_API_RENT_DETAIL)
+    'process.env.VITE_API_RENT_DETAIL': JSON.stringify(process.env.VITE_API_RENT_DETAIL),
+
+    'process.env.VITE_API_BOOK_ADD': JSON.stringify(process.env.VITE_API_BOOK_ADD),
+    'process.env.VITE_API_BOOK_EDIT': JSON.stringify(process.env.VITE_API_BOOK_EDIT),
+    'process.env.VITE_API_BOOK_CANCEL': JSON.stringify(process.env.VITE_API_BOOK_CANCEL),
+    'process.env.VITE_API_BOOK_CREATE_RENT': JSON.stringify(process.env.VITE_API_BOOK_CREATE_RENT),
+    'process.env.VITE_API_BOOK_DETAIL': JSON.stringify(process.env.VITE_API_BOOK_DETAIL)
   }
 })

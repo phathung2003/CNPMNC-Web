@@ -41,6 +41,9 @@ function getUri(type) {
         case 'CustomerMain':
             return [import.meta.env.VITE_API_CUSTOMER_MAIN];
 
+        //Sổ xe
+        case 'RentMain':
+            return [import.meta.env.VITE_API_RENT_MAIN];
         case 'RentAdd':
             return [import.meta.env.VITE_API_RENT_ADD];
         case 'RentEdit':
@@ -50,6 +53,19 @@ function getUri(type) {
 
         case 'RentDetail':
             return [import.meta.env.VITE_API_RENT_DETAIL];
+
+        //Sổ đặt xe
+        case 'BookAdd':
+            return [import.meta.env.VITE_API_BOOK_ADD];
+        case 'BookEdit':
+            return [import.meta.env.VITE_API_BOOK_EDIT];
+        case 'BookCancel':
+            return [import.meta.env.VITE_API_BOOK_CANCEL];
+        case 'BookCreateRent':
+            return [import.meta.env.VITE_API_BOOK_CREATE_RENT];
+        case 'BookDetail':
+            return [import.meta.env.VITE_API_BOOK_DETAIL];
+            
         default:
             return null;
     }

@@ -4,16 +4,16 @@ import SearchIcon from '@mui/icons-material/Search';
 
 import "../../css/table.css"
 import Data from "../../backend/CarManager/View/carMain"
-import Delete from "../../backend/CarManager/Post/carDelete";
-import SearchData from "../../backend/CarManager/searchCar"
+import SearchData from "../../backend/RentManager/searchRentCar"
 
 export default function Info() {
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
     var carList = SearchData(Data(), search);
+
     return (
         <div>
-            <h2>Quản lý xe</h2>
+            <h2>Quản lý sổ đặt xe</h2>
             <div className="d-flex justify-content-between mb-3">
                 <div className="row">
                     <div className="input-group">
@@ -31,8 +31,10 @@ export default function Info() {
                 </div>
 
                 <div className="d-flex justify-content-end">
-                    <button className="btn btn-success" onClick={(e) => navigate("/Car/Add")}>Thêm xe</button>
+                    <h3>Chọn xe bạn muốn đặt</h3>
                 </div>
+                <div></div>
+                <div><button className="btn btn-primary mb-0" onClick={(e) => window.history.back()}>Quay lại</button></div>
             </div>
 
             <div id="table-scroll" className="table-scroll">
@@ -50,16 +52,15 @@ export default function Info() {
 
                     <tbody>
                         {
-                            carList.length != 0 ? carList.map(info => {
+                            carList.length != 0 ? carList.map((info) => {
                                 return <tr key={info._id}>
                                     <td align="center" style={{ width: "5%" }}>{info.IDXe}</td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhAnh}`}></img></td>
                                     <td style={{ textAlign: "center" }}>{info.BienSo}</td>
                                     <td style={{ textAlign: "center" }}>{info.SoCho}</td>
                                     <td style={{ textAlign: "center" }}>{info.TinhTrang}</td>
-                                    <td>
-                                        <button className="btn btn-primary" onClick={(e) => navigate(`/Car/Detail/${info._id}`, { state: info })}>Chi tiết</button>
-                                        {info.TinhTrang != "Đang thuê" ? <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.HinhAnh)}>Xoá bài</button> : <div />}
+                                    <td style={{ width: "8vw" }}>
+                                        <button className="btn btn-success" onClick={(e) => navigate(`/Book/Add/${info._id}`)}>Đặt đơn</button>
                                     </td>
                                 </tr>
                             }) : <tr><td colSpan={6} height={100} className='text-center text-2xl font-bold bg-transparent'>Hiện tại chưa có xe nào !</td></tr>

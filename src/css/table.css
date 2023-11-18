@@ -20,7 +20,7 @@ html {
   margin: auto;
   margin-left: 0;
   overflow: auto;
-  max-height: 580px;
+  max-height: 80vh;
 }
 
 .table-scroll table {
@@ -85,7 +85,7 @@ tfoot th:first-child {
 }
 
 .img {
-  width: 100px;
-  height: 100px;
-  object-fit: scale-down;
+  width: 200px;
+  height: 150px;
+  object-fit: fill;
 }
