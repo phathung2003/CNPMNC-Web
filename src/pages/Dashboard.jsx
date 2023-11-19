@@ -30,140 +30,122 @@ import RentAdd from './RentManager/RentAdd'
 import RentDetail from './RentManager/RentDetail'
 import RentCheckout from './RentManager/RentCheckout'
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Drawer() {
-    const [showMenu, setShowMenu] = useState(false);
-    const [showList, setShowList] = useState(false);
 
-    const handleArrowClick = () => {
-        setShowMenu(!showMenu);
-    };
+    //Thu nhỏ thanh (Có lưu biến tạm [localStorage.getItem*=('Tên biến') === 'Gía trị ngược với mình muốn'])
+    const [showMenu, setShowMenu] = useState(localStorage.getItem('showMenu') === 'true');
+    useEffect(() => { localStorage.setItem('showMenu', showMenu); }, [showMenu]);
+    const handleArrowClick = () => { setShowMenu(!showMenu); };
+    const sidebarclassName = showMenu ? 'sidebar close' : 'sidebar';
+    const handleSidebarToggle = () => { setShowMenu((prevShowMenu) => !prevShowMenu); };
+    const menuBtnclassName = showMenu ? <MenuOpenIcon style={{ transform: "rotate(-180deg)", transition: "all 0.5s ease" }} /> : <MenuOpenIcon style={{ transition: "all 0.5s ease" }} />;
 
-    const handleListClick = () => {
-        setShowList(!showList);
-    };
 
-    const handleSidebarToggle = () => {
-        setShowMenu((prevShowMenu) => !prevShowMenu);
-    };
+    //Danh sách xe (Có lưu biến tạm [localStorage.getItem*=('Tên biến') === 'Gía trị ngược với mình muốn'])
+    const [showListCar, setShowListCar] = useState(localStorage.getItem('showListCar') === 'true');
+    useEffect(() => { localStorage.setItem('showListCar', showListCar); }, [showListCar]);
+    const handleListCar = () => { setShowListCar(!showListCar); };
+    const dropDownBtnCar = showListCar ? <ArrowIcon style={{ transform: "rotate(-180deg)", transition: "all 0.5s ease" }} /> : <ArrowIcon style={{ transition: "all 0.5s ease" }} />;
+    const ListDropCar = showListCar ? "sub-menu showMenu" : "sub-menu"
 
-    const menuBtnClass = showMenu ? <MenuOpenIcon style={{ transform: "rotate(-180deg)", transition: "all 0.5s ease" }} /> : <MenuOpenIcon style={{ transition: "all 0.5s ease" }} />;
-
-    const dropDownBtnClass = showList ? <ArrowIcon style={{ transform: "rotate(-180deg)", transition: "all 0.5s ease" }} /> : <ArrowIcon style={{ transition: "all 0.5s ease" }} />;
-    const ListDrop = showList ? "sub-menu showMenu" : "sub-menu"
-    const sidebarClass = showMenu ? 'sidebar close' : 'sidebar';
+    //Sổ xe (Có lưu biến tạm [localStorage.getItem*=('Tên biến') === 'Gía trị ngược với mình muốn'])
+    const [showListBook, setShowListBook] = useState(localStorage.getItem('showListBook') === 'true');
+    useEffect(() => { localStorage.setItem('showListBook', showListBook); }, [showListBook]);
+    const handleListBook = () => { setShowListBook(!showListBook); };
+    const dropDownBtnBook = showListBook ? <ArrowIcon style={{ transform: "rotate(-180deg)", transition: "all 0.5s ease" }} /> : <ArrowIcon style={{ transition: "all 0.5s ease" }} />;
+    const ListDropBook = showListBook ? "sub-menu showMenu" : "sub-menu"
 
     return (
         <div>
-            <div className={sidebarClass}>
+            <div className={sidebarclassName}>
 
-                <div class="logo-content">
-                    <div class="logo">
+                <div className="logo-content">
+                    <div className="logo">
                         <img src={Logo} id="logoImg" />
                     </div>
-                    <button id="btn" onClick={handleSidebarToggle}><i>{menuBtnClass}</i></button>
+                    <button id="btn" onClick={handleSidebarToggle}><i>{menuBtnclassName}</i></button>
                 </div>
 
+
                 <ul className="nav-links">
+
+
                     <li>
                         <div className="icon-link">
                             <div className="link">
-                                <Link to="/Car">
-                                    <i><CarIcon /></i>
-                                    <span className="link_name">Quản lý xe</span>
+                                <Link to="/">
+                                    <i><DashboardIcon /></i>
+                                    <span className="link_name">Trang điều khiển</span>
                                 </Link>
                             </div>
                         </div>
 
                         <ul className="sub-menu">
-                            <li><a className="link_name" href="/Car">Quản lý xe</a></li>
+                            <li><a className="link_name" href="/">Trang điều khiển</a></li>
                         </ul>
                     </li>
 
 
-
-
-
-
-
+                    {/*Quản lý xe*/}
                     <li>
-
-                        <div class="icon-link">
-                            <div class="link">
-                                <a href="#">
-                                    <i class='bx bxs-calendar-event'></i>
-                                    <span class="link_name">Sự kiện</span>
+                        <div className="icon-link">
+                            <div className="link">
+                                <a href="/Car">
+                                    <i><CarIcon /></i>
+                                    <span className="link_name">Quản lý xe</span>
                                 </a>
                             </div>
 
-                            <i className="showMenu" onClick={handleListClick}>{dropDownBtnClass}</i>
+                            <i className="arrow" onClick={handleListCar}>{dropDownBtnCar}</i>
                         </div>
 
 
-                        <ul className={ListDrop}>
-                            <li className="showMenu"><a class="link_name" href="#">Sự kiện</a></li>
-                            <li className="showMenu"><a href="#">Chưa duyệt</a></li>
-                            <li className="showMenu"><a href="#">Đã duyệt</a></li>
-                        </ul>
-
-                    </li>
-
-
-
-
-
-
-
-
-                    <li>
-                        <div className="icon-link">
-                            <div className="link">
-                                <Link to="/Car">
-                                    <i><CarIcon /></i>
-                                    <span className="link_name">Quản lý xe</span>
-                                </Link>
-                            </div>
-                        </div>
-
-                        <ul className="sub-menu">
-                            <li><a className="link_name" href="/Car">Quản lý xe</a></li>
-                            <li><a href="/Car">Quản lý xe</a></li>
+                        <ul className={ListDropCar}>
+                            <li className="showMenu"><a className="link_name" href="/Car">Quản lý xe</a></li>
+                            <li className="showMenu"><a href="/Car">Trang chủ</a></li>
+                            <li className="showMenu"><a href="/Car/Add">Thêm xe</a></li>
                         </ul>
                     </li>
 
-
+                    {/*Sổ đặt xe*/}
                     <li>
                         <div className="icon-link">
                             <div className="link">
                                 <a href="/Book">
-
                                     <i><PreOrderIcon /></i>
-
                                     <span className="link_name">Sổ đặt xe</span>
                                 </a>
                             </div>
-                            <i className='bx bxs-chevron-down arrow'></i>
-                        </div >
 
-                        <ul className="sub-menu">
-                            <li><a className="link_name" href="/Book">Sổ đặt xe</a></li>
+                            <i className="arrow" onClick={handleListBook}>{dropDownBtnBook}</i>
+                        </div>
+
+
+                        <ul className={ListDropBook}>
+                            <li className="showMenu"><a className="link_name" href="/Book">Sổ đặt xe</a></li>
+                            <li className="showMenu"><a href="/Book">Trang chủ</a></li>
+                            <li className="showMenu"><a href="Book/Add/ChooseCar">Tạo đơn</a></li>
                         </ul>
                     </li>
 
+
+                    {/*Sổ xe*/}
                     <li>
                         <div className="icon-link">
                             <div className="link">
-                                <a href="/Rent">
+                                <Link to="/Rent">
                                     <i><BookIcon /></i>
                                     <span className="link_name">Sổ xe</span>
-                                </a>
+                                </Link>
                             </div>
-                        </div >
+                        </div>
 
-                        <ul className="sub-menu" >
-                            <li><a className="link_name" href="/Rent">Sổ xe</a></li >
+                        <ul className="sub-menu">
+                            <li><a className="link_name" href="/Rent">Sổ xe</a></li>
                         </ul>
-                    </li >
+                    </li>
                 </ul >
 
                 <div className="profile-content">
