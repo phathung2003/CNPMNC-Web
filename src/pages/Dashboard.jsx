@@ -1,8 +1,10 @@
 import "../css/Dashboard.css"
 import { Link, Route, Routes } from "react-router-dom";
 import { IconButton } from "@mui/material";
-
 import Logo from "../assets/images/Logo_DarkMode.png"
+
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import ArrowIcon from '@mui/icons-material/ArrowDropDown';
 
 import UserIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -27,31 +29,44 @@ import RentMain from './RentManager/RentMain'
 import RentAdd from './RentManager/RentAdd'
 import RentDetail from './RentManager/RentDetail'
 import RentCheckout from './RentManager/RentCheckout'
+import { useState } from "react";
 
 export default function Drawer() {
+    const [showMenu, setShowMenu] = useState(false);
+    const [showList, setShowList] = useState(false);
+
+    const handleArrowClick = () => {
+        setShowMenu(!showMenu);
+    };
+
+    const handleListClick = () => {
+        setShowList(!showList);
+    };
+
+    const handleSidebarToggle = () => {
+        setShowMenu((prevShowMenu) => !prevShowMenu);
+    };
+
+    const menuBtnClass = showMenu ? <MenuOpenIcon style={{ transform: "rotate(-180deg)", transition: "all 0.5s ease" }} /> : <MenuOpenIcon style={{ transition: "all 0.5s ease" }} />;
+
+    const dropDownBtnClass = showList ? <ArrowIcon style={{ transform: "rotate(-180deg)", transition: "all 0.5s ease" }} /> : <ArrowIcon style={{ transition: "all 0.5s ease" }} />;
+    const ListDrop = showList ? "sub-menu showMenu" : "sub-menu"
+    const sidebarClass = showMenu ? 'sidebar close' : 'sidebar';
+
     return (
         <div>
-            <div className="sidebar">
-                <div className="logo-content">
-                    <div className="logo">
+            <div className={sidebarClass}>
+
+                <div class="logo-content">
+                    <div class="logo">
                         <img src={Logo} id="logoImg" />
                     </div>
+                    <button id="btn" onClick={handleSidebarToggle}><i>{menuBtnClass}</i></button>
                 </div>
 
                 <ul className="nav-links">
-                    <li> <a href="/Dashboard">
-                        <i><DashboardIcon /></i>
-                        <span className="link_name">Thanh điều khiển</span>
-                    </a>
-
-                        <ul className="sub-menu blank">
-                            <li><a className="link_name" href="#">Thanh điều khiển</a></li>
-                        </ul>
-                    </li>
-
-
                     <li>
-                        <div className="iocn-link">
+                        <div className="icon-link">
                             <div className="link">
                                 <Link to="/Car">
                                     <i><CarIcon /></i>
@@ -66,8 +81,59 @@ export default function Drawer() {
                     </li>
 
 
+
+
+
+
+
                     <li>
-                        <div className="iocn-link">
+
+                        <div class="icon-link">
+                            <div class="link">
+                                <a href="#">
+                                    <i class='bx bxs-calendar-event'></i>
+                                    <span class="link_name">Sự kiện</span>
+                                </a>
+                            </div>
+
+                            <i className="showMenu" onClick={handleListClick}>{dropDownBtnClass}</i>
+                        </div>
+
+
+                        <ul className={ListDrop}>
+                            <li className="showMenu"><a class="link_name" href="#">Sự kiện</a></li>
+                            <li className="showMenu"><a href="#">Chưa duyệt</a></li>
+                            <li className="showMenu"><a href="#">Đã duyệt</a></li>
+                        </ul>
+
+                    </li>
+
+
+
+
+
+
+
+
+                    <li>
+                        <div className="icon-link">
+                            <div className="link">
+                                <Link to="/Car">
+                                    <i><CarIcon /></i>
+                                    <span className="link_name">Quản lý xe</span>
+                                </Link>
+                            </div>
+                        </div>
+
+                        <ul className="sub-menu">
+                            <li><a className="link_name" href="/Car">Quản lý xe</a></li>
+                            <li><a href="/Car">Quản lý xe</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <div className="icon-link">
                             <div className="link">
                                 <a href="/Book">
 
@@ -85,7 +151,7 @@ export default function Drawer() {
                     </li>
 
                     <li>
-                        <div className="iocn-link">
+                        <div className="icon-link">
                             <div className="link">
                                 <a href="/Rent">
                                     <i><BookIcon /></i>
@@ -149,6 +215,6 @@ export default function Drawer() {
                     <Route path="/Rent/Checkout/:id" element={<RentCheckout />} />
                 </Routes>
             </div>
-        </div>
+        </div >
     );
 }

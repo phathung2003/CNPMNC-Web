@@ -3,9 +3,6 @@ const router = express.Router();
 
 const KhachHangModel = require("../models/KhachHang");
 
-const mongoose = require("mongoose");
-const params = require('params');
-
 router.post('/CustomerAdd/', async (req,res) => {
     await KhachHangModel.create(req.body)
     .then((KhachHangInfo) => res.json({success: true, msg: `${KhachHangInfo._id}`}))

@@ -5,7 +5,6 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
-import "../../css/searchRecommend.css"
 
 import handleSubmit from "../../backend/BookManager/View/BookAdd";
 import convertToBase64 from "../../backend/Feature/convertToBase64"

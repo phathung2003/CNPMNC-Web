@@ -13,8 +13,8 @@ export default function Info() {
 
     return (
         <div>
-            <h2>Quản lý sổ xe</h2>
-            <div className="d-flex justify-content-between mb-3">
+
+            <div className="d-flex justify-content-between mb-5">
                 <div className="row">
                     <div className="input-group">
 
@@ -22,7 +22,8 @@ export default function Info() {
                             <input type="text" className="form-control border border-secondary" placeholder="Tìm kiếm" onChange={(e) => setSearch(e.target.value.toLowerCase())} />
                         </div>
                         <div>
-                            <button className="btn btn-primary" type="submit">
+                            <button className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-xl px-5 py-1.5 text-center me-2 mb-2 "
+                                type="submit">
                                 <i><SearchIcon /></i>
                             </button>
                         </div>
@@ -30,13 +31,16 @@ export default function Info() {
                     </div>
                 </div>
 
+                <h2 className='text-center uppercase text-4xl font-bold  text-black md:text-3xl lg:text-4xl dark:text-white d-flex justify-content-center'>Quản lý sổ xe</h2>
+
                 <div className="d-flex justify-content-end">
                     {/* <button className="btn btn-success" onClick={(e) => navigate("/CarAdd")}>Thêm xe</button> */}
                 </div>
+                <div />
             </div>
 
             <div id="table-scroll" className="table-scroll">
-                <table id="main-table" className="main-table" style={{ width: "100%" }}>
+                <table id="main-table" className="main-table">
                     <thead>
                         <tr style={{ textAlign: "center" }}>
                             <th>ID</th>
@@ -48,21 +52,30 @@ export default function Info() {
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody className='text-base'>
                         {
                             carList.length != 0 ? carList.map((info) => {
                                 return <tr key={info._id}>
-                                    <td align="center" style={{ width: "5%" }}>{info.IDXe}</td>
-                                    <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhAnh}`}></img></td>
-                                    <td style={{ textAlign: "center" }}>{info.BienSo}</td>
-                                    <td style={{ textAlign: "center" }}>{info.SoCho}</td>
-                                    <td style={{ textAlign: "center" }}>{info.TinhTrang}</td>
+                                    <td align="center" style={{ width: "8vw", backgroundColor: '#fff' }}>{info.IDXe}</td>
+                                    <td align="center" style={{ verticalAlign: "middle", width: "20vw" }}><img src={`${info.HinhAnh}`}></img></td>
+                                    <td style={{ textAlign: "center", width: '10vw' }}>{info.BienSo}</td>
+                                    <td style={{ textAlign: "center", width: '5vw' }}>{info.SoCho} chỗ</td>
+                                    <td style={{ textAlign: "center", width: '7vw' }}>{info.TinhTrang}</td>
                                     <td>
                                         {info.TinhTrang == "Còn trống" ?
-                                            <button className="btn btn-success" onClick={(e) => navigate(`/Rent/Add/${info._id}`, { state: info })}>Làm đơn</button> :
+                                            <button className="text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-base px-4 py-3 text-center me-2 mb-2"
+                                                onClick={(e) => navigate(`/Rent/Add/${info._id}`, { state: info })}>
+                                                Làm đơn
+                                            </button> :
                                             <div>
-                                                <button className="btn btn-primary" onClick={(e) => navigate(`/Rent/Detail/${info.IDDon}`)}>Chi tiết</button>
-                                                <button className="btn btn-danger ml-2" onClick={(e) => navigate(`/Rent/Checkout/${info.IDDon}`)}>Trả xe</button>
+                                                <button className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-base px-5 py-3 text-center me-2 mb-2 "
+                                                    onClick={(e) => navigate(`/Rent/Detail/${info.IDDon}`)}>
+                                                    Chi tiết
+                                                </button>
+                                                <button className="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-base px-5 py-3 text-center me-2 mb-2"
+                                                    onClick={(e) => navigate(`/Rent/Checkout/${info.IDDon}`)}>
+                                                    Trả xe
+                                                </button>
                                             </div>
                                         }
                                     </td>

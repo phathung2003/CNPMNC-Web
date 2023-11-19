@@ -21,6 +21,7 @@ html {
   margin-left: 0;
   overflow: auto;
   max-height: 80vh;
+  border-radius: 10px;
 }
 
 .table-scroll table {
@@ -37,7 +38,7 @@ html {
 .table-scroll th,
 .table-scroll td {
   padding: 5px 10px;
-  border: 1px solid #000;
+  /* border: 1px solid #000; */
   background: #fff;
   vertical-align: middle;
 }
@@ -76,16 +77,18 @@ td:first-child {
   position: sticky;
   left: 0;
   z-index: 3;
-  background: #ccc;
+  //background: #fff;
+}
+
+td img {
+  vertical-align: middle;
+  width: 15vw;
+  height: 9vw;
+  object-fit: fill;
+  border-radius: 10px;
 }
 
 thead th:first-child,
 tfoot th:first-child {
   z-index: 5;
-}
-
-.img {
-  width: 200px;
-  height: 150px;
-  object-fit: fill;
 }
