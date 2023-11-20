@@ -1,7 +1,7 @@
-import "../css/Dashboard.css"
+import "../../css/Dashboard.css"
 import { Link, Route, Routes } from "react-router-dom";
 import { IconButton } from "@mui/material";
-import Logo from "../assets/images/Logo_DarkMode.png"
+import Logo from "../../assets/images/Logo_DarkMode.png"
 
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import ArrowIcon from '@mui/icons-material/ArrowDropDown';
@@ -15,20 +15,22 @@ import BookIcon from '@mui/icons-material/CarRental';
 
 // import Test from './test/test'
 
-import CarMain from './CarManager/MainCar'
-import CarAdd from './CarManager/AddCar'
-import CarEdit from './CarManager/DetailCar'
+import DashboardMain from './Main'
 
-import BookMain from './BookManager/BookMain'
-import BookChooseCar from './BookManager/BookChooseCar'
-import BookAdd from './BookManager/BookAdd'
-import BookDetail from './BookManager/BookDetail'
-import BookCreateRent from './BookManager/BookCreateRent'
+import CarMain from '../CarManager/MainCar'
+import CarAdd from '../CarManager/AddCar'
+import CarEdit from '../CarManager/DetailCar'
 
-import RentMain from './RentManager/RentMain'
-import RentAdd from './RentManager/RentAdd'
-import RentDetail from './RentManager/RentDetail'
-import RentCheckout from './RentManager/RentCheckout'
+import BookMain from '../BookManager/BookMain'
+import BookChooseCar from '../BookManager/BookChooseCar'
+import BookAdd from '../BookManager/BookAdd'
+import BookDetail from '../BookManager/BookDetail'
+import BookCreateRent from '../BookManager/BookCreateRent'
+
+import RentMain from '../RentManager/RentMain'
+import RentAdd from '../RentManager/RentAdd'
+import RentDetail from '../RentManager/RentDetail'
+import RentCheckout from '../RentManager/RentCheckout'
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -180,7 +182,7 @@ export default function Drawer() {
 
             <div className="home-content">
                 <Routes>
-                    <Route path="/" element={<p className="text-3xl font-bold underline">Trang Chủ</p>} />
+                    <Route path="/" element={<DashboardMain />} />
                     <Route path="/Car" element={<CarMain />} />
                     <Route path="/Car/Add" element={<CarAdd />} />
                     <Route path="/Car/Detail/:id" element={<CarEdit />} />

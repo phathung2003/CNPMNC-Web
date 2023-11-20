@@ -32,6 +32,9 @@ export default async function fetchData(IDXe, IDDon, setData, setFormData, setCM
             KhachTra: data.KhachTra,
             TinhTrang: data.TinhTrang,
 
+            SoLuong: 0,
+            SLDatTruoc: 0,
+
             loading: true,
         });
         setCMNDImage(`${data.IDKH.HinhCMND}`);

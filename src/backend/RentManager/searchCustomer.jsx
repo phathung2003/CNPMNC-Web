@@ -1,7 +1,8 @@
 export default function Search(customerList, search) {
-    var search = customerList.filter((item) => {
+    search = search.toUpperCase();
 
-        return String(item.IDKH).includes(search) ||
+    var search = customerList.filter((item) => {
+        return item.IDKH.includes(search) ||
             item.TenKH.includes(search) ||
             item.SoDienThoai.includes(search) ||
             item.CMND.includes(search) ||

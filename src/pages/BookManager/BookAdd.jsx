@@ -12,7 +12,7 @@ import convertToBase64 from "../../backend/Feature/convertToBase64"
 import fetchData from "../../backend/BookManager/Fetch/fetchData"
 import fetchRentData from "../../backend/BookManager/Fetch/fetchRent"
 
-import customerData from "../../backend/RentManager/GET/getCustomer"
+import customerData from "../../backend/RentManager/Get/getCustomer"
 
 import SearchData from "../../backend/RentManager/searchCustomer"
 
@@ -90,7 +90,7 @@ export default function RentAdd() {
                 ["_idKH"]: data._id,
                 ["IDKH"]: data.IDKH,
                 ["TenKH"]: data.TenKH,
-                ["NgaySinh"]: `${format(data.NgaySinh, "yyyy-MM-dd")}`,
+                ["NgaySinh"]: `${data.NgaySinh != null ? format(data.NgaySinh, "yyyy-MM-dd") : ""}`,
                 ["DiaChi"]: data.DiaChi,
                 ["SoDienThoai"]: data.SoDienThoai,
                 ["CMND"]: data.CMND,

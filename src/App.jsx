@@ -2,7 +2,7 @@ import { Routes, Route, Link } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Main from './pages/test/main'
-import Dashboard from "./pages/Dashboard"
+import Dashboard from "./pages/Dashboard/Dashboard"
 
 const testing = true
 export default function App() {

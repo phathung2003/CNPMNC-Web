@@ -1,6 +1,7 @@
 import uploadImage from "../../Feature/uploadPicture"
 import pushToDatabase from "../Post/uploadCar";
 import DeletePicture from '../../Feature/deletePicture';
+import IDGenerate from "../../Setting/getID";
 
 export default async function handleSubmit(e, formData, image, setFile, setProgress, inUploadProgress, setInUploadProgress) {
     e.preventDefault();
@@ -18,9 +19,18 @@ export default async function handleSubmit(e, formData, image, setFile, setProgr
                 await DeletePicture(newUrl)
         }
 
+
         formData.ID = formData._id;
+
+        if (formData.SoChoTemp != formData.SoCho) {
+            var [ID, Current] = await IDGenerate(formData.SoCho);
+            formData.IDXe = ID;
+            formData.SoLuong = Current;
+        }
+
         await pushToDatabase("CarEdit", formData)
         setProgress(undefined);
         setInUploadProgress(false);
+        window.location.reload(false);
     }
 }

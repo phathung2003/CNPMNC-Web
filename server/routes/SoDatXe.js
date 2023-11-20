@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const CaiDatModel = require("../models/CaiDat")
+const ObjectIdCaiDat = "655aae7e837397ecacd19930";
+
 const SoXeModel = require('../models/SoXe');
 const XeModel = require("../models/Xe");
 const KhachHangModel = require("../models/KhachHang");
@@ -8,6 +11,18 @@ const KhachHangModel = require("../models/KhachHang");
 const mongoose = require("mongoose");
 const params = require('params');
 const ObjectId = mongoose.Types.ObjectId;
+
+router.post('/BookAdd/:IDXe//:SLDon/:SLDatTruoc', async (req,res) => {
+    try{
+
+        await SoXeModel.create(req.body).then((e) => res.json({success: true, msg: e._id}))
+
+        if(req.params.SLDon > 0 && req.params.SLDatTruoc > 0){
+            await CaiDatModel.updateOne({_id : ObjectIdCaiDat},{$set: {SLDon: req.params.SLDon, SLDonDatTruoc: req.params.SLDatTruoc}})
+        }
+    }
+    catch{() => {res.json({ success: false, msg: 'Tạo đơn đặt trước xe thất bại. Vui lòng thử lại sau !' })}}
+})
 
 router.get('/BookDetail/:IDXe/:IDDon', async (req,res) => {
     const info = await SoXeModel.find({ 
@@ -24,15 +39,7 @@ router.get('/BookDetail/:IDXe/', async (req,res) => {
     // .catch(err => res.json(err))
 })
 
-router.post('/BookAdd/:IDXe/', async (req,res) => {
-    try{
-        await SoXeModel.create(req.body)
-        .then((e) => res.json({success: true, msg: e._id}))
-    }
-    catch{() => {res.json({ success: false, msg: 'Tạo đơn đặt trước xe thất bại. Vui lòng thử lại sau !' })}}
-})
-
-router.post('/BookEdit/:IDXe/:IDDon', async (req,res) => {
+router.post('/BookEdit/:IDXe/:IDDon/:SLDon', async (req,res) => {
     const {NgayBatDau, NgayKetThuc,TinhTrang} = req.body;
 
     await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{

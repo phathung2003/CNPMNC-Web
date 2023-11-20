@@ -3,7 +3,7 @@ export default function Search(carList, search) {
         if (search === "") return item.TinhTrang !== "Tạm ngừng";
 
         return item.TinhTrang !== "Tạm ngừng" &&
-            String(item.IDXe).includes(search) ||
+            item.IDXe.includes(search) ||
             item.TenXe.toLowerCase().includes(search) ||
             item.BienSo.toLowerCase().includes(search) ||
             String(item.SoCho).includes(search) ||

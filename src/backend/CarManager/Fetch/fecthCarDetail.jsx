@@ -8,7 +8,10 @@ export default async function fetchCar(IDParams, setFormData, setFile, setTemp) 
             IDXe: data.IDXe,
             TenXe: data.TenXe,
             BienSo: data.BienSo,
+
             SoCho: data.SoCho,
+            SoChoTemp: data.SoCho,
+
             TruyenDong: data.TruyenDong,
             NhienLieu: data.NhienLieu,
             MoTa: data.MoTa,
@@ -16,6 +19,8 @@ export default async function fetchCar(IDParams, setFormData, setFile, setTemp) 
             HinhAnh: data.HinhAnh,
             TinhTrang: data.TinhTrang,
             IDDon: data.IDDon,
+
+            SoLuong: 0,
 
             loading: true
         })

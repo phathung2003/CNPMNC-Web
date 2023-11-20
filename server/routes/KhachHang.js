@@ -1,15 +1,25 @@
 const express = require('express');
 const router = express.Router();
 
+const CaiDatModel = require("../models/CaiDat")
+const ObjectIdCaiDat = "655aae7e837397ecacd19930";
+
 const KhachHangModel = require("../models/KhachHang");
 
-router.post('/CustomerAdd/', async (req,res) => {
-    await KhachHangModel.create(req.body)
-    .then((KhachHangInfo) => res.json({success: true, msg: `${KhachHangInfo._id}`}))
-    .catch(() => res.json({ success: false, msg: 'Thêm khách hàng thất bại. Vui lòng thử lại sau !' }))
+router.post('/CustomerAdd//:SoLuong', async (req,res) => {
+
+    try{
+        await KhachHangModel.create(req.body).then((KhachHangInfo) => res.json({success: true, msg: `${KhachHangInfo._id}`}))
+        
+        if(req.params.SoLuong > 0){
+            await CaiDatModel.updateOne({_id : ObjectIdCaiDat},{$set: {SLKhachHang: req.params.SoLuong}})
+        }
+    }
+
+    catch{res.json({ success: false, msg: 'Thêm khách hàng thất bại. Vui lòng thử lại sau !' })}
 })
 
-router.post('/CustomerEdit/:ID', async (req,res) => {
+router.post('/CustomerEdit/:ID/:SoLuong', async (req,res) => {
     const {TenKH, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND, BangLai, HinhBangLai} = req.body;
 
     await KhachHangModel.updateOne({ _id : `${req.params.ID}`},{
