@@ -15,6 +15,6 @@
     {"src": "/Rent","dest": "/RentMain"},
     { "src": "/Rent/Add/(?<id>[^/]*)", "dest": "/RentAdd?id=$id" },
     { "src": "/Rent/Detail/(?<id>[^/]*)", "dest": "/RentDetail?id=$id" },
-    { "src": "/Rent/Checkout/(?<id>[^/]*)", "dest": "/RentCheckout?id=$id" },
+    { "src": "/Rent/Checkout/(?<id>[^/]*)", "dest": "/RentCheckout?id=$id" }
   ]
 }
