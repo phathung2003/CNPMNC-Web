@@ -1,19 +1,56 @@
 {
-  "rewrites": [
-    { "source": "^/$", "destination": "/DashboardMain" },
-    { "source": "^/Car$", "destination": "/CarMain" },
-    { "source": "^/Car/Add$", "destination": "/CarAdd" },
-    { "source": "^/Car/Detail/([^/]+)$", "destination": "/CarEdit" },
-
-    { "source": "^/Book$", "destination": "/BookMain" },
-    { "source": "^/Book/Add/ChooseCar$", "destination": "/BookChooseCar" },
-    { "source": "^/Book/Add/([^/]+)$", "destination": "/BookAdd" },
-    { "source": "^/Book/Detail/([^/]+)/([^/]+)$", "destination": "/BookDetail" },
-    { "source": "^/Book/Create/([^/]+)$", "destination": "/BookCreateRent" },
-
-    { "source": "^/Rent$", "destination": "/RentMain" },
-    { "source": "^/Rent/Add/([^/]+)$", "destination": "/RentAdd" },
-    { "source": "^/Rent/Detail/([^/]+)$", "destination": "/RentDetail" },
-    { "source": "^/Rent/Checkout/([^/]+)$", "destination": "/RentCheckout" }
+  "routes": [
+    {
+      "src": "/",
+      "element": "DashboardMain"
+    },
+    {
+      "src": "/Car",
+      "element": "CarMain"
+    },
+    {
+      "src": "/Car/Add",
+      "element": "CarAdd"
+    },
+    {
+      "src": "/Car/Detail/:id",
+      "element": "CarEdit"
+    },
+    {
+      "src": "/Book",
+      "element": "BookMain"
+    },
+    {
+      "src": "/Book/Add/ChooseCar",
+      "element": "BookChooseCar"
+    },
+    {
+      "src": "/Book/Add/:id",
+      "element": "BookAdd"
+    },
+    {
+      "src": "/Book/Detail/:IDXe/:IDDon",
+      "element": "BookDetail"
+    },
+    {
+      "src": "/Book/Create/:IDDon",
+      "element": "BookCreateRent"
+    },
+    {
+      "src": "/Rent",
+      "element": "RentMain"
+    },
+    {
+      "src": "/Rent/Add/:id",
+      "element": "RentAdd"
+    },
+    {
+      "src": "/Rent/Detail/:id",
+      "element": "RentDetail"
+    },
+    {
+      "src": "/Rent/Checkout/:id",
+      "element": "RentCheckout"
+    }
   ]
 }
