@@ -1,4 +1,6 @@
 require('dotenv').config()
+const ObjectId = process.env.OBJECT_ID;
+
 const express = require('express');
 const router = express.Router();
 
@@ -6,9 +8,7 @@ const XeModel = require("../models/Xe");
 const KhachHangModel = require("../models/KhachHang");
 const SoXeModel = require("../models/SoXe");
 const CaiDatModel = require("../models/CaiDat")
-
-const ObjectId = "655aae7e837397ecacd19930";
-
+const LichSuModel = require("../models/LichSu")
 
 router.get('/ResetStatistic/:Password', async (req,res) => {
     if(req.params.Password == process.env.PASSWORD){
@@ -17,6 +17,7 @@ router.get('/ResetStatistic/:Password', async (req,res) => {
             await XeModel.deleteMany()
             await KhachHangModel.deleteMany()
             await SoXeModel.deleteMany()
+            await LichSuModel.deleteMany()
             await CaiDatModel.updateOne({_id : ObjectId},{
                 $set: 
                 {
@@ -40,8 +41,12 @@ router.get('/ResetStatistic/:Password', async (req,res) => {
 })
 
 
-router.get('/CaiDatMain', async (req,res) => {
-    await CaiDatModel.findOne({ _id : ObjectId}).then((info) => res.json(info)).catch(err => res.json(err))
+router.get('/SettingMain', async (req,res) => {
+    try{
+        const data = await CaiDatModel.findOne({ _id : ObjectId})
+        return res.json(data)
+    }
+    catch{(err) => {return res.json(err);}}
 })
 
 

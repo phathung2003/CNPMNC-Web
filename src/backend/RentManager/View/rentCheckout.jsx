@@ -13,8 +13,10 @@ export default async function handleSubmit(e, formData, inUploadProgress, setInU
                     if (payMoney == "")
                         payMoney = 0
 
-                    formData.KhachTra += payMoney
-                    axios.post(`${api}/${formData._idXe}/${formData._idDon}`, formData)
+                    var a = parseInt(formData.KhachTra, 10) + parseInt(payMoney, 10)
+                    formData.KhachTra = a;
+
+                    axios.post(`${api}/${formData._idXe}/${formData._idDon}/${payMoney}`, formData)
                         .then((result) => {
                             alert(result.data.msg)
                             console.log(result.data.msg);

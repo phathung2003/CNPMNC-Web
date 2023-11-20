@@ -1,6 +1,6 @@
 import uploadImage from "../../Feature/uploadPicture"
 import pushToDatabase from "../Post/uploadCar";
-import IDGenerate from "../../Setting/getID";
+import IDGenerate from "../../Dashboard/getID";
 
 export default async function handleSubmit(e, formData, image, setProgress, inUploadProgress, setInUploadProgress) {
     e.preventDefault();

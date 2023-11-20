@@ -7,15 +7,7 @@ const SoDatXeRoute = require('./routes/SoDatXe');
 const SoXeRoute = require('./routes/SoXe')
 const KhachHangRoute = require('./routes/KhachHang');
 const CaiDatRoute = require('./routes/CaiDat');
-
-
-const XeModel = require("./models/Xe");
-const KhachHangModel = require("./models/KhachHang");
-const SoXeModel = require("./models/SoXe");
-const CaiDatModel = require("./models/CaiDat")
-const mongoose = require("mongoose");
-const params = require('params');
-const ObjectId = mongoose.Types.ObjectId;
+const LichSuRoute = require("./routes/LichSu")
 
 if(result){
     app.post('/contact', (req,res) => {``
@@ -71,9 +63,12 @@ if(result){
     //--------- Xử lý quản lý sổ xe (Sổ xe) ---------//
     app.use('/Rent', SoXeRoute)
 
-    //--------- Xử lý quản lý sổ xe (Sổ xe) ---------//
+    //--------- Xử lý cài đặt ---------//
     app.use('/Setting', CaiDatRoute)
-    
+
+    //--------- Xử lý Lịch sử ---------//
+    app.use('/History', LichSuRoute)
+
     try{app.listen(port, () =>{console.log("Server khởi động tại port " + port)})}
     catch{console.log("Server khởi động thất bại")}
 }

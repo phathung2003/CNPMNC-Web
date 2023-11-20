@@ -1,13 +1,14 @@
+require('dotenv').config()
+const ObjectIdCaiDat = process.env.OBJECT_ID;
+
 const express = require('express');
 const router = express.Router();
-const ObjectIdCaiDat = "655aae7e837397ecacd19930";
 
 const SoXeModel = require('../models/SoXe');
 const XeModel = require("../models/Xe");
 const CaiDatModel = require("../models/CaiDat")
 
 const mongoose = require("mongoose");
-const params = require('params');
 const ObjectId = mongoose.Types.ObjectId;
 
 router.post('/CarAdd/:ID/:SoLuong', async (req,res) => {

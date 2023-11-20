@@ -69,6 +69,11 @@ function getUri(type) {
         //Cài đặt
         case 'SettingMain':
             return [import.meta.env.VITE_API_SETTING_MAIN];
+
+        //Lịch sử
+        case 'HistoryMain':
+            return [import.meta.env.VITE_API_HISTORY_MAIN];
+            
         default:
             return null;
     }

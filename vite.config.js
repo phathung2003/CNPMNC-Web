@@ -35,6 +35,16 @@ export default defineConfig({
     'process.env.VITE_API_BOOK_CREATE_RENT': JSON.stringify(process.env.VITE_API_BOOK_CREATE_RENT),
     'process.env.VITE_API_BOOK_DETAIL': JSON.stringify(process.env.VITE_API_BOOK_DETAIL),
 
-    'process.env.VITE_API_SETTING_MAIN': JSON.stringify(process.env.VITE_API_SETTING_MAIN)
+    'process.env.VITE_API_SETTING_MAIN': JSON.stringify(process.env.VITE_API_SETTING_MAIN),
+    'process.env.VITE_API_HISTORY_MAIN': JSON.stringify(process.env.VITE_API_HISTORY_MAIN),
+
+    //API Firebase
+    'process.env.VITE_API_FIREBASE_API_KEY': JSON.stringify(process.env.VITE_API_FIREBASE_API_KEY),
+    'process.env.VITE_API_AUTH_DOMAIN': JSON.stringify(process.env.VITE_API_AUTH_DOMAIN),
+    'process.env.VITE_API_PROJECT_ID': JSON.stringify(process.env.VITE_API_PROJECT_ID),
+    'process.env.VITE_API_STORAGE_BUCKET': JSON.stringify(process.env.VITE_API_STORAGE_BUCKET),
+    'process.env.VITE_API_MESSAGING_SENDER_ID': JSON.stringify(process.env.VITE_API_MESSAGING_SENDER_ID),   
+    'process.env.VITE_API_APP_ID': JSON.stringify(process.env.VITE_API_APP_ID),   
+    APP_ID
   }
 })

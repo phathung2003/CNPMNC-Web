@@ -2,7 +2,7 @@ import uploadImage from "../../Feature/uploadPicture"
 import pushCustomerToDatabase from "../../RentManager/Post/uploadCustomer";
 import pushToDatabase from "../Post/uploadForm";
 import updateCustomer from "../../RentManager/updateCustomer";
-import IDGenerate from "../../Setting/getID";
+import IDGenerate from "../../Dashboard/getID";
 
 export default async function handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, navigate, rentList) {
     e.preventDefault();

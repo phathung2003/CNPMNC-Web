@@ -207,7 +207,7 @@ export default function testing() {
                                                 <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay - data.KhachTra <= 0 ? 0 : data.IDXe.SoTien * numberOfDay - data.KhachTra).toLocaleString('vi-VN')}đ</p>
 
                                                 <div>
-                                                    {(data.IDXe.SoTien * numberOfDay - data.KhachTra) - data.KhachTra > 0 ?
+                                                    {(data.IDXe.SoTien * numberOfDay - data.KhachTra) > 0 ?
                                                         <div>
                                                             <div className="row">
                                                                 <hr />

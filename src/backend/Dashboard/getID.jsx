@@ -3,9 +3,8 @@ import SettingInfo from "./Get/getSetting"
 
 export default async function fetchCar(type) {
     const myPromise = new Promise(
-        await async function (resolve) {
+        async function (resolve) {
             const data = await SettingInfo();
-
             switch (type) {
                 case "4":
                     resolve(["XE04" + `${data.Xe4 + 1}`, data.Xe4 + 1]);
@@ -19,16 +18,16 @@ export default async function fetchCar(type) {
                     resolve(["XE45" + `${data.Xe45 + 1}`, data.Xe45 + 1]);
 
                 case "SoXe":
-                    resolve(["HĐ" + `${data.SLDon + 1}`, data.SLDon + 1]);
+                    resolve(["HD" + `${data.SLDon + 1}`, data.SLDon + 1]);
                 case "SoDatXe":
-                    resolve(["HĐ" + `${data.SLDon + 1}`, data.SLDonDatTruoc + 1]);
+                    resolve(["HD" + `${data.SLDon + 1}`, data.SLDonDatTruoc + 1]);
 
                 case "KhachHang":
                     resolve(["KH" + `${data.SLKhachHang + 1}`, data.SLKhachHang + 1]);
                 case "KeToan":
                     resolve(["KT" + `${data.SLNhanVien + 1}`, data.SLNhanVien + 1]);
                 case "Chu":
-                    resolve(["GĐ" + `${data.SLNhanVien + 1}`, data.SLNhanVien + 1]);
+                    resolve(["GD" + `${data.SLNhanVien + 1}`, data.SLNhanVien + 1]);
 
 
             }

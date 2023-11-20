@@ -3,7 +3,7 @@ import pushCustomerToDatabase from "../Post/uploadCustomer";
 import pushToDatabase from "../Post/uploadForm";
 import updateCustomer from "../updateCustomer";
 import getIDForm from "../../CarManager/Get/carDetail"
-import IDGenerate from "../../Setting/getID";
+import IDGenerate from "../../Dashboard/getID";
 
 export default async function handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, navigate, TienCoc) {
     e.preventDefault();
