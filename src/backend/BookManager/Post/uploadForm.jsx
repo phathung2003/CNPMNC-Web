@@ -17,7 +17,7 @@ export default async function uploadForm(apiType, formData, navigate) {
                     var IDXe = formData._idXe;
                     var IDKH = formData._idKH
 
-                    axios.post(`${api}/${formData._idXe}/${formData._idDon}`, { IDDon, NgayBatDau, NgayKetThuc, TinhTrang, KhachTra, IDXe, IDKH })
+                    axios.post(`${api}/${formData._idXe}/${formData._idDon}/${formData.SoLuong}/${formData.SLDatTruoc}`, { IDDon, NgayBatDau, NgayKetThuc, TinhTrang, KhachTra, IDXe, IDKH })
                         .then((result) => {
                             if (result.data.success) {
                                 alert("Tạo đơn đặt trước thành công")

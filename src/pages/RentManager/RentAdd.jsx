@@ -5,13 +5,13 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 
 import "../../css/Detail.css"
 import "../../css/pictureUpload.css"
-import "../../css/searchRecommend.css"
+
 
 import handleSubmit from "../../backend/RentManager/View/rentAdd";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 import fetchData from "../../backend/RentManager/Fetch/fetchCar";
 
-import customerData from "../../backend/RentManager/GET/getCustomer"
+import customerData from "../../backend/RentManager/Get/getCustomer"
 import SearchData from "../../backend/RentManager/searchCustomer"
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"
@@ -83,7 +83,7 @@ export default function RentAdd() {
                 ["_idKH"]: data._id,
                 ["IDKH"]: data.IDKH,
                 ["TenKH"]: data.TenKH,
-                ["NgaySinh"]: `${format(data.NgaySinh, "yyyy-MM-dd")}`,
+                ["NgaySinh"]: `${data.NgaySinh != null ? format(data.NgaySinh, "yyyy-MM-dd") : ""}`,
                 ["DiaChi"]: data.DiaChi,
                 ["SoDienThoai"]: data.SoDienThoai,
                 ["CMND"]: data.CMND,
@@ -344,7 +344,7 @@ export default function RentAdd() {
                                                         <p className="col">Khách trả</p>
 
                                                         <div className="flex align-middle col">
-                                                            <input className="flex form-control" style={{ width: "95%" }} type="number" min={0}  autoComplete="off" name="KhachTra" defaultValue={0} onChange={Input} /> <span className="mx-2"> đ</span>
+                                                            <input className="flex form-control" style={{ width: "95%" }} type="number" min={0} autoComplete="off" name="KhachTra" defaultValue={0} onChange={Input} /> <span className="mx-2"> đ</span>
                                                         </div>
                                                     </div>
                                                     <hr className="mt-2"></hr>

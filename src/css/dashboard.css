@@ -15,7 +15,7 @@
   left: 0;
   height: 100%;
   width: 260px;
-  background: #01a66f;
+  background: #a31c0a;
   z-index: 100;
   transition: all 0.5s ease;
 }
@@ -122,16 +122,16 @@
 }
 
 .sidebar .nav-links li:hover {
-  background: #75ce9f;
+  background: #660000;
 }
 
-.sidebar .nav-links li .iocn-link {
+.sidebar .nav-links li .icon-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.sidebar.close .nav-links li .iocn-link {
+.sidebar.close .nav-links li .icon-link {
   display: block;
 }
 
@@ -148,6 +148,7 @@
 
 .sidebar .nav-links li.showMenu i.arrow {
   transform: rotate(-180deg);
+  transition: all 0.4s ease;
 }
 
 .sidebar.close .nav-links i.arrow {
@@ -189,6 +190,7 @@
 .sidebar.close .nav-links li .link .link_name {
   opacity: 0;
   pointer-events: none;
+  display: none;
 }
 
 .sidebar .nav-links li .sub-menu {
@@ -198,8 +200,9 @@
   display: none;
 }
 
-.sidebar .nav-links li.showMenu .sub-menu {
+.sidebar .nav-links li .showMenu {
   display: block;
+  transition: all 0.4s ease;
 }
 
 .sidebar .nav-links li .sub-menu a {
@@ -209,6 +212,16 @@
   white-space: nowrap;
   opacity: 0.6;
   transition: all 0.3s ease;
+}
+
+.sidebar .nav-links li .showMenu a {
+  color: #fff;
+  font-size: 15px;
+  padding: 5px 0;
+  white-space: nowrap;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  display: block;
 }
 
 .sidebar .nav-links li .sub-menu a:hover {
@@ -261,7 +274,7 @@
 /*Thông tin người dùng*/
 .sidebar .profile-content {
   position: absolute;
-  color: #000000;
+  color: #ffffff;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -271,7 +284,7 @@
   position: relative;
   padding: 10px 6px;
   height: 60px;
-  background: #019875;
+  background: #840000;
 }
 
 .profile-content .profile .profile-details {

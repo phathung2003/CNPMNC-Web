@@ -65,6 +65,14 @@ function getUri(type) {
             return [import.meta.env.VITE_API_BOOK_CREATE_RENT];
         case 'BookDetail':
             return [import.meta.env.VITE_API_BOOK_DETAIL];
+        
+        //Cài đặt
+        case 'SettingMain':
+            return [import.meta.env.VITE_API_SETTING_MAIN];
+
+        //Lịch sử
+        case 'HistoryMain':
+            return [import.meta.env.VITE_API_HISTORY_MAIN];
             
         default:
             return null;

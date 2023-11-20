@@ -7,6 +7,7 @@ const CaiDatSchema = new mongoose.Schema({
     Xe30: Number,
     Xe45: Number,
     SLDon: Number,
+    SLDonDatTruoc: Number,
     SLKhachHang: Number,
     SLNhanVien: Number,
 })

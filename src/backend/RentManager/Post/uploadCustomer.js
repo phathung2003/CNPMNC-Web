@@ -17,7 +17,7 @@ export default async function uploadCar(apiType, formData) {
                     var BangLai = formData.BangLai;
                     var HinhBangLai = formData.HinhBangLai;
 
-                    axios.post(`${api}/${formData._idKH}`, { IDKH, TenKH, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND, BangLai, HinhBangLai})
+                    axios.post(`${api}/${formData._idKH}/${formData.SoLuong}`, { IDKH, TenKH, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND, BangLai, HinhBangLai})
                     .then((result) => {
                         formData._idKH = result.data.msg
                         resolve(result.data.success);

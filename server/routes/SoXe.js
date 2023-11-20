@@ -1,13 +1,16 @@
+require('dotenv').config()
+const ObjectIdCaiDat = process.env.OBJECT_ID;
+
 const express = require('express');
 const router = express.Router();
 
 const SoXeModel = require('../models/SoXe');
 const XeModel = require("../models/Xe");
-const KhachHangModel = require("../models/KhachHang");
+const CaiDatModel = require("../models/CaiDat")
 
 const mongoose = require("mongoose");
-const params = require('params');
 const ObjectId = mongoose.Types.ObjectId;
+const LichSuModel = require("../models/LichSu")
 
 router.get('/RentMain', async (req,res) => {
     try{
@@ -17,10 +20,11 @@ router.get('/RentMain', async (req,res) => {
     catch(e){res.json(e)}
 })
 
-router.post('/RentAdd/:IDXe/', async (req,res) => {
-    req.body.IDXe = new ObjectId(`${req.params.IDXe}`);
-    req.body.IDKH = new ObjectId(`${req.body.IDKH}`);
+router.post('/RentAdd/:IDXe//:SoLuong', async (req,res) => {
     try{
+        req.body.IDXe = new ObjectId(`${req.params.IDXe}`);
+        req.body.IDKH = new ObjectId(`${req.body.IDKH}`);
+
         await SoXeModel.create(req.body)
         .then((SoXeInfo) => {
                 XeModel.updateOne({ _id : `${req.params.IDXe}`},{
@@ -31,38 +35,78 @@ router.post('/RentAdd/:IDXe/', async (req,res) => {
                 })
                 .then(() => res.json({success: true, msg: "Tạo đơn thành công"}))
         }) 
+
+        //Ghi lịch sử
+        const log = {
+            Ngay: new Date(Date.now()).getTime(),
+            MaDon: `${req.body.IDDon}`,
+            DanhMuc: "Sổ xe",
+            MoTa: "Tạo đơn thành công",
+            ThongTin: req.body.KhachTra,
+        }
+        await LichSuModel.create(log);
+
+        if(req.params.SoLuong >0){
+            await CaiDatModel.updateOne({_id : ObjectIdCaiDat},{$set: {SLDon: req.params.SoLuong}})
+        }
     }
     catch{() => {res.json({ success: false, msg: 'Thêm xe thất bại. Vui lòng thử lại sau !' })}}
 })
 
-router.post('/RentEdit/:IDXe/:IDDon', async (req,res) => {
-    const {NgayKetThuc,TinhTrang} = req.body;
+router.post('/RentEdit/:IDXe/:IDDon/:SoLuong', async (req,res) => {
+    try{
+        const {NgayKetThuc,TinhTrang} = req.body;
 
-    await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
-        $set: {
-          NgayKetThuc : NgayKetThuc,
-          TinhTrang : TinhTrang
+        await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
+            $set: {
+              NgayKetThuc : NgayKetThuc,
+              TinhTrang : TinhTrang
+            }
+        })
+        .then(() => res.json({ success: true, msg: 'Cập nhật thành công !' }))
+
+        //Ghi lịch sử
+        const log = {
+            Ngay: new Date(Date.now()).getTime(),
+            MaDon: `${req.body.IDDon}`,
+            DanhMuc: "Sổ xe",
+            MoTa: "Chỉnh sửa thông tin thành công",
+            ThongTin: req.body.KhachTra,
         }
-    })
-    .then(() => res.json({ success: true, msg: 'Cập nhật thành công !' }))
-    .catch(() => res.json({ success: false, msg: 'Cập nhật thất bại. Vui lòng thử lại sau !' }))
+        
+        await LichSuModel.create(log);
+    }
+    catch{() => res.json({ success: false, msg: 'Cập nhật thất bại. Vui lòng thử lại sau !' })}
+
+   
 })
 
-router.post('/RentCheckout/:IDXe/:IDDon', async (req,res) => {
+router.post('/RentCheckout/:IDXe/:IDDon/:TienTra', async (req,res) => {
+    try{
+        await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
+            $set: {
+                KhachTra : `${req.body.KhachTra}`,
+                TinhTrang : "Hoàn thành",
+            }
+        })
     
-    await SoXeModel.updateOne({ _id : `${req.params.IDDon}`},{
-        $set: {
-            KhachTra : `${req.body.KhachTra}`,
-            TinhTrang : "Hoàn thành",
-            
+        await XeModel.updateOne({ _id : `${req.params.IDXe}`},{
+            $set: {TinhTrang : "Còn trống", IDDon : null}
+        })
+    
+        //Ghi lịch sử
+        const log = {
+            Ngay: new Date(Date.now()).getTime(),
+            MaDon: `${req.body.IDDon}`,
+            DanhMuc: "Sổ xe",
+            MoTa: "Thanh toán thành công",
+            ThongTin: req.params.TienTra,
         }
-    })
+        await LichSuModel.create(log);
 
-    await XeModel.updateOne({ _id : `${req.params.IDXe}`},{
-        $set: {TinhTrang : "Còn trống", IDDon : null}
-    })
-    .then(() => res.json({ success: true, msg: 'Trả xe thành công !' }))
-    .catch(() => res.json({ success: false, msg: 'Trả xe thất bại. Vui lòng thử lại sau !' }))
+        res.json({ success: true, msg: 'Trả xe thành công !' })
+    }
+    catch{() => res.json({ success: false, msg: 'Trả xe thất bại. Vui lòng thử lại sau !' })}
 })
 
 router.get('/RentDetail/:IDDon/', async (req,res) => {

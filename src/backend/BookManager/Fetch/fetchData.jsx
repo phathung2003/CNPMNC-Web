@@ -28,9 +28,13 @@ export default async function fetchCar(IDParams, setData, setFormData, setRentDa
             NgayBatDau: `${format(Date.now(), "yyyy-MM-dd")}`,
             NgayKetThuc: `${format(Date.now(), "yyyy-MM-dd")}`,
             KhachTra: 0,
+
+            SoLuong: 0,
+            SLDatTruoc: 0,
+
             TinhTrang: "Đặt trước",
             _idXe: `${IDParams}`,
-            
+
             loading: true,
             searchOn: true
         })

@@ -48,7 +48,7 @@ export default function testing() {
 
                     <div className="d-flex justify-content-between">
                         <button className="btn btn-primary mb-0" onClick={(e) => window.history.back()}>Quay lại</button>
-                        <h3 className="flex align-middle"><span className="text-lg mt-1"><span className="font-bold">Mã đơn: </span> {data.IDXe.IDXe} - </span><span className="ml-1 mr-1">Hoá đơn</span></h3>
+                        <h3 className="flex align-middle"><span className="text-lg mt-1"><span className="font-bold">Mã đơn: </span> {data.IDDon} - </span><span className="ml-1 mr-1">Hoá đơn</span></h3>
                     </div>
 
                     {/*Thanh Sidebar*/}
@@ -204,10 +204,10 @@ export default function testing() {
 
                                                 <hr></hr>
                                                 <h5 className="col font-bold">Tổng cộng</h5>
-                                                <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay - data.KhachTra).toLocaleString('vi-VN')}đ</p>
+                                                <p className="col font-bold">{(data.IDXe.SoTien * numberOfDay - data.KhachTra <= 0 ? 0 : data.IDXe.SoTien * numberOfDay - data.KhachTra).toLocaleString('vi-VN')}đ</p>
 
                                                 <div>
-                                                    {(data.IDXe.SoTien * numberOfDay - data.KhachTra) - data.KhachTra > 0 ?
+                                                    {(data.IDXe.SoTien * numberOfDay - data.KhachTra) > 0 ?
                                                         <div>
                                                             <div className="row">
                                                                 <hr />

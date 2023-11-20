@@ -3,6 +3,7 @@ import pushCustomerToDatabase from "../Post/uploadCustomer";
 import pushToDatabase from "../Post/uploadForm";
 import updateCustomer from "../updateCustomer";
 import getIDForm from "../../CarManager/Get/carDetail"
+import IDGenerate from "../../Dashboard/getID";
 
 export default async function handleSubmit(e, formData, CMNDImage, licenseImage, setCMNDProgress, setLicenseProgress, inUploadProgress, setInUploadProgress, navigate, TienCoc) {
     e.preventDefault();
@@ -17,7 +18,6 @@ export default async function handleSubmit(e, formData, CMNDImage, licenseImage,
 
             var currentdate = new Date();
             var Pharse2 = false;
-            formData.IDDon = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
 
             //Người thuê xe cũ
             if (formData._idKH != "") {
@@ -29,11 +29,17 @@ export default async function handleSubmit(e, formData, CMNDImage, licenseImage,
                 await uploadPicture(formData, CMNDImage, setCMNDProgress, "CMND")
                 await uploadPicture(formData, licenseImage, setLicenseProgress, "License")
 
-                var currentdate = new Date();
-                formData.IDKH = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
+                var [ID, Current] = await IDGenerate("KhachHang");
+                formData.IDKH = ID;
+                formData.SoLuong = Current;
 
                 Pharse2 = await pushCustomerToDatabase("CustomerAdd", formData)
             }
+
+            var [ID, Current] = await IDGenerate("SoXe");
+            formData.IDDon = ID;
+            formData.SoLuong = Current;
+
             if (Pharse2) {
                 if (await pushToDatabase("RentAdd", formData)) {
                     const data = await getIDForm(formData._idXe)

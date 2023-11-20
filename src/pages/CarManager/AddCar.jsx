@@ -17,17 +17,18 @@ export default function AddCar() {
     const [Progress, setProgress] = useState();
     const [inUploadProgress, setInUploadProgress] = useState(false);
     const [formData, setFormData] = useState({
-        _id: "",
+        _id: "1",
         IDXe: "",
         TenXe: "",
         BienSo: "",
-        SoCho: 4,
+        SoCho: `${4}`,
         TruyenDong: "Số sàn",
         NhienLieu: "Xăng dầu",
         MoTa: "",
         SoTien: 0,
         HinhAnh: `${defaultPicture}`,
         TinhTrang: "Còn trống",
+        SoLuong: 0,
         IDDon: null,
     });
 
@@ -153,13 +154,14 @@ export default function AddCar() {
                                                 <label className="form-label">Mô tả</label>
                                                 <textarea className="form-control" type="text" name="MoTa" onChange={Input} />
                                             </div>
-                                        </div>
 
-                                        <div className="d-flex flex-row-reverse mb-1 mr-1   ">
-                                            {!inUploadProgress ?
-                                                <button type="submit" className="btn btn-success">Lưu</button> :
-                                                <button className="btn btn-secondary">Đang lưu dữ liệu</button>
-                                            }
+
+                                            <div className="d-flex flex-row-reverse mb-1 mr-1   ">
+                                                {!inUploadProgress ?
+                                                    <button type="submit" className="btn btn-success">Lưu</button> :
+                                                    <button className="btn btn-secondary">Đang lưu dữ liệu</button>
+                                                }
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

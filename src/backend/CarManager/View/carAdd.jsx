@@ -1,5 +1,6 @@
 import uploadImage from "../../Feature/uploadPicture"
 import pushToDatabase from "../Post/uploadCar";
+import IDGenerate from "../../Dashboard/getID";
 
 export default async function handleSubmit(e, formData, image, setProgress, inUploadProgress, setInUploadProgress) {
     e.preventDefault();
@@ -9,8 +10,12 @@ export default async function handleSubmit(e, formData, image, setProgress, inUp
         if (image != null && image != "" && image != "Default")
             formData.HinhAnh = await uploadImage("Car", image, setProgress)
 
-        var currentdate = new Date();
-        formData.IDXe = currentdate.getDate() * 86400 + (currentdate.getMonth() + 1) * 2678400 + currentdate.getFullYear() * 32140800 + currentdate.getHours() * 3600 + currentdate.getMinutes() * 60 + currentdate.getSeconds();
+
+
+        var [ID, Current] = await IDGenerate(formData.SoCho);
+
+        formData.IDXe = ID;
+        formData.SoLuong = Current;
 
         if (await pushToDatabase("CarAdd", formData))
             window.location.reload(false);
