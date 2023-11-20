@@ -14,6 +14,6 @@
     { "source": "^/Rent$", "destination": "/RentMain" },
     { "source": "^/Rent/Add/([^/]+)$", "destination": "/RentAdd" },
     { "source": "^/Rent/Detail/([^/]+)$", "destination": "/RentDetail" },
-    { "source": "^/Rent/Checkout/([^/]+)$", "destination": "/RentCheckout" },
+    { "source": "^/Rent/Checkout/([^/]+)$", "destination": "/RentCheckout" }
   ]
 }
