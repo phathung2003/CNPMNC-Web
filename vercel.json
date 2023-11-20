@@ -1,19 +1,19 @@
 {
     "rewrites": [
-      { "src": "^/$", "dist": "/DashboardMain" },
-      { "src": "^/Car$", "dist": "/CarMain" },
-      { "src": "^/Car/Add$", "dist": "/CarAdd" },
-      { "src": "^/Car/Detail/:id$", "dist": "/CarEdit" },
+      { "source": "^/$", "destination": "/DashboardMain" },
+      { "source": "^/Car$", "destination": "/CarMain" },
+      { "source": "^/Car/Add$", "destination": "/CarAdd" },
+      { "source": "^/Car/Detail/:id$", "destination": "/CarEdit" },
   
-      { "src": "^/Book$", "dist": "/BookMain" },
-      { "src": "^/Book/Add/ChooseCar$", "dist": "/BookChooseCar" },
-      { "src": "^/Book/Add/:id$", "dist": "/BookAdd" },
-      { "src": "^/Book/Detail/:IDXe/:IDDon$", "dist": "/BookDetail" },
-      { "src": "^/Book/Create/:IDDon$", "dist": "/BookCreateRent" },
+      { "source": "^/Book$", "destination": "/BookMain" },
+      { "source": "^/Book/Add/ChooseCar$", "destination": "/BookChooseCar" },
+      { "source": "^/Book/Add/:id$", "destination": "/BookAdd" },
+      { "source": "^/Book/Detail/:IDXe/:IDDon$", "destination": "/BookDetail" },
+      { "source": "^/Book/Create/:IDDon$", "destination": "/BookCreateRent" },
   
-      { "src": "^/Rent$", "dist": "/RentMain" },
-      { "src": "^/Rent/Add/:id$", "dist": "/RentAdd" },
-      { "src": "^/Rent/Detail/:id$", "dist": "/RentDetail" },
-      { "src": "^/Rent/Checkout/:id$", "dist": "/RentCheckout" }
+      { "source": "^/Rent$", "destination": "/RentMain" },
+      { "source": "^/Rent/Add/:id$", "destination": "/RentAdd" },
+      { "source": "^/Rent/Detail/:id$", "destination": "/RentDetail" },
+      { "source": "^/Rent/Checkout/:id$", "destination": "/RentCheckout" }
     ]
   }
