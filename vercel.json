@@ -1,20 +1,20 @@
 {
   "routes": [
-    {"src": "/","dest": "/DashboardMain"},
-    { "src": "/Car", "dest": "/CarMain" },
-    { "src": "/Car/Add", "dest": "/CarAdd" },
-    { "src": "/Car/Detail/(?<id>[^/]*)", "dest": "/CarEdit?id=$id" },
+    {"src": "/","dest": "/Main.jsx"},
+    { "src": "/Car", "dest": "/MainCar.jsx" },
+    { "src": "/Car/Add", "dest": "/AddCar.jsx" },
+    { "src": "/Car/Detail/(?<id>[^/]*)", "dest": "/DetailCar.jsx?id=$id" },
 
     
-    {"src": "/Book","dest": "/BookMain"},
-    { "src": "/Book/Add/ChooseCar", "dest": "/BookChooseCar" },
-    { "src": "/Book/Add/(?<id>[^/]*)", "dest": "/BookAdd?id=$id" },
-    { "src": "/Car/Detail/(?<IDXe>[^/]*)/(?<IDDon>[^/]*)", "dest": "/BookDetail?IDXe=$IDXe&&IDDon=$IDDon" },
-    { "src": "/Book/Create/(?<IDDon>[^/]*)", "dest": "/BookDetail?IDDon=$IDDon" },
+    {"src": "/Book","dest": "/BookMain.jsx"},
+    { "src": "/Book/Add/ChooseCar", "dest": "/BookChooseCar.jsx" },
+    { "src": "/Book/Add/(?<id>[^/]*)", "dest": "/BookAdd.jsx?id=$id" },
+    { "src": "/Car/Detail/(?<IDXe>[^/]*)/(?<IDDon>[^/]*)", "dest": "/BookDetail.jsx?IDXe=$IDXe&&IDDon=$IDDon" },
+    { "src": "/Book/Create/(?<IDDon>[^/]*)", "dest": "/BookCreateRent.jsx?IDDon=$IDDon" },
 
-    {"src": "/Rent","dest": "/RentMain"},
-    { "src": "/Rent/Add/(?<id>[^/]*)", "dest": "/RentAdd?id=$id" },
-    { "src": "/Rent/Detail/(?<id>[^/]*)", "dest": "/RentDetail?id=$id" },
-    { "src": "/Rent/Checkout/(?<id>[^/]*)", "dest": "/RentCheckout?id=$id" }
+    {"src": "/Rent","dest": "/RentMain.jsx"},
+    { "src": "/Rent/Add/(?<id>[^/]*)", "dest": "/RentAdd.jsx?id=$id" },
+    { "src": "/Rent/Detail/(?<id>[^/]*)", "dest": "/RentDetail.jsx?id=$id" },
+    { "src": "/Rent/Checkout/(?<id>[^/]*)", "dest": "/RentCheckout.jsx?id=$id" }
   ]
 }
