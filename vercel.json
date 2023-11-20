@@ -1,55 +1,20 @@
 {
   "routes": [
-    {
-      "src": "/",
-    },
-    {
-      "src": "/Car",
-     
-    },
-    {
-      "src": "/Car/Add",
-     
-    },
-    {
-      "src": "/Car/Detail/:id",
-     
-    },
-    {
-      "src": "/Book",
-     
-    },
-    {
-      "src": "/Book/Add/ChooseCar",
-     
-    },
-    {
-      "src": "/Book/Add/:id",
-     
-    },
-    {
-      "src": "/Book/Detail/:IDXe/:IDDon",
-     
-    },
-    {
-      "src": "/Book/Create/:IDDon",
-     
-    },
-    {
-      "src": "/Rent",
-     
-    },
-    {
-      "src": "/Rent/Add/:id",
-     
-    },
-    {
-      "src": "/Rent/Detail/:id",
-     
-    },
-    {
-      "src": "/Rent/Checkout/:id",
-     
-    }
+    {"src": "/","dest": "/DashboardMain"},
+    { "src": "/Car", "dest": "/CarMain" },
+    { "src": "/Car/Add", "dest": "/CarAdd" },
+    { "src": "/Car/Detail/(?<id>[^/]*)", "dest": "/CarEdit?id=$id" },
+
+    
+    {"src": "/Book","dest": "/BookMain"},
+    { "src": "/Book/Add/ChooseCar", "dest": "/BookChooseCar" },
+    { "src": "/Book/Add/(?<id>[^/]*)", "dest": "/BookAdd?id=$id" },
+    { "src": "/Car/Detail/(?<IDXe>[^/]*)/(?<IDDon>[^/]*)", "dest": "/BookDetail?IDXe=$IDXe&&IDDon=$IDDon" },
+    { "src": "/Book/Create/(?<IDDon>[^/]*)", "dest": "/BookDetail?IDDon=$IDDon" },
+
+    {"src": "/Rent","dest": "/RentMain"},
+    { "src": "/Rent/Add/(?<id>[^/]*)", "dest": "/RentAdd?id=$id" },
+    { "src": "/Rent/Detail/(?<id>[^/]*)", "dest": "/RentDetail?id=$id" },
+    { "src": "/Rent/Checkout/(?<id>[^/]*)", "dest": "/RentCheckout?id=$id" },
   ]
 }
