@@ -11,7 +11,7 @@ import handleSubmit from "../../backend/RentManager/View/rentAdd";
 import convertToBase64 from "../../backend/Feature/convertToBase64"
 import fetchData from "../../backend/RentManager/Fetch/fetchCar";
 
-import customerData from "../../backend/RentManager/GET/getCustomer"
+import customerData from "../../backend/RentManager/Get/getCustomer"
 import SearchData from "../../backend/RentManager/searchCustomer"
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_picture.jpg?alt=media"

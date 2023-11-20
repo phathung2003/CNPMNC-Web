@@ -1,4 +1,4 @@
-import "../../css/Dashboard.css"
+
 import { Link, Route, Routes } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import Logo from "../../assets/images/Logo_DarkMode.png"
@@ -13,8 +13,7 @@ import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
 
-// import Test from './test/test'
-
+import "../../css/dashboard.css"
 import DashboardMain from './Main'
 
 import CarMain from '../CarManager/MainCar'
