@@ -2,55 +2,54 @@
   "routes": [
     {
       "src": "/",
-      "dist": "/"
     },
     {
       "src": "/Car",
-      "dist": "/"
+     
     },
     {
       "src": "/Car/Add",
-      "dist": "/"
+     
     },
     {
       "src": "/Car/Detail/:id",
-      "dist": "/"
+     
     },
     {
       "src": "/Book",
-      "dist": "/"
+     
     },
     {
       "src": "/Book/Add/ChooseCar",
-      "dist": "/"
+     
     },
     {
       "src": "/Book/Add/:id",
-      "dist": "/"
+     
     },
     {
       "src": "/Book/Detail/:IDXe/:IDDon",
-      "dist": "/"
+     
     },
     {
       "src": "/Book/Create/:IDDon",
-      "dist": "/"
+     
     },
     {
       "src": "/Rent",
-      "dist": "/"
+     
     },
     {
       "src": "/Rent/Add/:id",
-      "dist": "/"
+     
     },
     {
       "src": "/Rent/Detail/:id",
-      "dist": "/"
+     
     },
     {
       "src": "/Rent/Checkout/:id",
-      "dist": "/"
+     
     }
   ]
 }
