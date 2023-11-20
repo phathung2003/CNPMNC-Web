@@ -1,0 +1,19 @@
+{
+    "rewrites": [
+      { "src": "^/$", "dist": "/DashboardMain" },
+      { "src": "^/Car$", "dist": "/CarMain" },
+      { "src": "^/Car/Add$", "dist": "/CarAdd" },
+      { "src": "^/Car/Detail/:id$", "dist": "/CarEdit" },
+  
+      { "src": "^/Book$", "dist": "/BookMain" },
+      { "src": "^/Book/Add/ChooseCar$", "dist": "/BookChooseCar" },
+      { "src": "^/Book/Add/:id$", "dist": "/BookAdd" },
+      { "src": "^/Book/Detail/:IDXe/:IDDon$", "dist": "/BookDetail" },
+      { "src": "^/Book/Create/:IDDon$", "dist": "/BookCreateRent" },
+  
+      { "src": "^/Rent$", "dist": "/RentMain" },
+      { "src": "^/Rent/Add/:id$", "dist": "/RentAdd" },
+      { "src": "^/Rent/Detail/:id$", "dist": "/RentDetail" },
+      { "src": "^/Rent/Checkout/:id$", "dist": "/RentCheckout" }
+    ]
+  }

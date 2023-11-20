@@ -17,62 +17,62 @@ export default function checkUri(type) {
 function getUri(type) {
     switch (type) {
         case 'Contact':
-            return [import.meta.env.VITE_API_CONTACT];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_CONTACT];
         case 'Main':
-            return [import.meta.env.VITE_API_MAIN];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_MAIN];
         case 'Info':
-            return [import.meta.env.VITE_API_INFO];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_INFO];
         case 'CarAdd':
-            return [import.meta.env.VITE_API_CAR_ADD];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_CAR_ADD];
         case 'CarEdit':
-            return [import.meta.env.VITE_API_CAR_EDIT];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_CAR_EDIT];
         case 'CarDelete':
-            return [import.meta.env.VITE_API_CAR_DELETE];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_CAR_DELETE];
         case 'CarMain':
-            return [import.meta.env.VITE_API_CAR_MAIN];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_CAR_MAIN];
         case 'CarDetail':
-            return [import.meta.env.VITE_API_CAR_DETAIL];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_CAR_DETAIL];
 
         //Khách hàng
         case 'CustomerAdd':
-            return [import.meta.env.VITE_API_CUSTOMER_ADD];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_CUSTOMER_ADD];
         case 'CustomerEdit':
-            return [import.meta.env.VITE_API_CUSTOMER_EDIT];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_CUSTOMER_EDIT];
         case 'CustomerMain':
-            return [import.meta.env.VITE_API_CUSTOMER_MAIN];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_CUSTOMER_MAIN];
 
         //Sổ xe
         case 'RentMain':
-            return [import.meta.env.VITE_API_RENT_MAIN];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_RENT_MAIN];
         case 'RentAdd':
-            return [import.meta.env.VITE_API_RENT_ADD];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_RENT_ADD];
         case 'RentEdit':
-            return [import.meta.env.VITE_API_RENT_EDIT];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_RENT_EDIT];
         case 'RentCheckout':
-            return [import.meta.env.VITE_API_RENT_CHECKOUT];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_RENT_CHECKOUT];
 
         case 'RentDetail':
-            return [import.meta.env.VITE_API_RENT_DETAIL];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_RENT_DETAIL];
 
         //Sổ đặt xe
         case 'BookAdd':
-            return [import.meta.env.VITE_API_BOOK_ADD];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_BOOK_ADD];
         case 'BookEdit':
-            return [import.meta.env.VITE_API_BOOK_EDIT];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_BOOK_EDIT];
         case 'BookCancel':
-            return [import.meta.env.VITE_API_BOOK_CANCEL];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_BOOK_CANCEL];
         case 'BookCreateRent':
-            return [import.meta.env.VITE_API_BOOK_CREATE_RENT];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_BOOK_CREATE_RENT];
         case 'BookDetail':
-            return [import.meta.env.VITE_API_BOOK_DETAIL];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_BOOK_DETAIL];
         
         //Cài đặt
         case 'SettingMain':
-            return [import.meta.env.VITE_API_SETTING_MAIN];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_SETTING_MAIN];
 
         //Lịch sử
         case 'HistoryMain':
-            return [import.meta.env.VITE_API_HISTORY_MAIN];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_HISTORY_MAIN];
             
         default:
             return null;
