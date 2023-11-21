@@ -1,4 +1,5 @@
 import axios from 'axios';
+<<<<<<< HEAD
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from 'uuid';
@@ -144,6 +145,8 @@ function pushToDatabase(formData) {
 =======
 >>>>>>> f3f017d (fix edit staff and add staff image)
 import axios from 'axios';
+=======
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
 import checkUri from "../checkUri";
 import { storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -155,6 +158,7 @@ const [result, api] = checkUri("StaffEdit");
 
 export default async function handleSubmit(e, formData, imageNV, setNVProgress, imageCMND, setCMNDProgess) {
     e.preventDefault();
+<<<<<<< HEAD
 
     if (imageNV != null && imageNV != "" && formData.Avatar != imageNV && imageNV != "Default") {
         await uploadImage(formData, imageNV, setNVProgress, 'Avatar');
@@ -482,6 +486,8 @@ const [result, api] = checkUri("StaffEdit");
 
 export default async function handleSubmit(e, formData, imageNV, setNVProgress, imageCMND, setCMNDProgess) {
     e.preventDefault();
+=======
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
    
     if (imageNV != null && imageNV != "" && formData.Avatar != imageNV && imageNV != "Default") {
         await uploadImage(formData, imageNV, setNVProgress, 'Avatar');
@@ -538,14 +544,20 @@ function pushToDatabase(formData) {
         var Avatar = formData.Avatar;
         var TenNV = formData.TenNV;
         var NgaySinh = formData.NgaySinh;
+<<<<<<< HEAD
         var NgaySinh = formData.NgaySinh;
+=======
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
         var DiaChi = formData.DiaChi;
         var SoDienThoai = formData.SoDienThoai;
         var CMND = formData.CMND;
         var HinhCMND = formData.HinhCMND;
 
+<<<<<<< HEAD
         axios
             .post(api, { ID, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND })
+=======
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
 
         axios.post(api, { IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND })
             .then((result) => {

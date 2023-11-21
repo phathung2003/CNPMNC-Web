@@ -60,6 +60,7 @@ export default function Info() {
                         {
                             carList.length != 0 ? carList.map(info => {
                                 return <tr key={info._id}>
+<<<<<<< HEAD
                                     <td align="center" style={{ width: "10vw" }}>{info.IDXe}</td>
                                     <td align="center" style={{ width: "18vw" }}><img src={`${info.HinhAnh}`}></img></td>
                                     <td style={{ textAlign: "center", width: "15vw" }}>{info.BienSo}</td>
@@ -71,6 +72,17 @@ export default function Info() {
                                         {info.TinhTrang != "Đang thuê" ?
                                             <button className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-base px-5 py-3 text-center me-2 mb-2"
                                                 onClick={(e) => Delete(info._id, info.HinhAnh)}>Xoá bài</button> : <div />}
+=======
+                                    <td align="center" style={{ width: "5%" }}>{info.IDXe}</td>
+                                    <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhAnh}`}></img></td>
+                                    <td style={{ textAlign: "center" }}>{info.BienSo}</td>
+                                    <td style={{ textAlign: "center" }}>{info.SoCho}</td>
+                                    <td style={{ textAlign: "center" }}>{info.TinhTrang}</td>
+                                    
+                                    <td>
+                                        <button className="btn btn-primary" onClick={(e) => navigate(`/Car/Detail/${info._id}`, { state: info })}>Chi tiết</button>
+                                        {info.TinhTrang != "Đang thuê" ? <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.HinhAnh)}>Xoá bài</button> : <div />}
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
                                     </td>
                                 </tr>
                             }) : <tr><td colSpan={6} height={100} className='text-center text-2xl font-bold bg-transparent'>Hiện tại chưa có xe nào !</td></tr>

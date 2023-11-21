@@ -16,5 +16,9 @@ export default function infoProcess() {
         }, [])
         
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
     return staffInfo;
 }

@@ -12,7 +12,10 @@ import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
 import PersonIcon from '@mui/icons-material/Person';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
 
 // import Test from './test/test'
 >>>>>>> 84aaed1 (fix mainStaff)
@@ -36,12 +39,18 @@ import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
 
 =======
 >>>>>>> 84aaed1 (fix mainStaff)
+=======
+=======
+
+>>>>>>> 884fdc8c158e3fe658dbcafa7ca283a78802dfbc
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
 export default function Drawer() {
     return (
         <div>

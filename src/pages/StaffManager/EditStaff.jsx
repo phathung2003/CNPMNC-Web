@@ -7,7 +7,11 @@ import Form from 'react-bootstrap/Form';
 import "../../css/Detail.css"
 import handleSubmit from "../../backend/StaffManager/staffEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64";
+<<<<<<< HEAD
 import { formatDate } from "@fullcalendar/core";
+=======
+import { formatDate } from '@fullcalendar/core';
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
 
@@ -162,7 +166,10 @@ export default function EditCar() {
                                                 <label className="btn btn-outline-primary col-3">
                                                     Tải hình mới
                                                     <input type="file" className="account-settings-fileinput" name="CMND" onChange={onFileChange} />
+<<<<<<< HEAD
                                                     <input type="file" className="account-settings-fileinput" name="CMND" onChange={onFileChange} />
+=======
+>>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
                                                 </label> &nbsp;
                                                 <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
                                                     setCMNDImage("Default")
