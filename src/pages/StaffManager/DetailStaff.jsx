@@ -73,17 +73,32 @@ export default function EditCar() {
                 {/*Thanh Sidebar*/}
                 <div className="card overflow-hidden mt-1 d-flex">
                     <div className="row no-gutters row-bordered row-border-light">
-                        <div className="col-md-3">
 
+                        <div className="col-md-3">
                             <div className="list-group list-group-flush account-settings-links">
 
                                 {/*Hình Avatar*/}
-                                <div className="justify-content-center form-group col mt-5 ml-5">
-                                    <img src={`${tempNV}`} className="avatar" />
-                                </div>
+                                <div className="justify-content-center form-group col mt-4 ml-5">
+                                    <img src={`${tempNV}`} className="avatar mt-0" />
 
-                                <div className="justify-content-center form-group col mt-5 ml-5">
-                                    <img src={`${tempCMND}`} className="avatar" />
+                                    {ProgressNV >= 0 || ProgressNV != undefined ? <ProgressBar className="mt-3" now={ProgressNV} label={`${ProgressNV != 100 ? ProgressNV + "%" : "Tải thành công"}`} /> : ""}
+
+                                    <div className="form-group col mt-3 ml-3 mr-3 mb-0">
+
+                                        <div className="row">
+                                            <label className="btn btn-outline-primary">
+                                                Tải hình mới
+                                                <input type="file" className="account-settings-fileinput" name="NV" onChange={onFileChange} />
+                                            </label> &nbsp;
+                                        </div>
+
+                                        <div className="row">
+                                            <button type="button" className="btn btn-outline-secondary" onClick={(e) => {
+                                                setNVImage("Default")
+                                                setNVTemp(defaultPicture)
+                                            }}>Mặc định</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -141,35 +156,35 @@ export default function EditCar() {
 
 
                                             {/*Upload hình*/}
-                                            <div className="form-group row mt-2">
-
-                                                <label className="col-3"> Hình ảnh nhân viên </label>
-                                                <label className="btn btn-outline-primary col-3">
-                                                    Tải hình mới
-                                                    <input type="file" className="account-settings-fileinput" name="NV" onChange={onFileChange} />
-                                                </label> &nbsp;
-                                                <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
-                                                    setNVImage("Default")
-                                                    setNVTemp(defaultPicture)
-                                                }}>Mặc định</button>
-                                                <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG, GIF và PNG</label>
-                                                {ProgressNV >= 0 || ProgressNV != undefined ? <ProgressBar className="mt-3" now={ProgressNV} label={`${ProgressNV != 100 ? ProgressNV + "%" : "Tải thành công"}`} /> : ""}
-                                            </div>
 
                                             <div className="form-group row mt-2">
-
                                                 <label className="col-3"> Hình ảnh của CMND </label>
-                                                <label className="btn btn-outline-primary col-3">
-                                                    Tải hình mới
-                                                    <input type="file" className="account-settings-fileinput" name="CMND" onChange={onFileChange} />
-                                                </label> &nbsp;
-                                                <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
-                                                    setCMNDImage("Default")
-                                                    setCMNDTemp(defaultPicture)
-                                                }}>Mặc định</button>
-                                                <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG, GIF và PNG</label>
-                                                {ProgressCMND >= 0 || ProgressCMND != undefined ? <ProgressBar className="mt-3" now={ProgressCMND} label={`${ProgressCMND != 100 ? ProgressCMND + "%" : "Tải thành công"}`} /> : ""}
+
+                                                <div className="col-5">
+                                                    <img src={`${tempCMND}`} className="avatar m-0" />
+                                                    {ProgressCMND >= 0 || ProgressCMND != undefined ? <ProgressBar className="mt-1" now={ProgressCMND} label={`${ProgressCMND != 100 ? ProgressCMND + "%" : "Tải thành công"}`} /> : ""}
+                                                </div>
+
+                                                <div className="col-2">
+
+                                                    <div className="row mt-3">
+                                                        <label className="btn btn-outline-primary row-2">
+                                                            Tải hình mới
+                                                            <input type="file" className="account-settings-fileinput" name="CMND" onChange={onFileChange} />
+                                                        </label> &nbsp;
+                                                        
+                                                        <button type="button" className="btn btn-outline-secondary row-3" onClick={(e) => {
+                                                            setCMNDImage("Default")
+                                                            setCMNDTemp(defaultPicture)
+                                                        }}>Mặc định</button>
+
+                                                       
+                                                    </div>
+                                                </div>
+
                                             </div>
+
+                                          
 
                                         </div>
 

@@ -118,9 +118,10 @@ export default function Main() {
                 </div>
 
                 <div className="d-flex justify-content-between mb-2 mt-3">
-
+                    <div></div>
+                    <div></div>
                     <div>
-                        <h3 className='text-center font-bold  text-black md:text-3xl lg:text-3xl dark:text-white d-flex justify-content-center'>Lịch sử thuê xe</h3>
+                        <h3 className=' font-bold text-black md:text-3xl lg:text-3xl dark:text-white d-flex justify-content-center'>Lịch sử thuê xe</h3>
                     </div>
 
                     <div className="row">

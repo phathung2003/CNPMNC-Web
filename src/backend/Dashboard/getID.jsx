@@ -1,4 +1,3 @@
-import { number } from "yup";
 import SettingInfo from "./Get/getSetting"
 
 export default async function fetchCar(type) {

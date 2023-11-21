@@ -10,10 +10,9 @@ export default async function handleSubmit(e, formData, image, setProgress, inUp
         if (image != null && image != "" && image != "Default")
             formData.HinhAnh = await uploadImage("Car", image, setProgress)
 
-
-
+        console.log("bEGIN")
         var [ID, Current] = await IDGenerate(formData.SoCho);
-
+        console.log(ID)
         formData.IDXe = ID;
         formData.SoLuong = Current;
 

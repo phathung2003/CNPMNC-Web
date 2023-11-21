@@ -35,7 +35,7 @@ import RentCheckout from '../RentManager/RentCheckout'
 
 import StaffMain from '../StaffManager/MainStaff'
 import StaffAdd from '../StaffManager/AddStaff'
-import StaffEdit from '../StaffManager/EditStaff'
+import StaffEdit from '../StaffManager/DetailStaff'
 
 
 export default function Drawer() {

@@ -40,13 +40,10 @@ export default function Info() {
                 <table id="main-table" className="main-table" style={{ width: "100%" }}>
                     <thead>
                         <tr style={{ textAlign: "center" }}>
-                            <th>ID</th>
-                            <th>Hình Ảnh</th>
-                            <th>Hình CMND</th>
-                            <th>Tên nhân viên</th>
-                            <th>Ngày Sinh</th>
-                            <th>Địa chi</th>
-
+                            <th>Mã</th>
+                            <th>Hình ảnh</th>
+                            <th>Họ và tên</th>
+                            <th>Chức vụ</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -55,24 +52,20 @@ export default function Info() {
                         {
                             staffInfo.filter((item) => {
                                 if (search === "") return item;
-                                return item.ID.toLowerCase().includes(search) ||
-                                    item.TenNV.toLowerCase().includes(search) ||
-                                    item.NgaySinh.toLowerCase().includes(search) ||
-                                    item.CMND.toLowerCase().includes(search) ||
-                                    item.DiaChi.toLowerCase().includes(search)
+                                return item.TenNV.includes(search) ||
+                                    item.CMND.includes(search) ||
+                                    item.DiaChi.includes(search)
 
                             }).map(info => {
                                 return <tr key={info._id}>
                                     <td align="center" style={{ width: "5%" }}>{info.IDNV}</td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.Avatar}`}></img></td>
-                                    <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhCMND}`}></img></td>
                                     <td style={{ textAlign: "center" }}>{info.TenNV}</td>
-                                    <td style={{ textAlign: "center" }}>{formatDate(info.NgaySinh)}</td>
-                                    <td style={{ textAlign: "center" }}>{info.DiaChi}</td>
+                                    <td style={{ textAlign: "center" }}>{info.ChucVu}</td>
 
                                     <td>
-                                        <button className="btn btn-primary" onClick={(e) => navigate("/StaffEdit", { state: info })}>Chi tiết</button>
-                                        <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.Avatar)}>Xoá bài</button>
+                                        <button className="btn btn-primary" onClick={(e) => navigate("/StaffEdit", { state: info })}>Thông tin</button>
+                                        <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.Avatar)}>Sa thải</button>
 
                                     </td>
                                 </tr>
