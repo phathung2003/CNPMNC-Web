@@ -1,4 +1,5 @@
 
+import { useState, useEffect } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import Logo from "../../assets/images/Logo_DarkMode.png"
@@ -12,6 +13,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
+import PersonIcon from '@mui/icons-material/Person';
 
 import "../../css/dashboard.css"
 import DashboardMain from './Main'
@@ -30,8 +32,11 @@ import RentMain from '../RentManager/RentMain'
 import RentAdd from '../RentManager/RentAdd'
 import RentDetail from '../RentManager/RentDetail'
 import RentCheckout from '../RentManager/RentCheckout'
-import { useState } from "react";
-import { useEffect } from "react";
+
+import StaffMain from '../StaffManager/MainStaff'
+import StaffAdd from '../StaffManager/AddStaff'
+import StaffEdit from '../StaffManager/EditStaff'
+
 
 export default function Drawer() {
 
@@ -147,6 +152,23 @@ export default function Drawer() {
                             <li><a className="link_name" href="/Rent">Sổ xe</a></li>
                         </ul>
                     </li>
+
+
+                    <li>
+                        <div className="ico n-link">
+                            <div className="link">
+                                <Link to="/Staff">
+                                    <i><PersonIcon /></i>
+                                    <span className="link_name">Quản lý nhân viên</span>
+                                </Link>
+                            </div>
+                        </div>
+
+                        <ul className="sub-menu">
+                            <li><a className="link_name" href="/Staff">Quản lý nhân viên</a></li>
+                        </ul>
+                    </li>
+
                 </ul >
 
                 <div className="profile-content">
@@ -196,6 +218,10 @@ export default function Drawer() {
                     <Route path="/Rent/Add/:id" element={<RentAdd />} />
                     <Route path="/Rent/Detail/:id" element={<RentDetail />} />
                     <Route path="/Rent/Checkout/:id" element={<RentCheckout />} />
+
+                    <Route path="/Staff" element={<StaffMain />} />
+                    <Route path="/StaffAdd" element={<StaffAdd />} />
+                    <Route path="/StaffEdit" element={<StaffEdit />} />
                 </Routes>
             </div>
         </div >

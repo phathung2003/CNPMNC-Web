@@ -7,11 +7,7 @@ import Form from 'react-bootstrap/Form';
 import "../../css/Detail.css"
 import handleSubmit from "../../backend/StaffManager/staffEdit";
 import convertToBase64 from "../../backend/Feature/convertToBase64";
-<<<<<<< HEAD
 import { formatDate } from "@fullcalendar/core";
-=======
-import { formatDate } from '@fullcalendar/core';
->>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
 
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/car%2Fdefault_vehicle.png?alt=media&token=4235fd2d-9431-49df-8d32-153a99c3fc2e";
 
@@ -32,7 +28,7 @@ export default function EditCar() {
 
 
     const [formData, setFormData] = useState({
-        
+
         _id: `${location.state._id}`,
         IDNV: `${location.state.IDNV}`,
         TenNV: `${location.state.TenNV}`,
@@ -43,7 +39,7 @@ export default function EditCar() {
         SoDienThoai: `${location.state.SoDienThoai}`,
         HinhCMND: `${location.state.HinhCMND}`,
         Avatar: `${location.state.Avatar}`
-        
+
     });
 
     const Input = (e) => {
@@ -62,7 +58,7 @@ export default function EditCar() {
         }
     };
 
-    
+
 
 
     return (
@@ -112,37 +108,37 @@ export default function EditCar() {
                                                 </div>
                                             </div>
 
-                                            
+
                                             <div className="form-group">
                                                 <div className="col">
-                                                <label className="form-label">Ngày sinh</label>
-                                                <input className="form-control" type="date" autoComplete="off" name="NgaySinh" defaultValue={formatDate(formData.NgaySinh)} onChange={Input} />
+                                                    <label className="form-label">Ngày sinh</label>
+                                                    <input className="form-control" type="date" autoComplete="off" name="NgaySinh" defaultValue={formatDate(formData.NgaySinh)} onChange={Input} />
                                                 </div>
                                             </div>
 
-                                           
+
                                             <div className="form-group row mt-1">
-                                             
+
                                                 <div className="col">
                                                     <label className="form-label">Địa chỉ</label>
                                                     <input className="form-control" type="text" autoComplete="off" name="DiaChi" defaultValue={formData.DiaChi} onChange={Input} />
                                                 </div>
 
-                                              
+
                                                 <div className="col">
                                                     <label className="form-label">SDT</label>
-                                                    
+
                                                     <input className="form-control" type="text" autoComplete="off" name="SoDienThoai" defaultValue={formData.SoDienThoai} onChange={Input} />
                                                 </div>
 
                                                 <div className="col">
                                                     <label className="form-label">CMND</label>
-                                                    
+
                                                     <input className="form-control" type="text" autoComplete="off" name="CMND" defaultValue={formData.CMND} onChange={Input} />
                                                 </div>
                                             </div>
 
-                                            
+
 
                                             {/*Upload hình*/}
                                             <div className="form-group row mt-2">
@@ -159,17 +155,13 @@ export default function EditCar() {
                                                 <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG, GIF và PNG</label>
                                                 {ProgressNV >= 0 || ProgressNV != undefined ? <ProgressBar className="mt-3" now={ProgressNV} label={`${ProgressNV != 100 ? ProgressNV + "%" : "Tải thành công"}`} /> : ""}
                                             </div>
-                                                
+
                                             <div className="form-group row mt-2">
 
                                                 <label className="col-3"> Hình ảnh của CMND </label>
                                                 <label className="btn btn-outline-primary col-3">
                                                     Tải hình mới
                                                     <input type="file" className="account-settings-fileinput" name="CMND" onChange={onFileChange} />
-<<<<<<< HEAD
-                                                    <input type="file" className="account-settings-fileinput" name="CMND" onChange={onFileChange} />
-=======
->>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
                                                 </label> &nbsp;
                                                 <button type="button" className="btn btn-outline-secondary col-3" onClick={(e) => {
                                                     setCMNDImage("Default")
@@ -178,7 +170,7 @@ export default function EditCar() {
                                                 <label className="small mt-1" style={{ color: "grey" }}>Cho phép JPG, GIF và PNG</label>
                                                 {ProgressCMND >= 0 || ProgressCMND != undefined ? <ProgressBar className="mt-3" now={ProgressCMND} label={`${ProgressCMND != 100 ? ProgressCMND + "%" : "Tải thành công"}`} /> : ""}
                                             </div>
-                                            
+
                                         </div>
 
                                         <div className="d-flex flex-row-reverse mb-1 mr-1   ">

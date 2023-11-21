@@ -9,6 +9,7 @@
     "start-client": "vite",
     "server": "cd server && npm start",
     "s": "cd server && npm start",
+    "i": "cd server && npm i",
     "start-terminal": "start cmd /k \"cd server && npm start\"",
     "dev": "vite",
     "build": "vite build",
