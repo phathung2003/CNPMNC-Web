@@ -36,6 +36,14 @@ export default defineConfig({
     'process.env.VITE_API_STAFF_ADD': JSON.stringify(process.env.VITE_API_STAFF_ADD),
     'process.env.VITE_API_STAFF_EDIT': JSON.stringify(process.env.VITE_API_STAFF_EDIT),
     'process.env.VITE_API_STAFF_DELETE': JSON.stringify(process.env.VITE_API_STAFF_DELETE),
-    'process.env.VITE_API_STAFF_MAIN': JSON.stringify(process.env.VITE_API_STAFF_MAIN)
+    'process.env.VITE_API_STAFF_MAIN': JSON.stringify(process.env.VITE_API_STAFF_MAIN),
+    'process.env.VITE_API_STAFF_DETAIL': JSON.stringify(process.env.VITE_API_STAFF_DETAIL),
+
+
+    'process.env.VITE_API_TAIKHOAN_ADD': JSON.stringify(process.env.VITE_API_TAIKHOAN_ADD),
+    'process.env.VITE_API_TAIKHOAN_EDIT': JSON.stringify(process.env.VITE_API_TAIKHOAN_EDIT),
+    'process.env.VITE_API_TAIKHOAN_DELETE': JSON.stringify(process.env.VITE_API_TAIKHOAN_DELETE),
+    'process.env.VITE_API_TAIKHOAN_MAIN': JSON.stringify(process.env.VITE_API_TAIKHOAN_MAIN),
+    'process.env.VITE_API_TAIKHOAN_DETAIL': JSON.stringify(process.env.VITE_API_TAIKHOAN_DETAIL),
   }
 })

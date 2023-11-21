@@ -70,7 +70,21 @@ function getUri(type) {
             return [import.meta.env.VITE_API_STAFF_EDIT];
         case 'StaffDelete':
             return [import.meta.env.VITE_API_STAFF_DELETE];
-            
+        case 'StaffDetail':
+            return [import.meta.env.VITE_API_STAFF_DETAIL];
+
+
+        case 'TaiKhoanMain':
+             return [import.meta.env.VITE_API_TAIKHOAN_MAIN];
+        case 'TaiKhoanAdd':
+            return [import.meta.env.VITE_API_TAIKHOAN_ADD];
+        case 'TaiKhoanEdit':
+             return [import.meta.env.VITE_API_TAIKHOAN_EDIT];
+        case 'TaiKhoanDelete':
+             return [import.meta.env.VITE_API_TAIKHOAN_DELETE];        
+        case 'TaiKhoanDetail':
+            return [import.meta.env.VITE_API_TAIKHOAN_DETAIL];      
+
         default:
             return null;
     }

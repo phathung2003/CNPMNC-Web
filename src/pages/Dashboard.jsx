@@ -32,10 +32,10 @@ import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
 
-<<<<<<< HEAD
-=======
+import TaiKhoanMain from './TaiKhoanManager/MainTaiKhoan'
+import TaiKhoanAdd from './TaiKhoanManager/AddTaiKhoan'
+// import NhanVienEdit from './TaiKhoanManager/EditTaiKhoan'
 
->>>>>>> 884fdc8c158e3fe658dbcafa7ca283a78802dfbc
 export default function Drawer() {
     return (
         <div>
@@ -121,6 +121,21 @@ export default function Drawer() {
                             <li><a className="link_name" href="/Staff">Quản lý nhân viên</a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <div className="iocn-link">
+                            <div className="link">
+                                <Link to="/TaiKhoan">
+                                    <i><PersonIcon /></i>
+                                    <span className="link_name">Quản lý tài khoản</span>
+                                </Link>
+                            </div>
+                        </div>
+
+                        <ul className="sub-menu">
+                            <li><a className="link_name" href="/TaiKhoan">Quản lý tài khoản</a></li>
+                        </ul>
+                    </li>
                 </ul >
 
                 <div className="profile-content">
@@ -174,6 +189,10 @@ export default function Drawer() {
                     <Route path="/Staff" element={<StaffMain />} />
                     <Route path="/StaffAdd" element={<StaffAdd />} />
                     <Route path="/StaffEdit" element={<StaffEdit />} />
+
+                    <Route path="/TaiKhoan" element={<TaiKhoanMain />} />
+                    <Route path="/TaiKhoanAdd" element={<TaiKhoanAdd />} />
+                    {/* <Route path="/TaiKhoanEdit" element={<TaiKhoanEdit />} />  */}
                 </Routes>
             </div>  
         </div>

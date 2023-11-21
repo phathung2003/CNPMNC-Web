@@ -1,4 +1,3 @@
-
 {
   "name": "giaoan",
   "private": true,
@@ -11,7 +10,6 @@
     "server": "cd server && npm start",
     "s": "cd server && npm start",
     "start-terminal": "start cmd /k \"cd server && npm start\"",
-
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

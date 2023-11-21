@@ -5,12 +5,11 @@ const TaiKhoanSchema = new mongoose.Schema({
     MatKhau: String,
     ChucVu: String,
     Avatar: String,
-
-    IDKH: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "KhachHang"
-    },
-
+    TinhTrang: String,
+    // IDKH: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "KhachHang"
+    // },
     IDNV: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "NhanVien"

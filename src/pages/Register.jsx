@@ -44,8 +44,6 @@ export default function Register() {
         }
     }
 
-
-
     return (
         <div>
             <p>Register Pages</p>

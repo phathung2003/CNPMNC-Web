@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const NhanVienSchema = new mongoose.Schema({
     IDNV: String,
     TenNV: String,
+    Avatar: String,
     NgaySinh: Date,
     DiaChi: String,
     SoDienThoai: String,

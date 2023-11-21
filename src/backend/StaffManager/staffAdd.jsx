@@ -15,8 +15,8 @@ export default async function handleSubmit(e, formData, imageNV, imageCMND, setN
     if (imageCMND && imageCMND !== "" && imageCMND !== "Default") {
         await uploadImage(formData, imageCMND, setCMNDProgess, 'HinhCMND');
     }
-    pushToDatabase(formData);
 
+    pushToDatabase(formData);
 }
 
 function uploadImage(formData, image, setProgress, formFieldKey) {
@@ -27,7 +27,7 @@ function uploadImage(formData, image, setProgress, formFieldKey) {
             return;
         }
 
-        const imageRef = ref(storage, `staff/${Date.now() + v4()}`);
+        const imageRef = ref(storage, `car/${Date.now() + v4()}`);
         const progress = uploadBytesResumable(imageRef, image);
 
         progress.on("state_changed",
@@ -44,6 +44,7 @@ function uploadImage(formData, image, setProgress, formFieldKey) {
                 getDownloadURL(progress.snapshot.ref).then(url => {
                     // Use formFieldKey to set the appropriate form field
                     formData[formFieldKey] = url;
+                    console.log(formData[formFieldKey])
                     resolve(); // Resolve on successful upload
                 }).catch((err) => {
                     console.error(err);
@@ -69,12 +70,10 @@ function pushToDatabase(formData) {
 
         axios.post(api, { IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND })
             .then((result) => {
-                console.log(result.data.IDNV)
                 console.log(result.data);
                 console.log(result.data.Avatar);
                 console.log(result.data.HinhCMND);
                 alert("Lưu thành công !");
-                
                 window.location.reload(false);
                 console.log('Lưu Thành Công !');
             })

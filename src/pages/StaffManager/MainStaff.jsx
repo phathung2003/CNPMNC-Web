@@ -5,7 +5,7 @@ import "../../css/table.css"
 import Value from "../../backend/StaffManager/staffMain"
 import Delete from "../../backend/StaffManager/staffDelete";
 import { useEffect, useState } from 'react';
-import { formatDate } from '@fullcalendar/core';
+import { format } from 'date-fns';
 
 export default function Info() {
     const navigate = useNavigate();
@@ -51,34 +51,63 @@ export default function Info() {
                         </tr>
                     </thead>
 
-                    <tbody>
-                        {
-                            staffInfo.filter((item) => {
-                                if (search === "") return item;                              
-                                return item.ID.toLowerCase().includes(search) ||
-                                    item.TenNV.toLowerCase().includes(search) ||
-                                    item.NgaySinh.toLowerCase().includes(search) ||
-                                    item.CMND.toLowerCase().includes(search) ||
-                                    item.DiaChi.toLowerCase().includes(search) 
-                                    
-                            }).map(info => {
-                                return <tr key={info._id}>
-                                    <td align="center" style={{ width: "5%" }}>{info.IDNV}</td>
-                                    <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.Avatar}`}></img></td>
-                                    <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.HinhCMND}`}></img></td>
-                                    <td style={{ textAlign: "center" }}>{info.TenNV}</td>
-                                    <td style={{ textAlign: "center" }}>{formatDate(info.NgaySinh)}</td>
-                                    <td style={{ textAlign: "center" }}>{info.DiaChi}</td>
-                                    
-                                    <td>
-                                        <button className="btn btn-primary" onClick={(e) => navigate("/StaffEdit", { state: info })}>Chi tiết</button>
-                                        <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.Avatar)}>Xoá bài</button>
-                                        
-                                    </td>
-                                </tr>
-                            })
-                        }
-                    </tbody>
+                                    <tbody>
+                {staffInfo.filter((item) => {
+                    if (search === "") return item;
+
+                    return (
+                    item.IDNV.toLowerCase().includes(search) ||
+                    item.TenNV.toLowerCase().includes(search) ||
+                    item.NgaySinh.toLowerCase().includes(search) ||
+                    item.CMND.toLowerCase().includes(search) ||
+                    item.DiaChi.toLowerCase().includes(search)
+                    );
+                }).length === 0 ? (
+                    <tr>
+                    <td colSpan={7} style={{ textAlign: "center" }}>Hiện tại không có nhân viên nào</td>
+                    </tr>
+                ) : (
+                    staffInfo.map((info) => {
+                    return (
+                        <tr key={info._id}>
+                        <td align="center" style={{ width: "5%" }}>{info.IDNV}</td>
+                        <td
+                            align="center"
+                            style={{ verticalAlign: "middle", width: "15%" }}
+                        >
+                            <img src={`${info.Avatar}`}></img>
+                        </td>
+                        <td
+                            align="center"
+                            style={{ verticalAlign: "middle", width: "15%" }}
+                        >
+                            <img src={`${info.HinhCMND}`}></img>
+                        </td>
+                        <td style={{ textAlign: "center" }}>{info.TenNV}</td>
+                        <td style={{ textAlign: "center" }}>
+                            {format(new Date(info.NgaySinh), "dd/MM/yyyy")}
+                        </td>
+                        <td style={{ textAlign: "center" }}>{info.DiaChi}</td>
+
+                        <td>
+                            <button
+                            className="btn btn-primary"
+                            onClick={(e) => navigate("/StaffEdit", { state: info })}
+                            >
+                            Chi tiết
+                            </button>
+                            <button
+                            className="btn btn-danger ml-2"
+                            onClick={(e) => Delete(info._id, info.Avatar)}
+                            >
+                            Xoá nhân viên
+                            </button>
+                        </td>
+                        </tr>
+                    );
+                    })
+                )}
+                </tbody>
                 </table>
             </div >
 

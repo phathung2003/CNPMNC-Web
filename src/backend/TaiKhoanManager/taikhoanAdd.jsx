@@ -1,28 +1,26 @@
 import axios from 'axios';
-import checkUri from "../checkUri";
+import checkUri from "../checkUri"
 import { storage } from "../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { v4 } from 'uuid';
+import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
+import { v4 } from 'uuid'
 
 import DeletePicture from '../Feature/deletePicture';
 
-const [result, api] = checkUri("StaffEdit");
+const [result, api] = checkUri("TaiKhoanAdd");
 
-export default async function handleSubmit(e, formData, imageNV, setNVProgress, imageCMND, setCMNDProgess) {
+export default async function handleSubmit(e, formData, imageNV, setNVProgress) {
     e.preventDefault();
-   
-    if (imageNV != null && imageNV != "" && formData.Avatar != imageNV && imageNV != "Default") {
-        await uploadImage(formData, imageNV, setNVProgress, 'Avatar');
-    } if (imageCMND != null && imageCMND != "" && formData.HinhCMND != imageCMND && imageCMND != "Default") {
-        await uploadImage(formData, imageCMND, setCMNDProgess, 'HinhCMND');
-    } 
-    pushToDatabase(formData);
-    
-    
 
+    if (imageNV != null && imageNV != "" && formData.Avatar != imageNV && imageNV != "Default") {
+        await uploadImage(formData, imageNV, setNVProgress);
+    }
+    // if (imageCMND && imageCMND !== "" && imageCMND !== "Default") {
+    //     await uploadImage(formData, imageCMND, setCMNDProgess, 'HinhCMND');
+    // }
+    pushToDatabase(formData);
 }
 
-function uploadImage(formData,image, setProgress, formFieldKey) {
+function uploadImage(formData,image, setProgress) {
     return new Promise((resolve, reject) => {
 
         if (!image || image === "Default") {
@@ -46,9 +44,9 @@ function uploadImage(formData,image, setProgress, formFieldKey) {
         //Sau khi tải xong (Lấy link)
         () => {
             getDownloadURL(progress.snapshot.ref).then(url => {
-                const DeleteResult = DeletePicture(formData[formFieldKey]);
+                const DeleteResult = DeletePicture(formData.Avatar);
                 if (DeleteResult) {
-                    formData[formFieldKey] = url;
+                    formData.Avatar = url;
                     resolve();
                 }
             }).catch((err) => {
@@ -59,28 +57,34 @@ function uploadImage(formData,image, setProgress, formFieldKey) {
     })
 }
 
-function pushToDatabase(formData) {
+async function pushToDatabase(formData) {
     if (result) {
-        var IDNV = formData._id;
+        
         var Avatar = formData.Avatar;
-        var TenNV = formData.TenNV;
-        var NgaySinh = formData.NgaySinh;
-        var DiaChi = formData.DiaChi;
-        var SoDienThoai = formData.SoDienThoai;
-        var CMND = formData.CMND;
-        var HinhCMND = formData.HinhCMND;
-
-
-        axios.post(api, { IDNV, Avatar, TenNV, NgaySinh, DiaChi, SoDienThoai, CMND, HinhCMND })
+        var TenTaiKhoan = formData.TenTaiKhoan; 
+        var MatKhau = formData.MatKhau;
+        var ChucVu = formData.ChucVu;
+        var TinhTrang = formData.TinhTrang;
+        var IDNV = formData.IDNV;
+        
+        console.log(TenTaiKhoan)
+        console.log(Avatar)
+        console.log(MatKhau)
+        console.log(ChucVu)
+        console.log(IDNV)
+        console.log(IDNV)
+        axios.post(api, { TenTaiKhoan, MatKhau, ChucVu, Avatar ,TinhTrang})
             .then((result) => {
-                console.log(result.data.IDNV)
-                console.log(result.data.TenNV)
+                console.log(result)
                 console.log(result.data);
-                alert("Cập nhật thành công !");             
-                console.log('Cập nhật Thành Công !');
+                console.log(result.data.IDNV);
+                console.log(result.data.Avatar);
+                alert("Lưu thành công !");
+                window.location.reload(false);
+                console.log('Lưu Thành Công !');
             })
             .catch((err) => {
-                console.error(err);
+                console.log(err);
                 console.log('An error occurred. Please try again later.');
             });
     } else {
