@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react()],
   define:{
     //Env variable from .env file
-    'process.env.VITE_API_LINK': JSON.stringify(process.env.VITE_API_LOCAL_HOST),
+    'process.env.VITE_API_LINK': JSON.stringify(process.env.VITE_API_LINK),
 
     'process.env.VITE_API_MAIN': JSON.stringify(process.env.VITE_API_MAIN),
     'process.env.VITE_API_CONTACT': JSON.stringify(process.env.VITE_API_CONTACT),
@@ -52,6 +52,8 @@ export default defineConfig({
     'process.env.VITE_API_STAFF_ADD': JSON.stringify(process.env.VITE_API_STAFF_ADD),
     'process.env.VITE_API_STAFF_EDIT': JSON.stringify(process.env.VITE_API_STAFF_EDIT),
     'process.env.VITE_API_STAFF_DELETE': JSON.stringify(process.env.VITE_API_STAFF_DELETE),
-    'process.env.VITE_API_STAFF_MAIN': JSON.stringify(process.env.VITE_API_STAFF_MAIN)
+    'process.env.VITE_API_STAFF_MAIN': JSON.stringify(process.env.VITE_API_STAFF_MAIN),
+
+    'process.env.VITE_API_ACCOUNT_ADD': JSON.stringify(process.env.VITE_API_ACCOUNT_ADD),
   }
 })

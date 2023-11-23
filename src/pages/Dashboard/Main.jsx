@@ -37,7 +37,7 @@ export default function Main() {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-4 col-xl-3">
-                                <div className="dashboardCard text-white bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium">
+                                <div className="dashboardCard text-white bg-gradient-to-r from-pink-600 via-pink-700 to-pink-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium">
                                     <div className="card-block">
                                         <h6 className="m-b-20 text-3xl">Khách hàng</h6>
 

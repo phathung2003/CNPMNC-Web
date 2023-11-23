@@ -83,7 +83,10 @@ function getUri(type) {
             return [import.meta.env.VITE_API_STAFF_EDIT];
         case 'StaffDelete':
             return [import.meta.env.VITE_API_STAFF_DELETE];
-            
+        
+        case 'AccountAdd':
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_ACCOUNT_ADD];
+
         default:
             return null;
     }

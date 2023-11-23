@@ -11,14 +11,6 @@ import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import BookIcon from '@mui/icons-material/CarRental';
 import PersonIcon from '@mui/icons-material/Person';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
-
-// import Test from './test/test'
->>>>>>> 84aaed1 (fix mainStaff)
 
 import CarMain from './CarManager/MainCar'
 import CarAdd from './CarManager/AddCar'
@@ -38,19 +30,10 @@ import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import StaffMain from './StaffManager/MainStaff'
 import StaffAdd from './StaffManager/AddStaff'
 import StaffEdit from './StaffManager/EditStaff'
 
-=======
->>>>>>> 84aaed1 (fix mainStaff)
-=======
-=======
-
->>>>>>> 884fdc8c158e3fe658dbcafa7ca283a78802dfbc
->>>>>>> b8361492a883e468b416780bf40e1744cc9758fc
 export default function Drawer() {
     return (
         <div>
@@ -62,15 +45,21 @@ export default function Drawer() {
                 </div>
 
                 <ul className="nav-links">
-                    <li> <a href="/Dashboard">
-                        <i><DashboardIcon /></i>
-                        <span className="link_name">Thanh điều khiển</span>
-                    </a>
 
-                        <ul className="sub-menu blank">
-                            <li><a className="link_name" href="#">Thanh điều khiển</a></li>
-                        </ul>
-                    </li>
+                    <div style={{ color: "#FFF" }}>
+                        <li> <a href="/Dashboard">
+                            <i>
+                                <DashboardIcon />
+                            </i>
+                            <span className="link_name">Thanh điều khiển</span>
+                        </a>
+
+                            <ul className="sub-menu blank">
+                                <li><a className="link_name" href="#">Thanh điều khiển</a></li>
+                            </ul>
+                        </li>
+                    </div>
+
 
 
                     <li>
@@ -144,7 +133,7 @@ export default function Drawer() {
                         <a href="#" style={{ textDecoration: "none", color: "white" }}>
                             <div className="profile-details">
 
-                                <IconButton style={{ color: "#ffffff" }} id="userImg">
+                                <IconButton style={{ color: "#000" }} id="userImg">
                                     <UserIcon />
                                 </IconButton>
 
@@ -157,20 +146,21 @@ export default function Drawer() {
                             </div>
                         </a>
 
-                        <a href="#">
-                            <IconButton style={{ color: "#ffffff" }} id="log_out">
+                        <a style={{ color: '#000' }} href="#">
+                            <IconButton id="log_out">
                                 <LogoutIcon />
                             </IconButton>
                         </a>
                     </div>
                 </div>
 
-                
+
 
             </div >
 
             <div className="home-content">
                 <Routes>
+                    <Route path="/Tesst" element={<p></p>} />
                     <Route path="/" element={<p className="text-3xl font-bold underline">Trang Chủ</p>} />
                     <Route path="/Car" element={<CarMain />} />
                     <Route path="/Car/Add" element={<CarAdd />} />
@@ -190,7 +180,7 @@ export default function Drawer() {
                     <Route path="/StaffAdd" element={<StaffAdd />} />
                     <Route path="/StaffEdit" element={<StaffEdit />} />
                 </Routes>
-            </div>  
+            </div>
         </div>
     );
 }

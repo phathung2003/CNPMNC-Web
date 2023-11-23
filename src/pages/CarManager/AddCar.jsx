@@ -11,7 +11,6 @@ import convertToBase64 from "../../backend/Feature/convertToBase64"
 const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_vehicle.png?alt=media";
 
 export default function AddCar() {
-    const navigate = useNavigate();
     const [image, setFile] = useState("Default");
     const [temp, setTemp] = useState(defaultPicture);
     const [Progress, setProgress] = useState();

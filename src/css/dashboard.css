@@ -1,5 +1,5 @@
 /* Google Fonts Import Link */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Tahoma:wght@300;400;500;600;700&display=swap");
 
 * {
   margin: 0;
@@ -15,7 +15,8 @@
   left: 0;
   height: 100%;
   width: 260px;
-  background: #a31c0a;
+  /* background: linear-gradient(to left, #30cfd0 0%, #330867 100%); */
+  background: #fff;
   z-index: 100;
   transition: all 0.5s ease;
 }
@@ -28,6 +29,7 @@
 .sidebar .logo-content {
   padding: 6px 14px;
 }
+
 /*Logo - Khi bật*/
 .sidebar .logo-content .logo {
   color: #ffffff;
@@ -59,6 +61,7 @@
   line-height: 50px;
   opacity: 1;
   transition: all 0.5s ease;
+  color: #000;
 }
 
 /*Khi đóng*/
@@ -74,12 +77,13 @@
   font-weight: 400;
   color: #fff;
   transition: all 0.5s ease;
+  color: #000;
 }
 
 /*Nút thu gọn - Khi bật*/
 .sidebar #btn {
   position: absolute;
-  color: #ffffff;
+  color: #000;
   left: 90%;
   top: 6px;
   font-size: 20px;
@@ -122,7 +126,10 @@
 }
 
 .sidebar .nav-links li:hover {
-  background: #660000;
+  background: #fff;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: 3px;
 }
 
 .sidebar .nav-links li .icon-link {
@@ -140,10 +147,20 @@
   min-width: 78px;
   text-align: center;
   line-height: 50px;
-  color: #fff;
   font-size: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.sidebar .nav-links li i {
+  height: 50px;
+  min-width: 78px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #000;
 }
 
 .sidebar .nav-links li.showMenu i.arrow {
@@ -164,14 +181,13 @@
 .sidebar .nav-links li a .link_name {
   font-size: 18px;
   font-weight: 400;
-  color: #fff;
+  color: #4f4557;
   transition: all 0.4s ease;
 }
 
 .sidebar .nav-links li .link_name {
   font-size: 18px;
   font-weight: 400;
-  color: #ffffff;
   transition: all 0.4s ease;
 }
 
@@ -223,7 +239,6 @@
   transition: all 0.3s ease;
   display: block;
 }
-
 .sidebar .nav-links li .sub-menu a:hover {
   opacity: 1;
 }
@@ -271,10 +286,14 @@
   transform: translateY(-50%);
 }
 
+.textColor {
+  color: #fff;
+}
+
 /*Thông tin người dùng*/
 .sidebar .profile-content {
   position: absolute;
-  color: #ffffff;
+  color: #000;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -284,13 +303,14 @@
   position: relative;
   padding: 10px 6px;
   height: 60px;
-  background: #840000;
+  color: #000;
+  background: #393646;
 }
 
 .profile-content .profile .profile-details {
   display: flex;
   align-items: center;
-
+  color: #000;
   opacity: 1;
   pointer-events: auto;
 }
@@ -299,6 +319,7 @@
   opacity: 0;
   pointer-events: none;
   white-space: nowrap;
+  color: #000;
 }
 
 /*Hình người dùng*/
@@ -312,6 +333,7 @@
 .profile .profile-details #userImg {
   font-size: 45px;
   align-items: center;
+  color: #000;
 }
 
 .profile .profile-details .name-job {
@@ -322,12 +344,14 @@
 .profile .profile-details .name {
   font-size: 15px;
   font-weight: 400;
+  color: #fff;
 }
 
 /*Chức vụ*/
 .profile .profile-details .job {
   font-size: 12px;
   font-weight: 400;
+  color: #fff;
 }
 .profile #log_out {
   position: absolute;
@@ -351,6 +375,8 @@
   height: 95%;
   margin: 12px;
   width: calc(100% - 290px);
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 .sidebar.close ~ .home-content {
