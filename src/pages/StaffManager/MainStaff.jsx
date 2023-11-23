@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
 import "../../css/table.css"
-import Value from "../../backend/StaffManager/staffMain"
+import Value from "../../backend/StaffManager/View/staffMain"
 import Delete from "../../backend/StaffManager/staffDelete";
 import { useEffect, useState } from 'react';
 import { formatDate } from '@fullcalendar/core';
@@ -58,15 +58,14 @@ export default function Info() {
 
                             }).map(info => {
                                 return <tr key={info._id}>
-                                    <td align="center" style={{ width: "5%" }}>{info.IDNV}</td>
+                                    <td align="center" style={{ width: "5%" }}>{info.IDNV.IDNV}</td>
                                     <td align="center" style={{ verticalAlign: "middle", width: "15%" }}><img src={`${info.Avatar}`}></img></td>
-                                    <td style={{ textAlign: "center" }}>{info.TenNV}</td>
+                                    <td style={{ textAlign: "center" }}>{info.IDNV.TenNV}</td>
                                     <td style={{ textAlign: "center" }}>{info.ChucVu}</td>
 
                                     <td>
-                                        <button className="btn btn-primary" onClick={(e) => navigate("/StaffEdit", { state: info })}>Thông tin</button>
+                                        <button className="btn btn-primary" onClick={(e) => navigate(`/Staff/Detail/${info._id}`, { state: info })}>Thông tin</button>
                                         <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.Avatar)}>Sa thải</button>
-
                                     </td>
                                 </tr>
                             })

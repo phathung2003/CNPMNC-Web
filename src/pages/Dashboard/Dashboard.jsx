@@ -35,7 +35,7 @@ import RentCheckout from '../RentManager/RentCheckout'
 
 import StaffMain from '../StaffManager/MainStaff'
 import StaffAdd from '../StaffManager/AddStaff'
-import StaffEdit from '../StaffManager/DetailStaff'
+import StaffDetail from '../StaffManager/DetailStaff'
 
 
 export default function Drawer() {
@@ -92,7 +92,7 @@ export default function Drawer() {
                         <ul className="sub-menu">
                             <li><a className="link_name" href="/">Trang điều khiển</a></li>
                         </ul>
-                        
+
                     </li>
 
 
@@ -223,7 +223,7 @@ export default function Drawer() {
 
                     <Route path="/Staff" element={<StaffMain />} />
                     <Route path="/StaffAdd" element={<StaffAdd />} />
-                    <Route path="/StaffEdit" element={<StaffEdit />} />
+                    <Route path="/Staff/Detail/:id" element={<StaffDetail />} />
                 </Routes>
             </div>
         </div >

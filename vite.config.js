@@ -55,5 +55,6 @@ export default defineConfig({
     'process.env.VITE_API_STAFF_MAIN': JSON.stringify(process.env.VITE_API_STAFF_MAIN),
 
     'process.env.VITE_API_ACCOUNT_ADD': JSON.stringify(process.env.VITE_API_ACCOUNT_ADD),
+    'process.env.VITE_API_ACCOUNT_MAIN': JSON.stringify(process.env.VITE_API_ACCOUNT_MAIN),
   }
 })

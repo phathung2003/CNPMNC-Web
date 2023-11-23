@@ -86,6 +86,8 @@ function getUri(type) {
         
         case 'AccountAdd':
             return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_ACCOUNT_ADD];
+        case 'AccountMain':
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_ACCOUNT_MAIN];
 
         default:
             return null;

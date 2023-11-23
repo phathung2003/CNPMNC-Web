@@ -14,49 +14,48 @@ const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600
 
 
 export default function EditCar() {
+    const params = useParams();
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const [imageNV, setNVImage] = useState(location.state.Avatar);
-    const [tempNV, setNVTemp] = useState(location.state.Avatar);
-    const [ProgressNV, setNVProgress] = useState();
+    const IDParams = params.id;
 
-    const [imageCMND, setCMNDImage] = useState(location.state.HinhCMND);
-    const [tempCMND, setCMNDTemp] = useState(location.state.HinhCMND);
-    const [ProgressCMND, setCMNDProgress] = useState();
+    const [image, setFile] = useState(defaultPicture);
+    const [temp, setTemp] = useState(defaultPicture);
+    const [Progress, setProgress] = useState();
+    const [inUploadProgress, setInUploadProgress] = useState(false);
+    const [formData, setFormData] = useState({ loading: false });
 
+    useEffect(() => { getData(IDParams, setFormData, setFile, setTemp) }, [])
 
-
-    const [formData, setFormData] = useState({
-
-        _id: `${location.state._id}`,
-        IDNV: `${location.state.IDNV}`,
-        TenNV: `${location.state.TenNV}`,
-        // NgaySinh: `${location.state.NgaySinh}`,
-        NgaySinh: `${location.state.NgaySinh}`,
-        DiaChi: `${location.state.DiaChi}`,
-        CMND: `${location.state.CMND}`,
-        SoDienThoai: `${location.state.SoDienThoai}`,
-        HinhCMND: `${location.state.HinhCMND}`,
-        Avatar: `${location.state.Avatar}`
-
-    });
-
-    const Input = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+    const Input = (e) => { setFormData({ ...formData, [e.target.name]: e.target.value }); };
 
     const onFileChange = (event) => {
-        switch (event.target.name) {
-            case "CMND":
-                setCMNDImage(event.target.files[0]);
-                convertToBase64(event, setCMNDTemp)
-                break;
-            default:
-                setNVImage(event.target.files[0]);
-                convertToBase64(event, setNVTemp)
-        }
+        // Updating the state 
+        setFile(event.target.files[0]);
+        convertToBase64(event, setTemp)
     };
+    
+
+    const location = useLocation();
+
+
+
+
+    // const [formData, setFormData] = useState({
+
+    //     _id: `${location.state._id}`,
+    //     IDNV: `${location.state.IDNV}`,
+    //     TenNV: `${location.state.TenNV}`,
+    //     // NgaySinh: `${location.state.NgaySinh}`,
+    //     NgaySinh: `${location.state.NgaySinh}`,
+    //     DiaChi: `${location.state.DiaChi}`,
+    //     CMND: `${location.state.CMND}`,
+    //     SoDienThoai: `${location.state.SoDienThoai}`,
+    //     HinhCMND: `${location.state.HinhCMND}`,
+    //     Avatar: `${location.state.Avatar}`
+
+    // });
+
 
 
 

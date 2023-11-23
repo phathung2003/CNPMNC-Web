@@ -12,9 +12,9 @@ const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const LichSuModel = require("../models/LichSu")
 
-router.get('/RentMain', async (req,res) => {
+router.get('/AccountMain', async (req,res) => {
     try{
-        const info = await TaiKhoanModel.find().populate("IDXe").populate("IDKH")
+        const info = await TaiKhoanModel.find({ ChucVu: { $in: ["Giám đốc", "Kế toán"] } }).populate("IDNV")
         res.json(info)
     }
     catch(e){res.json(e)}
