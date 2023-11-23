@@ -9,14 +9,14 @@ export default async function uploadForm(apiType, formData) {
                 const [result, api] = checkUri(apiType);
 
                 if (result) {
-                    var TenTaiKhoan = formData.IDNV;
-                    var MatKhau = "123456";
+                    var TenTaiKhoan = formData.TenTaiKhoan;
+                    var MatKhau = formData.MatKhau;
                     var ChucVu = formData.ChucVu;
                     var Avatar = formData.Avatar;
                     var IDKH = formData.IDKH;
                     var IDNV = formData._idNV;
 
-                    axios.post(`${api}/${formData._idNV}/${formData._idTK}`, {TenTaiKhoan, MatKhau, ChucVu, Avatar, IDKH,IDNV})
+                    axios.post(`${api}/${formData._idTK}`, {TenTaiKhoan, MatKhau, ChucVu, Avatar, IDKH,IDNV})
                     .then((result) => {
                         alert(result.data.msg)
                         console.log(result.data.msg);

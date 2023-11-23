@@ -2,15 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 
 import "../../css/table.css"
-import Value from "../../backend/StaffManager/View/staffMain"
+import EmployeeData from "../../backend/StaffManager/Get/getEmployee"
 import Delete from "../../backend/StaffManager/staffDelete";
-import { useEffect, useState } from 'react';
-import { formatDate } from '@fullcalendar/core';
+import { useState } from 'react';
 
 export default function Info() {
     const navigate = useNavigate();
     const [search, setSearch] = useState("");
-    const staffInfo = Value();
+    const staffInfo = EmployeeData();
 
     return (
         <div>
@@ -65,7 +64,7 @@ export default function Info() {
 
                                     <td>
                                         <button className="btn btn-primary" onClick={(e) => navigate(`/Staff/Detail/${info._id}`, { state: info })}>Thông tin</button>
-                                        <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.Avatar)}>Sa thải</button>
+                                        {/* <button className="btn btn-danger ml-2" onClick={(e) => Delete(info._id, info.Avatar)}>Sa thải</button> */}
                                     </td>
                                 </tr>
                             })

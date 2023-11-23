@@ -1,30 +1,29 @@
-import CarInfo from '../Get/carDetail'
+import EmployeeInfo from '../Get/employeeDetail'
 
 export default async function fetchCar(IDParams, setFormData, setFile, setTemp) {
-    const data = await CarInfo(IDParams);
+    const data = await EmployeeInfo(IDParams);
     if (data) {
+        console.log(data)
         setFormData({
-            _id: data._id,
-            IDXe: data.IDXe,
-            TenXe: data.TenXe,
-            BienSo: data.BienSo,
-
-            SoCho: data.SoCho,
-            SoChoTemp: data.SoCho,
-
-            TruyenDong: data.TruyenDong,
-            NhienLieu: data.NhienLieu,
-            MoTa: data.MoTa,
-            SoTien: data.SoTien,
-            HinhAnh: data.HinhAnh,
-            TinhTrang: data.TinhTrang,
-            IDDon: data.IDDon,
-
+            _idNV: data.IDNV._id,
+            _idTK: data._id,
+    
+            IDNV: data.IDNV.IDNV,
+            tempChucVu: data.ChucVu,
+            ChucVu: data.ChucVu,
+            TenNV: data.IDNV.TenNV,
+            NgaySinh: data.IDNV.NgaySinh,
+            DiaChi: data.IDNV.DiaChi,
+            SoDienThoai: data.IDNV.SoDienThoai,
+            CMND: data.IDNV.CMND,
             SoLuong: 0,
-
-            loading: true
+    
+            TenTaiKhoan: data.TenTaiKhoan,
+            MatKhau: data.MatKhau,
+            Avatar: data.Avatar,
+            IDKH: null,
         })
-        setFile(data.HinhAnh)
-        setTemp(data.HinhAnh)
+        setFile(data.Avatar)
+        setTemp(data.Avatar)
     }
 };

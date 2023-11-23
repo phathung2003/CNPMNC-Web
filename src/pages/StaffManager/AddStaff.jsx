@@ -9,7 +9,7 @@ import convertToBase64 from "../../backend/Feature/convertToBase64"
 
 
 
-const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_user.jpg?alt=media";
+const defaultPicture = "https://firebasestorage.googleapis.com/v0/b/thuexe-5b600.appspot.com/o/default_user.png?alt=media";
 
 export default function AddStaff() {
     const [image, setFile] = useState("Default");
@@ -30,7 +30,7 @@ export default function AddStaff() {
         SoLuong: 0,
 
         TenTaiKhoan: "",
-        MatKhau: "",
+        MatKhau: "123456",
         Avatar: defaultPicture,
         IDKH: null,
     });

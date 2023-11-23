@@ -9,11 +9,13 @@ export default async function handleSubmit(e, formData, image, setProgress, inUp
     if (!inUploadProgress) {
         setInUploadProgress(true);
         if (image != null && image != "" && image != "Default")
-            formData.HinhAnh = await uploadImage("Employee", image, setProgress)
+            formData.Avatar = await uploadImage("Employee", image, setProgress)
 
         var [ID, Current] = await IDGenerate(formData.ChucVu);
+        
         formData.IDNV = ID;
         formData.SoLuong = Current;
+        formData.TenTaiKhoan = ID;
 
         if (await pushEmployee("StaffAdd", formData)) {
             if (await pushAccount("AccountAdd", formData)) {

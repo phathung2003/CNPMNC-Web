@@ -78,14 +78,18 @@ function getUri(type) {
         case 'StaffMain':
             return [import.meta.env.VITE_API_STAFF_MAIN];
         case 'StaffAdd':
-            return [import.meta.env.VITE_API_STAFF_ADD];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_STAFF_ADD];
         case 'StaffEdit':
-            return [import.meta.env.VITE_API_STAFF_EDIT];
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_STAFF_EDIT];
         case 'StaffDelete':
             return [import.meta.env.VITE_API_STAFF_DELETE];
         
         case 'AccountAdd':
             return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_ACCOUNT_ADD];
+        case 'AccountDetail':
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_ACCOUNT_DETAIL];
+        case 'AccountEdit':
+            return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_ACCOUNT_EDIT];
         case 'AccountMain':
             return [import.meta.env.VITE_API_LINK] + [import.meta.env.VITE_API_ACCOUNT_MAIN];
 
