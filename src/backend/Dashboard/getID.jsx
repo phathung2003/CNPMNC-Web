@@ -1,4 +1,3 @@
-import { number } from "yup";
 import SettingInfo from "./Get/getSetting"
 
 export default async function fetchCar(type) {
@@ -24,9 +23,9 @@ export default async function fetchCar(type) {
 
                 case "KhachHang":
                     resolve(["KH" + `${data.SLKhachHang + 1}`, data.SLKhachHang + 1]);
-                case "KeToan":
+                case "Kế toán":
                     resolve(["KT" + `${data.SLNhanVien + 1}`, data.SLNhanVien + 1]);
-                case "Chu":
+                case "Giám đốc":
                     resolve(["GD" + `${data.SLNhanVien + 1}`, data.SLNhanVien + 1]);
 
 

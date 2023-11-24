@@ -12,6 +12,7 @@ const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 
 router.post('/CarAdd/:ID/:SoLuong', async (req,res) => {
+    console.log("Hi")
     try{
         await XeModel.create(req.body)
 

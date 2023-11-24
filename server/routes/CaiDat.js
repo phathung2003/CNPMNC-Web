@@ -9,6 +9,8 @@ const KhachHangModel = require("../models/KhachHang");
 const SoXeModel = require("../models/SoXe");
 const CaiDatModel = require("../models/CaiDat")
 const LichSuModel = require("../models/LichSu")
+const TaiKhoanModel = require("../models/TaiKhoan")
+const NhanVienModel = require("../models/NhanVien")
 
 router.get('/ResetStatistic/:Password', async (req,res) => {
     if(req.params.Password == process.env.PASSWORD){
@@ -18,6 +20,8 @@ router.get('/ResetStatistic/:Password', async (req,res) => {
             await KhachHangModel.deleteMany()
             await SoXeModel.deleteMany()
             await LichSuModel.deleteMany()
+            await TaiKhoanModel.deleteMany()
+            await NhanVienModel.deleteMany()
             await CaiDatModel.updateOne({_id : ObjectId},{
                 $set: 
                 {
@@ -32,7 +36,7 @@ router.get('/ResetStatistic/:Password', async (req,res) => {
                     SLNhanVien: 0,
                 }
             })
-            res.json("Cài lại hoàn thành")
+            res.json({"status": 200, "message": "Cài lại hoàn thành"})
         }
         catch{(e) => res.json(e)}
     }

@@ -6,6 +6,7 @@ import CarIcon from '@mui/icons-material/DirectionsCar';
 import PreOrderIcon from '@mui/icons-material/EditCalendar';
 import MoneyIcon from '@mui/icons-material/AttachMoney';
 import SearchIcon from '@mui/icons-material/Search';
+
 import "../../css/card.css"
 
 import CarData from "../../backend/Dashboard/Fetch/fetchDashboard"
@@ -36,7 +37,7 @@ export default function Main() {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-4 col-xl-3">
-                                <div className="dashboardCard text-white bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium">
+                                <div className="dashboardCard text-white bg-gradient-to-r from-pink-600 via-pink-700 to-pink-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium">
                                     <div className="card-block">
                                         <h6 className="m-b-20 text-3xl">Khách hàng</h6>
 
@@ -117,9 +118,10 @@ export default function Main() {
                 </div>
 
                 <div className="d-flex justify-content-between mb-2 mt-3">
-
+                    <div></div>
+                    <div></div>
                     <div>
-                        <h3 className='text-center font-bold  text-black md:text-3xl lg:text-3xl dark:text-white d-flex justify-content-center'>Lịch sử thuê xe</h3>
+                        <h3 className=' font-bold text-black md:text-3xl lg:text-3xl dark:text-white d-flex justify-content-center'>Lịch sử thuê xe</h3>
                     </div>
 
                     <div className="row">

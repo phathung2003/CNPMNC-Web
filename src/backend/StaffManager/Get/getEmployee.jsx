@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+
 import checkUri from "../../checkUri";
 
-const [result, api] = checkUri("CarMain");
+const [result, api] = checkUri("AccountMain");
 
 export default function infoProcess() {
-    const [carInfo, setInfo] = useState([]);
+
+    const [accountInfo, setInfo] = useState([]);
+
     if (result) {
         useEffect(() => {
             axios.get(api)
@@ -14,5 +17,5 @@ export default function infoProcess() {
         }, [])
 
     }
-    return carInfo;
+    return accountInfo;
 }

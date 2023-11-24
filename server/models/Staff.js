@@ -1,14 +1,16 @@
 const mongoose = require("mongoose")
 
-const NhanVienSchema = new mongoose.Schema({
+const staffChema = new mongoose.Schema({
     IDNV: String,
+    Avatar: String,
     TenNV: String,
-    NgaySinh: Number,
+    NgaySinh: Date,
     DiaChi: String,
     SoDienThoai: String,
     CMND: String,
+    HinhCMND: String
 })
 
 //const <Tên model> = mongoose.model("<Tên bảng",<Dữ liệu)
-const NhanVienModel  = mongoose.model("NhanVien",NhanVienSchema)
-module.exports = NhanVienModel
+const staffModel = mongoose.model("Staff",staffChema)
+module.exports = staffModel

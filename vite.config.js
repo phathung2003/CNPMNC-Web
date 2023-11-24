@@ -47,5 +47,16 @@ export default defineConfig({
     'process.env.VITE_API_STORAGE_BUCKET': JSON.stringify(process.env.VITE_API_STORAGE_BUCKET),
     'process.env.VITE_API_MESSAGING_SENDER_ID': JSON.stringify(process.env.VITE_API_MESSAGING_SENDER_ID),   
     'process.env.VITE_API_APP_ID': JSON.stringify(process.env.VITE_API_APP_ID),   
+    
+
+    'process.env.VITE_API_STAFF_ADD': JSON.stringify(process.env.VITE_API_STAFF_ADD),
+    'process.env.VITE_API_STAFF_EDIT': JSON.stringify(process.env.VITE_API_STAFF_EDIT),
+    'process.env.VITE_API_STAFF_DELETE': JSON.stringify(process.env.VITE_API_STAFF_DELETE),
+    'process.env.VITE_API_STAFF_MAIN': JSON.stringify(process.env.VITE_API_STAFF_MAIN),
+
+    'process.env.VITE_API_ACCOUNT_ADD': JSON.stringify(process.env.VITE_API_ACCOUNT_ADD),
+    'process.env.VITE_API_ACCOUNT_DETAIL': JSON.stringify(process.env.VITE_API_ACCOUNT_DETAIL),
+    'process.env.VITE_API_ACCOUNT_EDIT': JSON.stringify(process.env.VITE_API_ACCOUNT_EDIT),
+    'process.env.VITE_API_ACCOUNT_MAIN': JSON.stringify(process.env.VITE_API_ACCOUNT_MAIN),
   }
 })
