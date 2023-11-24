@@ -2,7 +2,7 @@ import axios from 'axios';
 import checkUri from "./checkUri"
 const [result, api] = checkUri("Main");
 
-export default function checkLogin(e, email, password, setError, setLogin,setInfo){
+export default function checkLogin(e, email, password, setError, setLogin,setName, setRole){
     e.preventDefault();
 
     // Basic validation
@@ -17,7 +17,8 @@ export default function checkLogin(e, email, password, setError, setLogin,setInf
             .then((result) => {
                 if (result.data.TenTaiKhoan === email && result.data.MatKhau === password) {
                     setLogin(true);
-                    setInfo(result.data)
+                    setName(result.data.IDNV.TenNV);
+                    setRole(result.data.ChucVu);
                 } 
                 else {
                     setError('Mật khẩu hoặc tài khoản sai. Hãy nhập lại.');

@@ -70,8 +70,12 @@ export default function Drawer() {
     const [login, setLogin] = useState(localStorage.getItem('login') === 'true')
     useEffect(() => { localStorage.setItem('login', login); }, [login]);
 
-    const [info, setInfo] = useState(localStorage.getItem('info') === 'null')
-    useEffect(() => { localStorage.setItem('info', info); }, [info]);
+    const [name, setName] = useState(localStorage.getItem('name'))
+    useEffect(() => { localStorage.setItem('name', name); }, [name]);
+
+    const [role, setRole] = useState(localStorage.getItem('role'))
+    useEffect(() => { localStorage.setItem('role', role); }, [role]);
+
     if (!login) {
         return (
             <div className="flex justify-center items-center mt-20">
@@ -80,7 +84,7 @@ export default function Drawer() {
                         Đăng nhập
                     </h1>
 
-                    <form className="mt-4" onSubmit={(e) => handleSubmit(e, email, password, setError, setLogin, setInfo)}>
+                    <form className="mt-4" onSubmit={(e) => handleSubmit(e, email, password, setError, setLogin, setName, setRole)}>
                         <div className="mb-2">
                             <label
                                 htmlFor="email"
@@ -248,15 +252,15 @@ export default function Drawer() {
 
                                     <div className="name-job">
 
-                                        <div className="name">{`${info.IDNV.TenNV}`}</div>
+                                        <div className="name">{`${name}`}</div>
 
-                                        <div className="job">{`${info.ChucVu}`}</div>
+                                        <div className="job">{`${role}`}</div>
                                     </div>
                                 </div>
                             </a>
 
                             <a>
-                                <IconButton style={{ color: "#ffffff" }} id="log_out" onClick={(e) => { setLogin(false); setInfo(null) }}>
+                                <IconButton style={{ color: "#ffffff" }} id="log_out" onClick={(e) => { setLogin(false); setName(null); setRole(null) }}>
                                     <LogoutIcon />
                                 </IconButton>
                             </a>
