@@ -12,7 +12,7 @@ export default async function fetchCar(IDParams, setFormData, setFile, setTemp) 
             tempChucVu: data.ChucVu,
             ChucVu: data.ChucVu,
             TenNV: data.IDNV.TenNV,
-            NgaySinh: data.IDNV.NgaySinh,
+            NgaySinh: `${data.IDNV.NgaySinh != null ? format(data.IDNV.NgaySinh, "yyyy-MM-dd") : ""}`,
             DiaChi: data.IDNV.DiaChi,
             SoDienThoai: data.IDNV.SoDienThoai,
             CMND: data.IDNV.CMND,
