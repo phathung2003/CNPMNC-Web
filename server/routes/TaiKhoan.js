@@ -23,7 +23,7 @@ router.get('/AccountDetail/:IDNV', async (req,res) => {
     // .catch(err => res.json(err))
 })
 
-router.post('/AccountAdd/:IDNV', async (req,res) => {
+router.post('/AccountAdd/', async (req,res) => {
     try{
         await TaiKhoanModel.create(req.body).then(() => res.json({success: true, msg: "Thêm nhân viên thành công"}))
     }

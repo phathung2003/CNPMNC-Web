@@ -2,7 +2,7 @@ import axios from 'axios';
 import checkUri from "./checkUri"
 const [result, api] = checkUri("Main");
 
-export default function checkLogin(e, email, password, setError, navigate){
+export default function checkLogin(e, email, password, setError, setLogin,setInfo){
     e.preventDefault();
 
     // Basic validation
@@ -15,10 +15,11 @@ export default function checkLogin(e, email, password, setError, navigate){
         axios 
             .post(api, { email, password })
             .then((result) => {
-                console.log(result.data);
-                if (result.data === 'Ok') {
-                    navigate('/info');
-                } else {
+                if (result.data.TenTaiKhoan === email && result.data.MatKhau === password) {
+                    setLogin(true);
+                    setInfo(result.data)
+                } 
+                else {
                     setError('Mật khẩu hoặc tài khoản sai. Hãy nhập lại.');
                 }
             })

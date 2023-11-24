@@ -13,7 +13,7 @@ const TaiKhoanRoute = require("./routes/TaiKhoan")
 
 const staffModel = require("./models/NhanVien")
 const carModel = require("./models/Xe");
-
+const login = require("./models/TaiKhoan")
 
 if(result){
     app.post('/contact', (req,res) => {
@@ -33,23 +33,12 @@ if(result){
         )
     })
     
-    app.post("/main", (req,res) => {
-        console.log(req.body)
+    app.post("/main",async (req,res) => { 
         const {email, password} = req.body;
-        contactModel.findOne({email : email}).then(
-            user => {
-                if(user){
-                    if(user.password === password){
-                        res.json("Ok")
-                    }else{
-                        res.json("Sai mật khẩu")                      
-                    }
-                }
-                else{
-                    res.json("Không có tài khoản")
-                }
-            }
-        )
+        console.log(email)
+        var a = await login.findOne({TenTaiKhoan : email}).populate("IDNV")
+        res.json(a)
+        
     })
 
     app.get("/info",(req,res) => {
