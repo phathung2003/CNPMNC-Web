@@ -35,7 +35,6 @@ if(result){
     
     app.post("/main",async (req,res) => { 
         const {email, password} = req.body;
-        console.log(email)
         var a = await login.findOne({TenTaiKhoan : email}).populate("IDNV")
         res.json(a)
         

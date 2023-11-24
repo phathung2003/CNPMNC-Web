@@ -1,8 +1,6 @@
 import { format } from 'date-fns';
 
 export default function Search(historyList, search) {
-    console.log(search)
-
     var search = historyList.filter((item) => {
         if (search === "") return item;
 
